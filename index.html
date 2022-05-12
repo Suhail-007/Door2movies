@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Door2Movies</title>
+		<script src="script/script.js" defer></script>
+		<link rel="stylesheet" href="styles/styles.css"/>		
+</head>
+<body>
+		<header>
+				<h1><a href="index.html">Door2<span>Movies</span></a></h1>
+				
+
+		</header>		
+		<nav>
+						<div class="nav-container" data-nav-container>
+								<ul>
+								<li>
+										<a href="#">Home</a>
+								</li>
+								<li>
+										<a href="#">News</a>
+								</li>
+						</ul>
+						
+						<div class="drop-down" data-dropdown>
+								<button class="drop-btn" data-dropdownBtn>Categories</button>
+								<div class="dropdown-content" data-dropdown-content>
+									<a href="#">Action	</a>
+									<a href="#">Adventure</a>
+									<a href="#">Anime</a>
+									<a href="#">Comedy</a>
+									<a href="#">Thriller</a>
+									<a href="#">Fantasy</a>							
+							</div>
+						</div>
+						</div>			<!-- nav container -->
+						
+						<!-- Search -->
+						<div class="search-container">
+								<input data-search-bar type="search" placeholder="Search here...">
+								<div class="search-results" data-search-results>
+										<div>
+												<p>Search results...</p>
+										</div>
+								</div><!-- search result -->
+								
+								<!-- Movies Card -->		
+								<template class="search-movie-template" data-search-movie-template>
+										<div class="result">
+												<img src="" data-search-img>
+												<div>
+														<a href="#" data-search-name>The Batman</a>
+												</div>
+										</div>
+								</template>
+						</div><!-- search container -->
+		</nav>
+								
+		<main>				
+				<section class="pagination-container">
+						<a href="#">1</a>
+				</section>
+				
+				<section class="movies-container">		</section>
+		</main>		
+		<footer>
+				<p>All right reserved &copy; at Door2Movies.</p>
+		</footer>
+</body>
+</html>
