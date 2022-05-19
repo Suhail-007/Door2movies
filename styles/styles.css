@@ -142,9 +142,9 @@ nav {
 		background: white;
 		color: black;
 		box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.5);
-		height: 10rem;
 		background: white;
 		overflow: scroll;
+		height: 15rem;
 		display: none;
 }
 
@@ -167,18 +167,18 @@ nav {
 }
 
 .result {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr;
+		display: flex;
+		flex-direction: row;
+		gap: 0 2em; 
 		background: bisque;
-		gap: 1rem;
+		padding: 0.5rem 0;
 }
 
 .result.hide {
 		display: none;
 }
 
-.result > div > a {
+.result > a {
 		font-size: clamp(0.5rem, 3vw, 1.3rem);
 		color: black;
 }
@@ -188,10 +188,37 @@ nav {
 		height: 4em;
 }
 
+.pagination-container {
+		margin: 1rem 0;
+		width: 100%;
+		text-align: center;
+}
+
+.pagination-container > button {
+		border: none;
+		background: #8c8c8c;
+		color: #fff;
+		outline: none;
+		cursor: pointer;
+		padding: 0.5rem 1rem;
+		font-size: clamp(1rem, 3vw, 1.5rem);
+		transition: background 300ms ease-in-out;
+}
+
+.hideBtn {
+		display: none;
+}
+
+.pagination-container > button:hover,
+.pagination-container > button:focus {
+		background: #000;
+}
+
 .movies-container {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
+		padding: 1rem;
 }
 
 .movies-container > .movie-card {
@@ -221,4 +248,11 @@ nav {
 
 .movies-container > .movie-card .movie-name > a {
 		color: black;
+}
+
+@media(min-width: 320px){
+		.movies-container > .movie-card .movie-name  {
+		padding: 0;
+		font-size: 1rem;
+}
 }
