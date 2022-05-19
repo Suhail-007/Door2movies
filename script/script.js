@@ -86,7 +86,7 @@ const nextPrevMovies = function (start, end) {
 
 paginationCont.addEventListener('click', function (e) {
 		const elem = e.target;
-		console.log(elem);
+		console.log(e);
 		const prevBtn = document.querySelector('[data-prevBtn]');
 		const nextBtn = document.querySelector('[data-nextBtn]');
 		
