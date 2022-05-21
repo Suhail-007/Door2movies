@@ -2,8 +2,7 @@ const movieCardTemplate = document.querySelector('.search-movie-template');
 const movieElemCont = document.querySelector('.movies-container');
 const searchResultsCont = document.querySelector('[data-search-results]');
 
-let movies = [];
-
+let movies;
 fetch('https://api.jsonbin.io/b/62690e4825069545a329e0fa/4').then(res => res.json()).then(data => {
 movies	= 	data.map(movie => {
 				//For Search bar
@@ -16,7 +15,7 @@ movies	= 	data.map(movie => {
 				searchResultsCont.appendChild(card);		
 				
 				//Home Page
-				displayMovies(movie.name, movie.img)
+				displayMovies(movie.name, movie.img);
 				return {name: movie.name, img: movie.img, id: movie.id, element:card}
 			})
 })
@@ -29,7 +28,7 @@ const displayMovies = function (name,img) {
 							<img src="${img}" alt="${name}" />
 						</div>
 						<div>
-								<p class="movie-name"><a href="#">${name}</a></p>
+								<p class="movie-name"><a href="download/downloads.html">${name}</a></p>
 						</div>
 				</div>`);
 }
@@ -41,7 +40,7 @@ document.addEventListener('click', function (e) {
 		//as long as user clicking inside of dropdown it won't close
 		if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) return;
 		
-		const dropdownContent = document.querySelector('[data-dropdown-content]')
+		const dropdownContent = document.querySelector('[data-dropdown-content]');
 		
 		if (isDropdownBtn) dropdownContent.classList.toggle('active');
 	 else dropdownContent.classList.remove('active');
@@ -79,39 +78,58 @@ let counter = 0;
 //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
 
 const nextPrevMovies = function (start, end) {
-		const page1 = movies.slice(start, end);
-		movieElemCont.innerHTML = '';	
-		page1.forEach(movie => displayMovies(movie.name, movie.img));
+		const page = movies.slice(start, end);
+		let displayPage = movieElemCont;	
+		displayPage.innerHTML = ''
+		page.forEach(movie => displayMovies(movie.name, movie.img));
 }
 
 paginationCont.addEventListener('click', function (e) {
-		const elem = e.target;
-		console.log(elem);
+		const elem = e.target.dataset;
 		const prevBtn = document.querySelector('[data-prevBtn]');
 		const nextBtn = document.querySelector('[data-nextBtn]');
 		
-		if (elem.innerHTML === 'Next') {
+		if (elem.btn === 'Next') {
 			//checking if we're on last page 	
 				if (counter >= movies.length) {
-					alert('THIS IS THE LAST PAGE');
+					alert('You\'re on LAST PAGE');
 						return
 				}
 				else {
-						nextPrevMovies(counter, counter+4);
-						counter = counter + 4;	
+						nextPrevMovies(counter, counter+1);
+						counter = counter + 1;	
 				}
 		}
-		else {
+		else if(elem.btn === 'Prev'){
 		//checking if we're on first page 	
-			if (counter === 0 || counter === 4) {
-					alert('THIS IS THE FIRST PAGE');
+			if (counter === 0 || counter === 1) {
+					alert('You\'re on FIRST PAGE');
 					return
 			}
 			else {
-				counter = counter - 4;	
-				nextPrevMovies(counter-4, counter);
+					counter = counter - 1;	
+					nextPrevMovies(counter-1, counter);
 			}
+			
 		}
 })	
 
 // what i have to do next is select the next and prev button and increase and decrease the counter according to it plus if counter is zero hide the prev button and when counter is equal to movies length hide next button 
+
+//for Download page 
+let selectedMovie;
+
+//I'll filter the array and then dynamically add everything on download page
+
+const getSelectedMovie = function(e) {
+		const element = e.target.closest('.movie-card');
+		if(element) {
+		const movieName = element.querySelector('p');
+		selectedMovie = 	movies.filter(movie => {
+		if (movieName.textContent === movie.name) return movie;
+				})
+		}	
+}
+
+const moviesAll = document.querySelectorAll('.movie-card');
+		movieElemCont.addEventListener('click', getSelectedMovie)
