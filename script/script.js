@@ -1,40 +1,96 @@
-const movieCardTemplate = document.querySelector('.search-movie-template');
-const movieElemCont = document.querySelector('.movies-container');
-const searchResultsCont = document.querySelector('[data-search-results]');
+let selectedMovie;
 
-let movies;
+const app = {
+movies: undefined,
+//selectedMovie: undefined,
+counter: 0,
+
+init: function() {
+	window.addEventListener('DOMContentLoaded', app.load);
+	document.addEventListener('click', app.dropDown);
+},
+
+load: function() {
+		app.getData();
+},
+
+getData: function() {
+	 let id = document.body.id
+		switch (id) {
+		case 'home':
+				app.getMovies('./');
+				app.findSearchMovie();
+				app.pagination();
+				app.movieElemCont().addEventListener('click', app.getSelectedMovie);
+				break;
+		case 'downloadPage':
+				app.getMovies('../');		
+				app.findSearchMovie();
+				app.i();
+				break
+		default:
+				
+  }
+},
+
+searchResultsCont: function () {
+		const searchCont = document.querySelector('[data-search-results]');
+		return searchCont
+},
+
+movieElemCont: function () {
+		const movieElem = document.querySelector('.movies-container');
+		return movieElem
+},
+
+pagination: function () {
+		const paginationBtnsCont = document.querySelector('[data-pagination-Btncontainer]');
+		paginationBtnsCont.addEventListener('click', app.nextPrevPage)
+},
+
+
+getMovies: function (path) {
+		const movieCardTemplate = document.querySelector('.search-movie-template');
+//const movieElemCont = document.querySelector('.movies-container');
+//const searchResultsCont = document.querySelector('[data-search-results]');
+
 fetch('https://api.jsonbin.io/b/62690e4825069545a329e0fa/4').then(res => res.json()).then(data => {
-movies	= 	data.map(movie => {
+app.movies	= 	data.map(movie => {
 				//For Search bar
 				const card = movieCardTemplate.content.cloneNode(true).children[0];
 				const img = card.querySelector('[data-search-img]');
 				const movieName = card.querySelector('[data-search-name]');
-				img.src = movie.img;
+				img.src = `${path}${movie.img}`;
 				movieName.textContent = movie.name	;
 				card.classList.add('hide');
-				searchResultsCont.appendChild(card);		
+				app.searchResultsCont().appendChild(card);		
 				
-				//Home Page
-				displayMovies(movie.name, movie.img);
+				if (document.body.id === 'home') {
+						//Home Page
+						app.displayMovies(movie.name, movie.img);
+				}
+				
 				return {name: movie.name, img: movie.img, id: movie.id, element:card}
 			})
-})
+});
+},
 
 //Add movies in DOM
-const displayMovies = function (name,img) {
-		movieElemCont.insertAdjacentHTML('afterbegin', `
+displayMovies: function (name,img) {
+		//const movieElemCont = document.querySelector('.movies-container');
+		app.movieElemCont().insertAdjacentHTML('afterbegin', `
 			<div class="movie-card">
 						<div class="movie-img">
 							<img src="${img}" alt="${name}" />
 						</div>
-						<div>
-								<p class="movie-name"><a href="download/downloads.html">${name}</a></p>
+						<div class="movie-name-cont">
+								<p class="movie-name"><a href="download/download.html">${name}</a></p>
 						</div>
 				</div>`);
-}
+},
 
 //DropDown
-document.addEventListener('click', function (e) {
+dropDown: function (e) {
 		const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
 		//as long as user clicking inside of dropdown it won't close
@@ -44,47 +100,36 @@ document.addEventListener('click', function (e) {
 		
 		if (isDropdownBtn) dropdownContent.classList.toggle('active');
 	 else dropdownContent.classList.remove('active');
-});
+},
 
 //Searchbar 
-const searchbar = document.querySelector('[data-search-bar]');
+findSearchMovie: function () {
+		const searchbar = document.querySelector('[data-search-bar]');
+		const searchResultsCont = document.querySelector('[data-search-results]');
 
 searchbar.addEventListener('input', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		if (inputValue !== '') searchResultsCont.classList.add('open');
-		else searchResultsCont.classList.remove('open');		
+		else app.searchResultsCont().classList.remove('open');		
 		
-		movies.forEach(movie => {
+		app.movies.forEach(movie => {
 				const isIncludes = movie.name.toLowerCase().includes(inputValue);
 				movie.element.classList.toggle('hide', !isIncludes);
 		})		
 });
-
-
-
-/*next i have to make a download page to do that
-1. I'll loop over the movies array and filter that array using just like we did with search functionality..
-2. loop over movies array then checks if e.target(movie name) includes in movie array
-3.if it does show that movie to download page
-4. have to add link in the movies array yet */
-
-
-const paginationCont = document.querySelector('[data-pagination-container]');
-
-let counter = 0;
-
+},
 //we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
 
 //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
 
-const nextPrevMovies = function (start, end) {
-		const page = movies.slice(start, end);
-		let displayPage = movieElemCont;	
+PAGE: function (start, end) {
+		const page = app.movies.slice(start, end);
+		let displayPage = app.movieElemCont();	
 		displayPage.innerHTML = ''
-		page.forEach(movie => displayMovies(movie.name, movie.img));
-}
+		page.forEach(movie => app.displayMovies(movie.name, movie.img));
+},
 
-paginationCont.addEventListener('click', function (e) {
+nextPrevPage: function (e) {
 		const elem = e.target.dataset;
 		
 		const prevBtn = document.querySelector('[data-prevBtn]');
@@ -92,45 +137,84 @@ paginationCont.addEventListener('click', function (e) {
 		
 		if (elem.btn === 'Next') {
 			//checking if we're on last page 	
-				if (counter >= movies.length) {
+				if (app.counter >= app.movies.length) {
 					alert('You\'re on LAST PAGE');
 						return
 				}
 				else {
-						nextPrevMovies(counter, counter+1);
-						counter = counter + 1;	
+						app.PAGE(app.counter, app.counter+1);
+						app.counter = app.counter + 1;	
 				}
 		}
 		else if(elem.btn === 'Prev'){
 		//checking if we're on first page 	
-			if (counter === 0 || counter === 1) {
+			if (app.counter === 0 || app.counter === 1) {
 					alert('You\'re on FIRST PAGE');
 					return
 			}
 			else {
-					counter = counter - 1;	
-					nextPrevMovies(counter-1, counter);
+					app.counter = app.counter - 1;	
+					app.PAGE(app.counter-1, app.counter);
 			}
 			
 		}
-})	
+},
 
-// what i have to do next is select the next and prev button and increase and decrease the counter according to it plus if counter is zero hide the prev button and when counter is equal to movies length hide next button 
+//filter the array and then dynamically add everything on download page
 
-//for Download page 
-let selectedMovie;
-
-//I'll filter the array and then dynamically add everything on download page
-
-const getSelectedMovie = function(e) {
-		const element = e.target.closest('.movie-card');
+getSelectedMovie: function(e) {
+		const element = e.target.parentElement.closest('.movie-card');
 		if(element) {
 		const movieName = element.querySelector('p');
-		selectedMovie = 	movies.filter(movie => {
+		selectedMovie = 	app.movies.filter(movie => {
 		if (movieName.textContent === movie.name) return movie;
-				})
-		}	
+				});
+				app.addToLocalStorage('movie', selectedMovie);
+				
+		//app.selectedMovie.forEach(movie => app.displayDownloadMovie(movie.name, '_', movie.img));
+		}	 else return
+
+},	
+
+displayDownloadMovie: function (name, link, img) {
+		const mainSection = document.querySelector('main');
+		const main = mainSection;
+		main.innerHTML = `				<p>Home > ${name} </p>
+				<section class="download-movie-page">
+						<h2 class="DMV" data-download-movie-name>${name}</h2>
+						<div class="img">
+								<img src="../${img}" alt="${name}" />
+						</div>
+						<div class="download-movie">
+								<p class="rating">Imbd Rating: 8/10</p>
+								<p class="director">Director: <span>John Doe</span></p>
+								<p class="actor">Actors: <span>John Doe, Jain Doe</span></p>
+								<p class="descp">Description: <span>luptatum praesent nascetur tempus scripta ferri idque sonet omittam vitae tellus diam persius conceptam hac sed etiam semper habitasse interpretaris</span></p>
+						</div>
+				</section>
+				<section class="links">
+						<a href="#">${link}</a>
+						<a href="#">${link}</a>
+						<a href="#">${link}</a>
+				</section>`
+},
+
+i: function () {
+		const m = localStorage.getItem('movie');
+		app.displayDownloadMovie(JSON.parse(m)[0].name, '_', JSON.parse(m)[0].img);	
+},
+
+ //	LOCAL STORAGE
+//add to localStorage
+addToLocalStorage: function (item, value) {
+		localStorage.setItem(item, JSON.stringify(value))
+},
+
+//Remove From localStorage
+removeFromLocalStorage: function (item) {
+		localStorage.removeItem(item);
+},
+
 }
 
-const moviesAll = document.querySelectorAll('.movie-card');
-		movieElemCont.addEventListener('click', getSelectedMovie)
+app.init();
