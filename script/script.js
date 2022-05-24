@@ -18,38 +18,25 @@ getData: function() {
 	 let id = document.body.id
 		switch (id) {
 		case 'home':
-				app.getMovies('./');
+				app.getMovies('./', 'download/');
 				app.findSearchMovie();
 				app.pagination();
-				app.movieElemCont().addEventListener('click', app.getSelectedMovie);
+				app.movieElemCont().addEventListener('click', app.getElem);
+				app.searchResultsCont().addEventListener('click', app.searchGoToDownload);
 				break;
 		case 'downloadPage':
-				app.getMovies('../');		
+		//Changing Path of image 	
+				app.getMovies('../', '');		
+				app.	searchResultsCont().addEventListener('click', app.searchGoToDownload);
 				app.findSearchMovie();
-				app.i();
+				app.getSelectedMovie();
 				break
 		default:
 				
   }
 },
 
-searchResultsCont: function () {
-		const searchCont = document.querySelector('[data-search-results]');
-		return searchCont
-},
-
-movieElemCont: function () {
-		const movieElem = document.querySelector('.movies-container');
-		return movieElem
-},
-
-pagination: function () {
-		const paginationBtnsCont = document.querySelector('[data-pagination-Btncontainer]');
-		paginationBtnsCont.addEventListener('click', app.nextPrevPage)
-},
-
-
-getMovies: function (path) {
+getMovies: function (path, downloadPath) {
 		const movieCardTemplate = document.querySelector('.search-movie-template');
 //const movieElemCont = document.querySelector('.movies-container');
 //const searchResultsCont = document.querySelector('[data-search-results]');
@@ -62,22 +49,37 @@ app.movies	= 	data.map(movie => {
 				const movieName = card.querySelector('[data-search-name]');
 				img.src = `${path}${movie.img}`;
 				movieName.textContent = movie.name	;
+				movieName.href = `${downloadPath}download.html`;
 				card.classList.add('hide');
 				app.searchResultsCont().appendChild(card);		
 				
 				if (document.body.id === 'home') {
 						//Home Page
 						app.displayMovies(movie.name, movie.img);
-				}
+				}		
 				
 				return {name: movie.name, img: movie.img, id: movie.id, element:card}
 			})
 });
 },
 
+movieElemCont: function () {
+		const movieElem = document.querySelector('.movies-container');
+		return movieElem
+},
+
+getElem: function(e) {
+		const element = e.target.parentElement.closest('.movie-card');
+		app.downloadMovie(element, 'p');
+},	
+
+pagination: function () {
+		const paginationBtnsCont = document.querySelector('[data-pagination-Btncontainer]');
+		paginationBtnsCont.addEventListener('click', app.nextPrevPage)
+},
+
 //Add movies in DOM
 displayMovies: function (name,img) {
-		//const movieElemCont = document.querySelector('.movies-container');
 		app.movieElemCont().insertAdjacentHTML('afterbegin', `
 			<div class="movie-card">
 						<div class="movie-img">
@@ -118,6 +120,17 @@ searchbar.addEventListener('input', (e) => {
 		})		
 });
 },
+
+searchResultsCont: function () {
+		const searchCont = document.querySelector('[data-search-results]');
+		return searchCont
+},
+
+searchGoToDownload: function (e) {
+		const element = e.target.parentElement.closest('.search-results');
+		app.downloadMovie(element, 'a')
+},
+
 //we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
 
 //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
@@ -146,7 +159,7 @@ nextPrevPage: function (e) {
 						app.counter = app.counter + 1;	
 				}
 		}
-		else if(elem.btn === 'Prev'){
+		else if(elem.btn === 'Prev') {
 		//checking if we're on first page 	
 			if (app.counter === 0 || app.counter === 1) {
 					alert('You\'re on FIRST PAGE');
@@ -155,26 +168,28 @@ nextPrevPage: function (e) {
 			else {
 					app.counter = app.counter - 1;	
 					app.PAGE(app.counter-1, app.counter);
-			}
-			
+			}			
 		}
 },
 
 //filter the array and then dynamically add everything on download page
-
-getSelectedMovie: function(e) {
-		const element = e.target.parentElement.closest('.movie-card');
+downloadMovie: function (element, qString) {
 		if(element) {
-		const movieName = element.querySelector('p');
+		const movieName = element.querySelector(qString);
+		console.log(movieName.innerHTML);
 		selectedMovie = 	app.movies.filter(movie => {
 		if (movieName.textContent === movie.name) return movie;
 				});
+				console.log(selectedMovie[0].name);
 				app.addToLocalStorage('movie', selectedMovie);
-				
-		//app.selectedMovie.forEach(movie => app.displayDownloadMovie(movie.name, '_', movie.img));
 		}	 else return
 
-},	
+},
+
+getSelectedMovie: function () {
+		const m = localStorage.getItem('movie');
+		app.displayDownloadMovie(JSON.parse(m)[0].name, '_', JSON.parse(m)[0].img);	
+},
 
 displayDownloadMovie: function (name, link, img) {
 		const mainSection = document.querySelector('main');
@@ -197,11 +212,6 @@ displayDownloadMovie: function (name, link, img) {
 						<a href="#">${link}</a>
 						<a href="#">${link}</a>
 				</section>`
-},
-
-i: function () {
-		const m = localStorage.getItem('movie');
-		app.displayDownloadMovie(JSON.parse(m)[0].name, '_', JSON.parse(m)[0].img);	
 },
 
  //	LOCAL STORAGE
