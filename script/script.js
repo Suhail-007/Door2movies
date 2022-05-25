@@ -38,9 +38,7 @@ getData: function() {
 
 getMovies: function (path, downloadPath) {
 		const movieCardTemplate = document.querySelector('.search-movie-template');
-//const movieElemCont = document.querySelector('.movies-container');
-//const searchResultsCont = document.querySelector('[data-search-results]');
-
+		
 fetch('https://api.jsonbin.io/b/62690e4825069545a329e0fa/4').then(res => res.json()).then(data => {
 app.movies	= 	data.map(movie => {
 				//For Search bar
@@ -127,7 +125,7 @@ searchResultsCont: function () {
 },
 
 searchGoToDownload: function (e) {
-		const element = e.target.parentElement.closest('.search-results');
+		const element = e.target.parentElement;
 		app.downloadMovie(element, 'a')
 },
 
@@ -175,12 +173,11 @@ nextPrevPage: function (e) {
 //filter the array and then dynamically add everything on download page
 downloadMovie: function (element, qString) {
 		if(element) {
+		console.log(element.innerHTML);
 		const movieName = element.querySelector(qString);
-		console.log(movieName.innerHTML);
 		selectedMovie = 	app.movies.filter(movie => {
 		if (movieName.textContent === movie.name) return movie;
 				});
-				console.log(selectedMovie[0].name);
 				app.addToLocalStorage('movie', selectedMovie);
 		}	 else return
 
@@ -228,3 +225,13 @@ removeFromLocalStorage: function (item) {
 }
 
 app.init();
+
+
+/*const myUrl = new URL(window.location.href);
+const myu = new URLSearchParams(myUrl);
+
+myu.set('name', 'suhail')
+myu.set('id', '2')
+
+console.log(myu.get('name'));
+console.log(myu.get('id'));*/
