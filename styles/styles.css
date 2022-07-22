@@ -244,12 +244,14 @@ nav {
 		height: 90%;
 }
 
-.movies-container > .movie-card .movie-name  {
+/*.movies-container > .movie-card .movie-name  {
 		padding: 0;
 		font-size: clamp(1.2rem, 3vw, 2.5rem);
-}
+}*/
 
-.movies-container > .movie-card .movie-name > a {
+.movies-container > .movie-card .movie-name /*> a */{
+		padding: 0;
+		font-size: clamp(1.2rem, 3vw, 2.5rem);
 		color: black;
 }
 
