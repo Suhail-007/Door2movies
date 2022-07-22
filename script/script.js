@@ -222,9 +222,9 @@ displayDownloadMovie: function (name, link, img) {
 				</section>`
 },
 
-checkName: function () {
-  const pageUrl = 
-},
+
+ 
+
 
 }
 
