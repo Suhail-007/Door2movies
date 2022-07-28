@@ -254,6 +254,7 @@ _displayDownloadMovie: function (name, link, img) {
 				</section>`
 },
 
+<<<<<<< HEAD
 /*checkPage: async function () {
 		try {
 				const pageUrl = new URL(window.location.href);
@@ -276,6 +277,12 @@ _displayDownloadMovie: function (name, link, img) {
 				console.log(err);
 		}
 },*/
+=======
+
+ 
+
+
+>>>>>>> a5594072562a3b9cd306151dcfca51e5646868c0
 }
 
 app._init();
