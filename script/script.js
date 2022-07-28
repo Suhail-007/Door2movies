@@ -5,57 +5,61 @@ searchCont: document.querySelector('[data-search-results]'),
 paginationBtnsCont: document.querySelector('[data-pagination-Btncontainer]'),
 
 //Variables
-counter: 0,
+counter: 9,
 movies: undefined,
 selectedMovie: undefined,
 fetchData: fetch('https://api.npoint.io/39747bbbd8c4e3aef9ff').then(res => res.json()),
 
 //initialize
-init: function() {
-	window.addEventListener('DOMContentLoaded', this.load);
-	document.addEventListener('click', this.dropDown);
+_init: function() {	window.addEventListener('DOMContentLoaded', app._load);
+document.addEventListener('click', app._dropDown);
 },
 
-//load everything
-load: function() {
-		app.getData();
+_load: function() {
+		app._getData();
 },
 
 //get data according to body
-getData: function() {
+_getData: function() {
 	 let id = document.body.id
 		switch (id) {
 		case 'home':
 				//Change Path for image and search Links on home page
-				this.getMovies('./', 'download/');
+				this._getMovies('./', 'download/');
 				this.findSearchMovie();
-				this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this))
+				this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
 				break;
 		case 'downloadPage':
 				this.findSearchMovie();
-				this.getSelectedMovie();
+				this._getSelectedMovie();
 				//Change Path for image and search Links on download page 
-				this.getMovies('../', '');
-				break
+				this._getMovies('../', '');
+				break;
+		case 'page':
+				this._getMovies('../', '../download/');
+				this.findSearchMovie();
+				this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
+				this._getSelectedMovie();
+//				this.checkPage()
 		default:	
 		return
   }
 },
 
 //fetch request
-getMovies: async function (path, downloadPath) {
+_getMovies: async function (path, downloadPath) {
 		try {
 				const movieCardTemplate = document.querySelector('.search-movie-template');
 				//waiting for fetch request 
 				const response = await this.fetchData;
-				this.movies	= 	response.map(movie => {
+				this.movies	= await 	response.map(movie => {
 						//Home Page
-						if (document.body.id === 'home') this.displayMovies(movie.name, movie.img, movie.id, 0, 0);
+						if (document.body.id === 'home') this._displayMovies(movie.name, movie.img, movie.id, 0, 0);
 				
 				//For Search bar
 				const card = movieCardTemplate.content.cloneNode(true).children[0];
 				
-				this.fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
+				this._fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
 				
 				return {
 				name: movie.name,
@@ -69,8 +73,8 @@ getMovies: async function (path, downloadPath) {
 				}
 },
 
-//fill up search bar
-fillSearch: function (card, name, img, id, path, downPath) {
+//fill up search container
+_fillSearch: function (card, name, img, id, path, downPath) {
 				const cardImg = card.querySelector('[data-search-img]');
 				//anchor Elem
 				const movieName = card.querySelector('[data-search-name]');
@@ -88,7 +92,7 @@ createSlug: function (str) {
 },
 
 //Add movies in DOM
-displayMovies: function (name,img, id, start, end) {
+_displayMovies: function (name,img, id, start, end) {
 		this.movieElemCont.insertAdjacentHTML('afterbegin', `
 			<div class="movie-card">
 						<div class="movie-img">
@@ -101,7 +105,7 @@ displayMovies: function (name,img, id, start, end) {
 },
 
 //DropDown
-dropDown: function (e) {
+_dropDown: function (e) {
 		const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
 		//as long as user clicking inside of dropdown it won't close
@@ -129,20 +133,65 @@ searchbar.addEventListener('input', (e) => {
 });
 },
 
+//we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
+
+//it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
+
+PAGE: function (start, end) {
+		const page = this.movies.slice(start, end);
+		let displayPage = this.movieElemCont;	
+		displayPage.innerHTML = '';
+		page.forEach(movie => {this._displayMovies(movie.name, movie.img, movie.id, start, end)
+				console.log(`start = ${start}, end = ${end}`);
+				}
+				);
+
+		//add Page number when using pagination
+		//const url = new URL(`${window.location.href}?start=${start}&end=${end}`);
+//		url.searchParams.set("start", start);
+	//	url.searchParams.set("end", end);
+},
+
+//we are starting counting from last array item so that whenever new movie is added it shows on first on next page
 nextPrevPage: function (e) {
 		const elem = e.target.dataset;
 		
 		const prevBtn = document.querySelector('[data-prevBtn]');
 		const nextBtn = document.querySelector('[data-nextBtn]');
-		
-		if (elem.btn === 'Next') {
-			//checking if we're on last page 	
-				if (this.counter >= this.movies.length) {
+
+if (elem.btn === 'Next') {
+		//		checking if we're on last page 
+				
+		if (this.counter === 0) {
 					alert('You\'re on LAST PAGE');
 					return
 				}
 				else {
-						app.PAGE(this.counter, this.counter+1);
+						this.PAGE(this.counter -1, this.counter );
+						this.counter = this.counter - 1;
+				}
+		}
+		else if(elem.btn === 'Prev') {
+		//checking if we're on first page 	
+			if (this.counter === this.movies.length - 1) {
+					alert('You\'re on FIRST PAGE');
+					return
+			}
+			else {
+					this.counter = this.counter + 1;
+					this.PAGE(this.counter, this.counter + 1);	
+			}			
+		}
+
+
+/*	if (elem.btn === 'Next') {
+		//		checking if we're on last page 
+					if (this.counter >= this.movies.length) {
+					alert('You\'re on LAST PAGE');
+					return
+				}
+				else {
+						this.PAGE(this.counter, this.counter +1 );
 						this.counter = this.counter + 1;
 				}
 		}
@@ -154,36 +203,19 @@ nextPrevPage: function (e) {
 			}
 			else {
 					this.counter = this.counter - 1;	
-					app.PAGE(this.counter-1, this.counter);
+					this.PAGE(this.counter-1, this.counter);
 			}			
-		}
+		}*/
 },
 
-//we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
-
-//it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
-
-PAGE: function (start, end) {
-		const page = this.movies.slice(start, end);
-		let displayPage = this.movieElemCont;	
-		displayPage.innerHTML = ''
-		page.forEach(movie => this.displayMovies(movie.name, movie.img, movie.id, start, end));
-		
-		//add Page number when using pagination
-		const url = new URL(window.location.href);
-		url.searchParams.set("start", start);
-		url.searchParams.set("end", end);		 
-},
-
-getSelectedMovie: async function (e) {
-		try {
-				//fetch request
-				const response = await this.fetchData;
+_getSelectedMovie: async function (e) {
+		try {												
 				//get Movie id from window url		
 				const url = new URL(window.location.href);
 				const movieId = url.searchParams.get('id');
 				const movieName = url.searchParams.get('name');
-				
+				//fetch request
+				const response = await this.fetchData;
 				//checking if both name and id exist in url xD
 				if(movieId && movieName) {
 						selectedMovie = response.filter(movie => {
@@ -191,7 +223,7 @@ getSelectedMovie: async function (e) {
 					});
 						const movie = await selectedMovie[0];
 							//display download Movie
-						this.displayDownloadMovie(movie.name, movie.link, movie.img);
+						this._displayDownloadMovie(movie.name, movie.link, movie.img);
 				}
 		} catch(err) {
 				console.log(err);
@@ -199,7 +231,7 @@ getSelectedMovie: async function (e) {
 },
 
 //show selected movie
-displayDownloadMovie: function (name, link, img) {
+_displayDownloadMovie: function (name, link, img) {
 		const mainSection = document.querySelector('main');
 		const main = mainSection;
 		main.innerHTML = `				<p>Home > ${name} </p>
@@ -222,14 +254,28 @@ displayDownloadMovie: function (name, link, img) {
 				</section>`
 },
 
-checkName: function () {
-  const pageUrl = 
-},
-
+/*checkPage: async function () {
+		try {
+				const pageUrl = new URL(window.location.href);
+  
+  		if (pageUrl.toString().includes("start")) {
+  				if (pageUrl.searchParams.get("start") > 0) {
+  						const pageStartNum = pageUrl.searchParams.get('start');
+  						console.log(pageStartNum);
+  						const pageEndNum = pageUrl.searchParams.get('end');	
+  						const slicedArr = await this.movies.slice(pageStartNum, pageEndNum);
+  						let displayPage = this.movieElemCont;
+  						displayPage.innerHTML = ''
+  						slicedArr.map(movie => {
+      		this._displayMovies(movie.name, movie.img, movie.id, pageStartNum, pageEndNum);
+      		console.log(this._displayMovies(movie.name, movie.img, movie.id, '../', pageStartNum, pageEndNum));
+    				})
+  				}
+  		}
+		} catch(err) {
+				console.log(err);
+		}
+},*/
 }
 
-app.init();
-
-//create three functions one download page when received a url, will show a movie according to that
-//one which will check if user is using pagination or not and show movies according to on which page user is and update the counter variable according to that
-//a function which will check if it's a download page url or pagination 
+app._init();
