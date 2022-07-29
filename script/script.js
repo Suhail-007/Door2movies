@@ -3,7 +3,7 @@ const app = {
 movieElemCont: document.querySelector('.movies-container'),
 searchCont: document.querySelector('[data-search-results]'),
 paginationBtnsCont: document.querySelector('[data-pagination-Btncontainer]'),
-
+movieCardTemplate: document.querySelector('.search-movie-template'),
 //Variables
 counter: 9,
 movies: undefined,
@@ -38,9 +38,9 @@ _getData: function() {
 		case 'page':
 				this._getMovies('../', '../download/');
 				this.findSearchMovie();
-				this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
+	//			this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
 				this._getSelectedMovie();
-//				this.checkPage()
+				this.checkPage()
 		default:	
 		return
   }
@@ -49,15 +49,16 @@ _getData: function() {
 //fetch request
 _getMovies: async function (path, downloadPath) {
 		try {
-				const movieCardTemplate = document.querySelector('.search-movie-template');
+		//		const movieCardTemplate = document.querySelector('.search-movie-template');
 				//waiting for fetch request 
 				const response = await this.fetchData;
 				this.movies	= await 	response.map(movie => {
 						//Home Page
-						if (document.body.id === 'home') this._displayMovies(movie.name, movie.img, movie.id, 0, 0);
+						if (document.body.id === 'home') this._displayMovies(movie.name, movie.img, './', movie.id, 0, 0);
 				
 				//For Search bar
-				const card = movieCardTemplate.content.cloneNode(true).children[0];
+//				const card = movieCardTemplate.content.cloneNode(true).children[0];
+				const card = this.movieCardTemplate.content.cloneNode(true).children[0];
 				
 				this._fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
 				
@@ -92,11 +93,11 @@ createSlug: function (str) {
 },
 
 //Add movies in DOM
-_displayMovies: function (name,img, id, start, end) {
+_displayMovies: function (name,img, imgPath, id, start, end) {
 		this.movieElemCont.insertAdjacentHTML('afterbegin', `
 			<div class="movie-card">
 						<div class="movie-img">
-							<img src="${img}" alt="${name}" />
+							<img src="${imgPath}${img}" alt="${name}" />
 						</div>
 						<div class="movie-name-cont movie-link">
 							<a class="movie-name" href="download/download.html?name=${this.createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>
@@ -141,18 +142,19 @@ PAGE: function (start, end) {
 		const page = this.movies.slice(start, end);
 		let displayPage = this.movieElemCont;	
 		displayPage.innerHTML = '';
-		page.forEach(movie => {this._displayMovies(movie.name, movie.img, movie.id, start, end)
+		page.forEach(movie => {this._displayMovies(movie.name, movie.img, './', movie.id, start, end)
 				console.log(`start = ${start}, end = ${end}`);
+	//			  window.location.replace(`page.html?start=${start}&end=${end}`);
 				}
 				);
 
 		//add Page number when using pagination
-		//const url = new URL(`${window.location.href}?start=${start}&end=${end}`);
+//		const url = new URL(window.location.href);
 //		url.searchParams.set("start", start);
-	//	url.searchParams.set("end", end);
+//		url.searchParams.set("end", end);
 },
 
-//we are starting counting from last array item so that whenever new movie is added it shows on first on next page
+//we start counting from last array item so that whenever new movie is added it shows on first on next page
 nextPrevPage: function (e) {
 		const elem = e.target.dataset;
 		
@@ -162,10 +164,7 @@ nextPrevPage: function (e) {
 if (elem.btn === 'Next') {
 		//		checking if we're on last page 
 				
-		if (this.counter === 0) {
-					alert('You\'re on LAST PAGE');
-					return
-				}
+		if (this.counter === 0) return alert('You\'re on LAST PAGE');
 				else {
 						this.PAGE(this.counter -1, this.counter );
 						this.counter = this.counter - 1;
@@ -173,10 +172,7 @@ if (elem.btn === 'Next') {
 		}
 		else if(elem.btn === 'Prev') {
 		//checking if we're on first page 	
-			if (this.counter === this.movies.length - 1) {
-					alert('You\'re on FIRST PAGE');
-					return
-			}
+			if (this.counter === this.movies.length - 1) return alert('You\'re on FIRST PAGE');
 			else {
 					this.counter = this.counter + 1;
 					this.PAGE(this.counter, this.counter + 1);	
@@ -254,35 +250,31 @@ _displayDownloadMovie: function (name, link, img) {
 				</section>`
 },
 
-<<<<<<< HEAD
-/*checkPage: async function () {
+checkPage: async function () {
 		try {
 				const pageUrl = new URL(window.location.href);
   
   		if (pageUrl.toString().includes("start")) {
-  				if (pageUrl.searchParams.get("start") > 0) {
-  						const pageStartNum = pageUrl.searchParams.get('start');
-  						console.log(pageStartNum);
-  						const pageEndNum = pageUrl.searchParams.get('end');	
-  						const slicedArr = await this.movies.slice(pageStartNum, pageEndNum);
+  		const start = pageUrl.searchParams.get("start");
+  				if (start > 0) {
+  						console.log(start);
+  						const end = pageUrl.searchParams.get('end');	
+  						const movies = await this.fetchData;
+  						const slicedArr = movies.slice(start, end);
   						let displayPage = this.movieElemCont;
   						displayPage.innerHTML = ''
   						slicedArr.map(movie => {
-      		this._displayMovies(movie.name, movie.img, movie.id, pageStartNum, pageEndNum);
-      		console.log(this._displayMovies(movie.name, movie.img, movie.id, '../', pageStartNum, pageEndNum));
+      		this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
+ //     		console.log(this._displayMovies(movie.name, movie.img, movie.id, '../', start, end);
     				})
   				}
   		}
 		} catch(err) {
 				console.log(err);
 		}
-},*/
-=======
-
- 
-
-
->>>>>>> a5594072562a3b9cd306151dcfca51e5646868c0
+},
 }
 
 app._init();
+
+//change the start and end in url of page
