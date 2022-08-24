@@ -12,7 +12,10 @@ const app = {
 
   //initialize
   _init: function() {
-    window.addEventListener('DOMContentLoaded', app._load);
+    window.addEventListener('DOMContentLoaded', () => {
+      this._load();
+      this.checkPage();
+    });
     document.addEventListener('click', app._dropDown);
   },
 
@@ -39,9 +42,9 @@ const app = {
       case 'page':
         this._getMovies('../', '../download/');
         this.findSearchMovie();
-        //			this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
+        this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
         this._getSelectedMovie();
-        this.checkPage()
+        //    this.checkPage()
       default:
         return
     }
@@ -71,6 +74,7 @@ const app = {
         }
       });
     } catch (err) {
+      location.reload();
       console.log(err);
     }
   },
@@ -83,13 +87,13 @@ const app = {
     cardImg.src = `${path}${img}`;
     movieName.textContent = name;
     //create Slug
-    movieName.href = `${downPath}download.html?name=${this.createSlug(name)}&id=${id}`;
+    movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
     card.classList.add('hide');
     this.searchCont.appendChild(card);
   },
 
   //slug function 
-  createSlug: function(str) {
+  _createSlug: function(str) {
     return str.toLowerCase();
   },
 
@@ -101,7 +105,7 @@ const app = {
 							<img src="${imgPath}${img}" alt="${name}" />
 						</div>
 						<div class="movie-name-cont movie-link">
-							<a class="movie-name" href="download/download.html?name=${this.createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>
+							<a class="movie-name" href="download/download.html?name=${this._createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>
 						</div>
 				</div>`);
   },
@@ -135,26 +139,6 @@ const app = {
     });
   },
 
-  //we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
-
-  //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
-
-  PAGE: function(start, end) {
-    const page = this.movies.slice(start, end);
-    let displayPage = this.movieElemCont;
-    displayPage.innerHTML = '';
-    page.forEach(movie => {
-      this._displayMovies(movie.name, movie.img, './', movie.id, start, end)
-      console.log(`start = ${start}, end = ${end}`);
-      //			  window.location.replace(`page.html?start=${start}&end=${end}`);
-    });
-
-    //add Page number when using pagination
-    //		const url = new URL(window.location.href);
-    //		url.searchParams.set("start", start);
-    //		url.searchParams.set("end", end);
-  },
-
   //we start counting from last array item so that whenever new movie is added it shows on first on next page
   nextPrevPage: function(e) {
     const elem = e.target.dataset;
@@ -167,13 +151,14 @@ const app = {
 
       if (this.counter === 0) return alert('You\'re on LAST PAGE');
       else {
+
         this.PAGE(this.counter - 1, this.counter);
         this.counter = this.counter - 1;
       }
     }
     else if (elem.btn === 'Prev') {
       //checking if we're on first page 	
-      if (this.counter === this.movies.length - 1) return alert('You\'re on FIRST PAGE');
+      if (this.counter >= this.movies.length - 1) return alert('You\'re on FIRST PAGE');
       else {
         this.counter = this.counter + 1;
         this.PAGE(this.counter, this.counter + 1);
@@ -204,11 +189,33 @@ const app = {
     			}			
     		}*/
   },
+  
+    //we'll increase the start variable by 10 everytime user click on next btn and then add 10 more to the end variable exmaple => slice(0, 10) then on next click => slice(10, 20);
 
+  //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
+
+  PAGE: function(start, end) {
+    const page = this.movies.slice(start, end);
+    let displayPage = this.movieElemCont;
+    displayPage.innerHTML = '';
+    page.forEach(movie => {
+      this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
+    });
+    
+    //window.location.replace(`page.html?start=${start}&end=${end}`);
+//add Page number when using pagination
+//const url = new URL(u);
+//console.log(u);
+/*url.searchParams.set("start", start);
+url.searchParams.set("end", end);*/
+  },
+
+  
   _getSelectedMovie: async function(e) {
     try {
       //get Movie id from window url		
       const url = new URL(window.location.href);
+      console.log(url);
       const movieId = url.searchParams.get('id');
       const movieName = url.searchParams.get('name');
       //fetch request
@@ -229,25 +236,26 @@ const app = {
 
   //show selected movie
   _displayDownloadMovie: function(name, link, img) {
+
     const mainSection = document.querySelector('main');
     const main = mainSection;
-    main.innerHTML = `				<p>Home > ${name} </p>
+    main.innerHTML = `				<p> Home > ${name} </p>
 				<section class="download-movie-page">
-						<h2 class="DMV" data-download-movie-name>${name}</h2>
-						<div class="img">
-								<img src="../${img}" alt="${name}" />
-						</div>
-						<div class="download-movie">
-								<p class="rating">Imbd Rating: 8/10</p>
-								<p class="director">Director: <span>John Doe</span></p>
-								<p class="actor">Actors: <span>John Doe, Jain Doe</span></p>
-								<p class="descp">Description: <span>luptatum praesent nascetur tempus scripta ferri idque sonet omittam vitae tellus diam persius conceptam hac sed etiam semper habitasse interpretaris</span></p>
-						</div>
+			  	<h2 class="DMV" data-download-movie-name>${name}</h2>
+					<div class="img">
+					  <img src="../${img}" alt="${name}" />
+					</div>
+					<div class="download-movie">
+				  	<p class="rating">Imbd Rating: 8/10</p>
+						<p class="director">Director: <span>John Doe</span></p>
+						<p class="actor">Actors: <span>John Doe, Jain Doe</span></p>
+						<p class="descp">Description: <span>luptatum praesent nascetur tempus scripta ferri idque sonet omittam vitae tellus diam persius conceptam hac sed etiam semper habitasse interpretaris</span></p>
+					</div>
 				</section>
 				<section class="links">
-						<a href="#">${link}</a>
-						<a href="#">${link}</a>
-						<a href="#">${link}</a>
+					<a href="#">${link}</a>
+					<a href="#">${link}</a>
+					<a href="#">${link}</a>
 				</section>`
   },
 
@@ -256,7 +264,6 @@ const app = {
       const pageUrl = new URL(window.location.href);
       const start = pageUrl.searchParams.get("start");
       if (pageUrl.toString().includes("start") && start > 0) {
-        console.log(start);
         const end = pageUrl.searchParams.get('end');
         const movies = await this.fetchData;
         const slicedArr = movies.slice(start, end);
