@@ -34,7 +34,7 @@ const app = {
         this.findSearchMovie();
         this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
         //set the local storage value to counter
-        this.setLocalStorage();
+ //       this.setLocalStorage();
         break;
       case 'downloadPage':
         this.findSearchMovie();
@@ -47,7 +47,7 @@ const app = {
         this.findSearchMovie();
         this.paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
         this._getSelectedMovie();
-        this.checkPage()
+   //     this.checkPage()
       default:
         return
     }
@@ -156,7 +156,7 @@ const app = {
 
         //edit localStorage
         const start = this.counter
-        this.editLocalStorage(start);
+    //    this.editLocalStorage(start);
 
         this.counter = this.counter - 1;
       }
@@ -169,7 +169,7 @@ const app = {
 
         //edit localStorage
         const start = this.counter
-        this.editLocalStorage(start);
+     //   this.editLocalStorage(start);
 
         this.PAGE(this.counter, this.counter + 1);
       }
@@ -189,9 +189,16 @@ const app = {
     });
 
     // edit local storage 
-    const startUrl = this.getLocalStorage('start');
+ //   const startCount = this.getLocalStorage('start');
+    
+    const url = new URL(window.location);
+    url.searchParams.set('start', start);
+    url.searchParams.set('end', end);
+    
+    window.history.pushState({}, '', url);
+    
+    console.log(window.location.href);
   },
-
 
   _getSelectedMovie: async function(e) {
     try {
@@ -251,9 +258,10 @@ const app = {
       if (pageUrl.toString().includes("start") && start > 0) {
         const end = pageUrl.searchParams.get('end');
         const movies = await this.fetchData;
-        const slicedArr = movies.slice(start, end + 1);
+        const slicedArr = movies.slice(start, end);
         let displayPage = this.movieElemCont;
         displayPage.innerHTML = ''
+        
         slicedArr.map(movie => {
           this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
         })
@@ -264,7 +272,7 @@ const app = {
   },
 
 
-  getLocalStorage: function(itemName) {
+ /* getLocalStorage: function(itemName) {
     return localStorage.getItem(itemName);
   },
 
@@ -279,7 +287,7 @@ const app = {
 
   setLocalStorage: function() {
     return localStorage.setItem('start', this.counter);
-  },
+  },*/
 }
 
 app._init();
