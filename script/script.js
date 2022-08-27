@@ -153,6 +153,11 @@ const app = {
       else {
 
         this.PAGE(this.counter - 1, this.counter);
+
+        //edit localStorage
+        const start = this.counter
+        this.editLocalStorage(start);
+
         this.counter = this.counter - 1;
       }
     }
@@ -161,6 +166,11 @@ const app = {
       if (this.counter >= this.movies.length - 1) return alert('You\'re on FIRST PAGE');
       else {
         this.counter = this.counter + 1;
+
+        //edit localStorage
+        const start = this.counter
+        this.editLocalStorage(start);
+
         this.PAGE(this.counter, this.counter + 1);
       }
     }
@@ -178,9 +188,8 @@ const app = {
       this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
     });
 
-    //edit local storage 
-    const startUrl = this.editLocalStorage(start);
-    
+    // edit local storage 
+    const startUrl = this.getLocalStorage('start');
   },
 
 
@@ -260,19 +269,16 @@ const app = {
   },
 
   //since we have only one item in localStorage we are passing it ourselves
-  editLocalStorage: function(value) {
+  editLocalStorage: function(editItem) {
     const item = this.getLocalStorage('start');
 
     if (item) {
-     localStorage.setItem('start', this.counter);
+      localStorage.setItem('start', editItem);
     }
-    
-    //returning updated value of localStorage to use in url 
-    return this.getLocalStorage('start');
   },
 
   setLocalStorage: function() {
-    return localStorage.setItem('start', this.counter) ? localStorage.setItem('start', this.counter) : '';
+    return localStorage.setItem('start', this.counter);
   },
 }
 
