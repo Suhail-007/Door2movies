@@ -257,6 +257,10 @@ const app = {
       const start = pageUrl.searchParams.get("start");
       if (pageUrl.toString().includes("start") && start > 0) {
         const end = pageUrl.searchParams.get('end');
+        
+        //reassign counter variable
+        this.counter = start;
+        
         const movies = await this.fetchData;
         const slicedArr = movies.slice(start, end);
         let displayPage = this.movieElemCont;
