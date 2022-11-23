@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  height: 100vh;
+  padding: 0;
 }
 
 header {
@@ -27,7 +27,7 @@ header>h1 {
 header>h1>a {
   text-decoration: none;
   color: #000;
-  font-size: clamp(1.3em, 3vw, 2.5em);
+  font-size: clamp(1.3em, 7vw, 2.5em);
 }
 
 header>h1>a>span {
@@ -219,7 +219,6 @@ nav {
 
 .movie-name-cont {
   width: 100%;
-
 }
 
 .movies-container>.movie-card {
@@ -244,15 +243,7 @@ nav {
   height: 90%;
 }
 
-/*.movies-container > .movie-card .movie-name  {
-		padding: 0;
-		font-size: clamp(1.2rem, 3vw, 2.5rem);
-}*/
-
-.movies-container>.movie-card .movie-name
-
-/*> a */
-  {
+.movies-container>.movie-card .movie-name-cont>.movie-name {
   padding: 0;
   font-size: clamp(1.2rem, 3vw, 2.5rem);
   color: black;
@@ -260,7 +251,7 @@ nav {
 
 footer {
   background: black;
-  height: 3rem;
+  height: 5em;
   display: grid;
   place-items: center;
 }
@@ -268,6 +259,7 @@ footer {
 footer>p {
   color: #fff;
   font-size: clamp(1rem, 3vw, 1.5rem);
+  padding: 0;
 }
 
 /* DOWNLOAD PAGE*/
@@ -290,14 +282,14 @@ main>p {
 }
 
 .img {
-  height: 100%;
   text-align: center;
+  width: 100%;
+  border: 2px solid red;
 }
 
 .img>img {
-  width: 60%;
-  height: 20rem;
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
 }
 
 .download-movie {
