@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Door2Movies</title>
-  <script src="script/script.js" defer></script>
+  <script src="src/js/controller.js" defer></script>
   <link rel="stylesheet" href="styles/styles.css" />
 </head>
 
@@ -34,7 +34,7 @@
     </div> <!-- nav container -->
 
     <!-- Search -->
-    <div class="search-container">
+    <div data-search-cont class="search-container">
       <input data-search-bar type="search" placeholder="Search here...">
       <div class="search-results" data-search-results>
         <div class="search-result-cont">
@@ -45,7 +45,7 @@
     </div><!-- search container -->
 
     <!-- Movies Card -->
-    <template class="search-movie-template" data-search-movie-template>
+    <template data-search-movie-template class="search-movie-template" data-search-movie-template>
       <div class="result" data-result>
         <img src="" data-search-img>
         <a href="#" data-search-name></a>
@@ -54,13 +54,13 @@
   </nav>
 
   <main>
-    <section class="pagination-container" data-pagination-Btncontainer>
+    <section class="pagination-container" data-pagination-btns-cont>
       <button type="button" data-btn="Next"><a href="pages/page.html">Next</a></button>
       <!--- <button type="button" data-btn="Next">Next</button>--->
       <button type="button" data-btn="Prev">Prev</button>
     </section>
 
-    <section class="movies-container"> </section>
+    <section data-movies-cont class="movies-container"> </section>
   </main>
   <footer>
     <p>All right reserved &copy; at Door2Movies.</p>

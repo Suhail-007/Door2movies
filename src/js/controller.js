@@ -1,53 +1,54 @@
 class App {
+
   //Elems
-  _movieElemCont = document.querySelector('.movies-container')
-  _searchCont = document.querySelector('[data-search-results]')
-  _paginationBtnsCont = document.querySelector('[data-pagination-Btncontainer]')
-  _movieCardTemplate = document.querySelector('.search-movie-template')
+  #movieElemCont = document.querySelector('[data-movies-cont]')
+  #searchCont = document.querySelector('[data-search-results]')
+  #paginationBtnsCont = document.querySelector('[data-pagination-btns-cont]')
+  #movieCardTemplate = document.querySelector('[data-search-movie-template]')
 
   //Variables
-  _counter = 9
-  _movies = undefined
-  _selectedMovie = undefined
-  _fetchData = fetch('https://api.npoint.io/39747bbbd8c4e3aef9ff').then(res => res.json());
+  #counter = 9
+  #movies = undefined
+  #selectedMovie = undefined
+  #fetchData = fetch('https://api.npoint.io/39747bbbd8c4e3aef9ff').then(res => res.json());
 
   //initialize app
   init() {
     window.addEventListener('DOMContentLoaded', () => {
-      this._load();
-      this._checkPage();
+      this.#load();
+      this.#checkPage();
     });
 
-    document.addEventListener('click', this._dropDown.bind(this));
+    document.addEventListener('click', this.#dropDown.bind(this));
   }
 
-  _load() {
-    this._getData();
+  #load() {
+    this.#getData();
   }
 
   //get data according to body
-  _getData() {
+  #getData() {
     let id = document.body.id
     switch (id) {
       case 'home':
         //Change Path for image and search Links on home page
-        this._getMovies('./', 'download/');
+        this.#getMovies('./', 'download/');
         this.findSearchMovie();
-        this._paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
-        //set the local storage value to _counter
+        this.#paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
+        //set the local storage value to #counter
         //       this.setLocalStorage();
         break;
       case 'downloadPage':
         this.findSearchMovie();
-        this._getSelectedMovie();
+        this.#getSelectedMovie();
         //Change Path for image and search Links on download page 
-        this._getMovies('../', '');
+        this.#getMovies('../', '');
         break;
       case 'page':
-        this._getMovies('../', '../download/');
+        this.#getMovies('../', '../download/');
         this.findSearchMovie();
-        this._paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
-        this._getSelectedMovie();
+        this.#paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
+        this.#getSelectedMovie();
         //     this.checkPage()
       default:
         return
@@ -55,19 +56,19 @@ class App {
   }
 
   //fetch request
-  async _getMovies(path, downloadPath) {
+  async #getMovies(path, downloadPath) {
     try {
       //waiting for fetch request 
-      const response = await this._fetchData;
+      const response = await this.#fetchData;
 
-      this._movies = response.map(movie => {
+      this.#movies = response.map(movie => {
         //Home Page
-        if (document.body.id === 'home') this._displayMovies(movie.name, movie.img, './', movie.id, '_', '_');
+        if (document.body.id === 'home') this.#displayMovies(movie.name, movie.img, './', movie.id, '#', '#');
 
         //For Search bar
-        const card = this._movieCardTemplate.content.cloneNode(true).children[0];
+        const card = this.#movieCardTemplate.content.cloneNode(true).children[0];
 
-        this._fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
+        this.#fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
 
         return {
           name: movie.name,
@@ -83,40 +84,40 @@ class App {
   }
 
   //fill up search container
-  _fillSearch(card, name, img, id, path, downPath) {
+  #fillSearch(card, name, img, id, path, downPath) {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
     cardImg.src = `${path}${img}`;
     movieName.textContent = name;
     //create Slug
-    movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
+    movieName.href = `${downPath}download.html?name=${this.#createSlug(name)}&id=${id}`;
     card.classList.add('hide');
-    this._searchCont.appendChild(card);
+    this.#searchCont.appendChild(card);
   }
 
   //slug function 
-  _createSlug(str) {
+  #createSlug(str) {
     return str.toLowerCase();
   }
 
   //Add movies in DOM
-  _displayMovies(name, img, imgPath, id, start, end) {
+  #displayMovies(name, img, imgPath, id, start, end) {
     const html = `
       <div class="movie-card">
         <div class="movie-img">
     		  <img src="${imgPath}${img}" alt="${name}" />
     		</div>
     		<div class="movie-name-cont movie-link">
-    		  <a class="movie-name" href="${imgPath}download/download.html?name=${this._createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>
+    		  <a class="movie-name" href="${imgPath}download/download.html?name=${this.#createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>
     		</div>
     	</div>`
 
-    this._movieElemCont.insertAdjacentHTML('afterbegin', html);
+    this.#movieElemCont.insertAdjacentHTML('afterbegin', html);
   }
 
   //DropDown
-  _dropDown(e) {
+  #dropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
     //as long as user clicking inside of dropdown it won't close
@@ -134,10 +135,10 @@ class App {
 
     searchbar.addEventListener('input', (e) => {
       const inputValue = e.target.value.toLowerCase();
-      if (inputValue !== '') this._searchCont.classList.add('open');
-      else this._searchCont.classList.remove('open');
+      if (inputValue !== '') this.#searchCont.classList.add('open');
+      else this.#searchCont.classList.remove('open');
 
-      this.movies.forEach(movie => {
+      this.#movies.forEach(movie => {
         const isIncludes = movie.name.toLowerCase().includes(inputValue);
         movie.element.classList.toggle('hide', !isIncludes);
       })
@@ -154,19 +155,19 @@ class App {
     if (elem.btn === 'Next') {
 
       //		checking if we're on last page 
-      if (this._counter === 0) return alert('You\'re on LAST PAGE');
+      if (this.#counter === 0) return alert('You\'re on LAST PAGE');
       else {
-        this.PAGE(this._counter - 1, this._counter);
-        this._counter = this._counter - 1;
+        this.PAGE(this.#counter - 1, this.#counter);
+        this.#counter = this.#counter - 1;
       }
     }
     else if (elem.btn === 'Prev') {
 
       //checking if we're on first page 	
-      if (this._counter >= this.movies.length - 1) return alert('You\'re on FIRST PAGE');
+      if (this.#counter >= this.movies.length - 1) return alert('You\'re on FIRST PAGE');
       else {
-        this._counter = this._counter + 1;
-        this.PAGE(this._counter, this._counter + 1);
+        this.#counter = this.#counter + 1;
+        this.PAGE(this.#counter, this.#counter + 1);
       }
     }
   }
@@ -176,11 +177,11 @@ class App {
   //it's same for prevBtn we will just decrease the start by 10 and end by other 10 everytime user clicks
 
   PAGE(start, end) {
-    const page = this._movies.slice(start, end);
-    let displayPage = this._movieElemCont;
+    const page = this.#movies.slice(start, end);
+    let displayPage = this.#movieElemCont;
     displayPage.innerHTML = '';
     page.forEach(movie => {
-      this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
+      this.#displayMovies(movie.name, movie.img, '../', movie.id, start, end);
     });
 
     const url = new URL(window.location);
@@ -190,7 +191,7 @@ class App {
     window.history.pushState({}, '', url);
   }
 
-  async _getSelectedMovie(e) {
+  async #getSelectedMovie(e) {
     try {
       //get Movie id from window url		
       const url = new URL(window.location.href);
@@ -199,17 +200,17 @@ class App {
       const movieName = url.searchParams.get('name');
 
       //fetch request
-      const response = await this._fetchData;
+      const response = await this.#fetchData;
 
       //checking if both name and id exist in url
       if (movieId && movieName) {
-        this._selectedMovie = response.filter(movie => {
+        this.#selectedMovie = response.filter(movie => {
           if (Number(movieId) === Number(movie.id)) return movie;
         });
-        const movie = this._selectedMovie[0];
+        const movie = this.#selectedMovie[0];
 
         //display download Movie
-        this._displayDownloadMovie(movie.name, movie.link, movie.img);
+        this.#displayDownloadMovie(movie.name, movie.link, movie.img);
       }
     } catch (err) {
       console.log(err);
@@ -217,7 +218,7 @@ class App {
   }
 
   //show selected movie
-  _displayDownloadMovie(name, link, img) {
+  #displayDownloadMovie(name, link, img) {
     const mainSection = document.querySelector('main');
     const main = mainSection;
     main.innerHTML = `
@@ -241,23 +242,23 @@ class App {
   		</section>`
   }
 
-  async _checkPage() {
+  async #checkPage() {
     try {
       const pageUrl = new URL(window.location.href);
       const start = pageUrl.searchParams.get("start");
       if (pageUrl.toString().includes("start") && start > 0) {
         const end = pageUrl.searchParams.get('end');
 
-        //reassign _counter variable
-        this._counter = start;
+        //reassign #counter variable
+        this.#counter = start;
 
-        const movies = await this._fetchData;
+        const movies = await this.#fetchData;
         const slicedArr = movies.slice(start, end);
-        let displayPage = this._movieElemCont;
+        let displayPage = this.#movieElemCont;
         displayPage.innerHTML = ''
 
         slicedArr.map(movie => {
-          this._displayMovies(movie.name, movie.img, '../', movie.id, start, end);
+          this.#displayMovies(movie.name, movie.img, '../', movie.id, start, end);
         })
       }
     } catch (err) {
