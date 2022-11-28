@@ -1,0 +1,79 @@
+#dowloadPage {
+  min-height: 100vh;
+}
+
+main {
+  text-transform: capitalize;
+
+  &>p {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: gray;
+    padding: 1rem 0.5rem;
+  }
+}
+
+.download-movie-page>h2 {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+}
+
+.img {
+  text-align: center;
+  width: 100%;
+  border: 2px solid red;
+
+  &>img {
+    box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+  }
+}
+
+.download-movie {
+  background: black;
+  padding: 1rem;
+}
+
+.download-movie,
+.rating,
+.actor,
+.director,
+.descp {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: #fff;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  padding: 5rem;
+
+  & a:link,
+  & a:visited {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    padding: 0.5rem;
+    text-align: center;
+    border: 2px solid goldenrod;
+    border-radius: 10vw;
+    position: relative;
+    overflow: hidden;
+    color: goldenrod;
+    cursor: pointer;
+
+
+    &:hover::after,
+    &:focus::after {
+      content: "";
+      position: absolute;
+      top: -4em;
+      left: -8%;
+      right: 0;
+      bottom: 0;
+      width: 1.5em;
+      height: 10em;
+      background: goldenrod;
+      transform: rotate(20deg);
+      z-index: -1;
+      animation: slideToRight 1000ms forwards;
+    }
+  }
+}

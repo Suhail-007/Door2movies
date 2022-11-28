@@ -1,0 +1,25 @@
+.pagination-container {
+  margin: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.pagination-container>button {
+  border: none;
+  background: #8c8c8c;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  transition: background 300ms ease-in-out;
+}
+
+.hideBtn {
+  display: none;
+}
+
+.pagination-container>button:hover,
+.pagination-container>button:focus {
+  background: #000;
+}

@@ -1,10 +1,9 @@
 class App {
-
   //Elems
-  #movieElemCont = document.querySelector('[data-movies-cont]')
+  #movieElemCont = document.querySelector('.movies-container')
   #searchCont = document.querySelector('[data-search-results]')
-  #paginationBtnsCont = document.querySelector('[data-pagination-btns-cont]')
-  #movieCardTemplate = document.querySelector('[data-search-movie-template]')
+  #paginationBtnsCont = document.querySelector('[data-pagination-Btncontainer]')
+  #movieCardTemplate = document.querySelector('.search-movie-template')
 
   //Variables
   #counter = 9
@@ -78,8 +77,8 @@ class App {
         }
       });
     } catch (err) {
-      console.log(err);
-      // setTimeout(() => location.reload(), 2000)
+
+      setTimeout(() => location.reload(), 2000)
     }
   }
 
@@ -164,7 +163,7 @@ class App {
     else if (elem.btn === 'Prev') {
 
       //checking if we're on first page 	
-      if (this.#counter >= this.movies.length - 1) return alert('You\'re on FIRST PAGE');
+      if (this.#counter >= this.#movies.length - 1) return alert('You\'re on FIRST PAGE');
       else {
         this.#counter = this.#counter + 1;
         this.PAGE(this.#counter, this.#counter + 1);

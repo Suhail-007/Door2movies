@@ -1,0 +1,144 @@
+nav {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.nav-container {
+  display: flex;
+}
+
+.nav-container>ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-container>ul>li>a,
+.drop-down>button,
+.search-container {
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+  color: var(--nav-text-color);
+  padding: 0.5rem 0.5rem;
+}
+
+.nav-container>ul>li>a {
+  text-decoration: none;
+
+}
+
+.drop-down>.drop-btn {
+  position: relative;
+  border: none;
+  background: none;
+}
+
+/*Nav Content*/
+.dropdown-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin-top: -1rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 0;
+  transition: 250ms margin ease-in-out, 250ms opacity ease-in-out;
+}
+
+.dropdown-content.active {
+  opacity: 1;
+  margin-top: 0.2rem;
+  pointer-events: auto;
+}
+
+.drop-down>.dropdown-content>a {
+  text-decoration: none;
+  display: inline-block;
+  color: #000;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.search-container>input {
+  width: 40%;
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+  transition: var(--transition-time-effect);
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+}
+
+.search-container>input[placeholder] {
+  padding: 0.2rem 0 0.2rem 0.5rem;
+}
+
+
+.search-container>input:focus,
+.search-container>input:hover {
+  width: 90%;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  color: black;
+  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  background: white;
+  overflow: scroll;
+  height: 15rem;
+  display: none;
+}
+
+.search-results.open {
+  display: block;
+}
+
+/*Your Search Results*/
+.search-results>div:first-child {
+  background: rgba(200, 200, 200, 0.3);
+  padding: 0.3rem;
+}
+
+.search-results>div:first-child>p {
+  font-size: clamp(0.8rem, 3vw, 1.5rem);
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  gap: 0 2em;
+  background: rgba(200, 200, 200, 0.5);
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.result.hide {
+  display: none;
+}
+
+.result>a {
+  font-size: clamp(0.5rem, 3vw, 1.3rem);
+  color: black;
+  width: 100%;
+}
+
+.result>img {
+  width: 25%;
+  height: 4em;
+}

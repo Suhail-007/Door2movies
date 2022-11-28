@@ -3,35 +3,62 @@
   --transition-time-effect: 300ms ease-in-out;
 }
 
+@keyframes slideToRight {
+  100% {
+    left: 110%;
+  }
+}
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-}
-
-body {
+  box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
-header {
-  padding: 0.5rem 0;
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
-/*Website Title*/
-header>h1 {
-  margin: 0;
+body {
+  min-height: 100vh;
+}
+
+footer {
+  background: black;
+  height: 5em;
+  display: grid;
+  place-items: center;
+}
+footer > p {
+  color: #999;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.movie-card {
+  border: 0.5px solid lightgrey;
   text-align: center;
+  transition: box-shadow var(--transition-time-effect);
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
-
-header>h1>a {
-  text-decoration: none;
-  color: #000;
-  font-size: clamp(1.3em, 7vw, 2.5em);
+.movie-card:hover, .movie-card:focus {
+  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.5);
 }
-
-header>h1>a>span {
-  color: red;
+.movie-card .movie-img {
+  height: 80%;
+}
+.movie-card .movie-img > img {
+  width: 100%;
+  height: 90%;
+}
+.movie-card .movie-name-cont > .movie-name {
+  padding: 0;
+  font-size: 1.3rem;
+  color: #626262;
 }
 
 nav {
@@ -45,31 +72,26 @@ nav {
 
 .nav-container {
   display: flex;
-  padding: 0;
-  margin: 0;
 }
 
-.nav-container>ul {
+.nav-container > ul {
   display: flex;
   list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
-.nav-container>ul>li>a,
-.drop-down>button,
+.nav-container > ul > li > a,
+.drop-down > button,
 .search-container {
   font-size: clamp(1rem, 2.5vw, 1.8rem);
   color: var(--nav-text-color);
   padding: 0.5rem 0.5rem;
 }
 
-.nav-container>ul>li>a {
-  display: inline-block;
+.nav-container > ul > li > a {
   text-decoration: none;
 }
 
-.drop-down>.drop-btn {
+.drop-down > .drop-btn {
   position: relative;
   border: none;
   background: none;
@@ -96,7 +118,7 @@ nav {
   pointer-events: auto;
 }
 
-.drop-down>.dropdown-content>a {
+.drop-down > .dropdown-content > a {
   text-decoration: none;
   display: inline-block;
   color: #000;
@@ -112,7 +134,7 @@ nav {
   position: relative;
 }
 
-.search-container>input {
+.search-container > input {
   width: 40%;
   font-size: clamp(0.9rem, 2.5vw, 1.4rem);
   transition: var(--transition-time-effect);
@@ -121,13 +143,12 @@ nav {
   outline: none;
 }
 
-.search-container>input[placeholder] {
+.search-container > input[placeholder] {
   padding: 0.2rem 0 0.2rem 0.5rem;
 }
 
-
-.search-container>input:focus,
-.search-container>input:hover {
+.search-container > input:focus,
+.search-container > input:hover {
   width: 90%;
 }
 
@@ -150,13 +171,12 @@ nav {
 }
 
 /*Your Search Results*/
-
-.search-results>div:first-child {
+.search-results > div:first-child {
   background: rgba(200, 200, 200, 0.3);
   padding: 0.3rem;
 }
 
-.search-results>div:first-child>p {
+.search-results > div:first-child > p {
   font-size: clamp(0.8rem, 3vw, 1.5rem);
 }
 
@@ -173,13 +193,13 @@ nav {
   display: none;
 }
 
-.result>a {
+.result > a {
   font-size: clamp(0.5rem, 3vw, 1.3rem);
   color: black;
   width: 100%;
 }
 
-.result>img {
+.result > img {
   width: 25%;
   height: 4em;
 }
@@ -190,7 +210,7 @@ nav {
   text-align: center;
 }
 
-.pagination-container>button {
+.pagination-container > button {
   border: none;
   background: #8c8c8c;
   color: #fff;
@@ -205,79 +225,45 @@ nav {
   display: none;
 }
 
-.pagination-container>button:hover,
-.pagination-container>button:focus {
+.pagination-container > button:hover,
+.pagination-container > button:focus {
   background: #000;
 }
 
-.movies-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
+header {
+  padding: 0.5rem 0;
 }
 
-.movie-name-cont {
-  width: 100%;
-}
-
-.movies-container>.movie-card {
-  border: 0.5px solid lightgrey;
+/*Website Title*/
+header > h1 {
+  margin: 0;
   text-align: center;
-  transition: box-shadow var(--transition-time-effect);
-  cursor: pointer;
 }
 
-.movies-container>.movie-card:hover,
-.movies-container>.movie-card:focus {
-  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.5);
+header > h1 > a {
+  text-decoration: none;
+  color: #000;
+  font-size: 4rem;
 }
 
-/*img container*/
-.movies-container .movie-card .movie-img {
-  height: 80%;
+header > h1 > a > span {
+  color: red;
 }
 
-.movies-container>.movie-card>.movie-img>img {
-  width: 100%;
-  height: 90%;
-}
-
-.movies-container>.movie-card .movie-name-cont>.movie-name {
-  padding: 0;
-  font-size: clamp(1.2rem, 3vw, 2.5rem);
-  color: black;
-}
-
-footer {
-  background: black;
-  height: 5em;
-  display: grid;
-  place-items: center;
-}
-
-footer>p {
-  color: #fff;
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  padding: 0;
-}
-
-/* DOWNLOAD PAGE*/
 #dowloadPage {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 main {
   text-transform: capitalize;
 }
-
-main>p {
+main > p {
   font-size: clamp(1rem, 3vw, 1.3rem);
   color: gray;
   padding: 1rem 0.5rem;
 }
 
-.download-movie-page>h2 {
+.download-movie-page > h2 {
   font-size: clamp(2rem, 3vw, 2.5rem);
 }
 
@@ -286,8 +272,7 @@ main>p {
   width: 100%;
   border: 2px solid red;
 }
-
-.img>img {
+.img > img {
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
   object-fit: cover;
 }
@@ -312,8 +297,7 @@ main>p {
   gap: 1rem 0;
   padding: 5rem;
 }
-
-.links a {
+.links a:link, .links a:visited {
   font-size: clamp(1.5rem, 3vw, 2rem);
   padding: 0.5rem;
   text-align: center;
@@ -324,9 +308,7 @@ main>p {
   color: goldenrod;
   cursor: pointer;
 }
-
-.links a:hover::after,
-.links a:focus::after {
+.links a:link:hover::after, .links a:link:focus::after, .links a:visited:hover::after, .links a:visited:focus::after {
   content: "";
   position: absolute;
   top: -4em;
@@ -341,16 +323,22 @@ main>p {
   animation: slideToRight 1000ms forwards;
 }
 
-@keyframes slideToRight {
-  100% {
-    left: 110%;
-  }
+main {
+  min-height: 100%;
 }
 
-
-@media(min-width: 320px) {
-  .movies-container>.movie-card .movie-name {
-    padding: 0;
-    font-size: 1rem;
-  }
+.movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+  margin: 1rem;
+  min-height: 100vh;
 }
+
+.movie-name-cont {
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */

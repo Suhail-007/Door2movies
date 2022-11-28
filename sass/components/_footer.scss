@@ -1,0 +1,12 @@
+footer {
+  background: black;
+  height: 5em;
+  display: grid;
+  place-items: center;
+
+  &>p {
+    color: #999;
+    font-size: 1.2rem;
+    padding: 0;
+  }
+}
