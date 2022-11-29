@@ -11,10 +11,10 @@ export const data = {
 
 export const getData = async function() {
   try {
-     data.movies = await getJSON(API_URL);
-     
-     //reverse the array so newly added movies will always be visible
-     data.movies = data.movies.reverse();
+    data.movies = await getJSON(API_URL);
+
+    //reverse the array so newly added movies will always be visible
+    data.movies = data.movies.reverse();
 
     const id = document.body.id;
     switch (id) {
