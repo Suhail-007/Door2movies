@@ -5,13 +5,16 @@ import movieView from './views/movieView.js'
 
 class App {
   init() {
-    model.getData();
     this.#controllerHome()
+    model.getData();
   }
 
-  #controllerHome() {
-    // console.log(homeView);
-    homeView.renderData(model.fetchMovies());
+  async #controllerHome() {
+    //loader 
+    await homeView.loader();
+
+    //delay
+    await homeView.delay(500);
   }
 }
 

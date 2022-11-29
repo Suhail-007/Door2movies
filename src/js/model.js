@@ -1,25 +1,30 @@
 'use strict'
-import { fetchAPI } from './config.js';
+import { API_URL, RES_PER_PAGE } from './config.js';
+import { getJSON } from './helper.js'
+import homeView from './views/homeView.js'
 
 export const data = {
-  movies: {},
-}
-
-export const fetchMovies = async function() {
-  const res = await fetch(fetchAPI);
-  const data = await res.json();
-  return data;
+  movies: [],
+  resPerPage = RES_PER_PAGE,
+  page = 1,
 }
 
 export const getData = async function() {
-  data.movies = await fetchMovies();
-  
-  let id = document.body.id;
-  switch (id) {
-    case 'home':
+  try {
+     data.movies = await getJSON(API_URL);
+     
+     //reverse the array so newly added movies will always be visible
+     data.movies = data.movies.reverse();
 
-      break;
-    default:
-      return
+    const id = document.body.id;
+    switch (id) {
+      case 'home':
+        homeView.renderData(data.movies);
+        break;
+      default:
+        return
+    }
+  } catch (err) {
+    console.log(err);
   }
 }

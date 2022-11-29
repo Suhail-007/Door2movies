@@ -7,6 +7,7 @@ class HomeView extends View {
   _generateMovieMarkup() {
     return this._data.map(movie => movieView.generateMovie(movie)).join(',').replaceAll(',', '');
   }
+  
 }
 
 export default new HomeView();

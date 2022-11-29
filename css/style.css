@@ -8,6 +8,11 @@
     left: 110%;
   }
 }
+@keyframes rotationRight {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 *,
 *::before,
 *::after {
@@ -23,6 +28,18 @@ html {
 
 body {
   min-height: 100vh;
+}
+
+.loader {
+  fill: hsl(350deg, 50%, 52%);
+  width: 4rem;
+  height: 4rem;
+  animation: rotationRight 1500ms infinite linear;
+}
+
+.error-message {
+  font-size: 1.6rem;
+  transform: translateY(-20rem);
 }
 
 footer {

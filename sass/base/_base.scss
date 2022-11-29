@@ -14,3 +14,17 @@ html {
 body {
   min-height: 100vh;
 }
+
+.loader {
+  fill: hsla(350, 50%, 52%, 1);
+  width: 4rem;
+  height: 4rem;
+  animation: rotationRight 1500ms infinite linear;
+}
+
+.error-message {
+  font-size: 1.6rem;
+  color: hsla(360, 65%, 67%, 1);
+  text-align: center;
+  transform: translateY(-20rem);
+}
