@@ -31,7 +31,7 @@ class App {
     switch (id) {
       case 'home':
         //Change Path for image and search Links on home page
-        this.#getMovies('./', 'download/');
+        this.#getMovies('_', 'download/');
         this.findSearchMovie();
         this.#paginationBtnsCont.addEventListener('click', this.nextPrevPage.bind(this));
         //set the local storage value to #counter
@@ -59,16 +59,20 @@ class App {
     try {
       //waiting for fetch request 
       const response = await this.#fetchData;
-
+      
+      console.log(response[0].img);
+      
+      
       this.#movies = response.map(movie => {
         //Home Page
-        if (document.body.id === 'home') this.#displayMovies(movie.name, movie.img, './', movie.id, '#', '#');
+        if (document.body.id === 'home') this.#displayMovies(movie.name, movie.img, movie.id, '_', '_');
+        console.log(movie.img);
 
         //For Search bar
         const card = this.#movieCardTemplate.content.cloneNode(true).children[0];
 
         this.#fillSearch(card, movie.name, movie.img, movie.id, path, downloadPath);
-
+        
         return {
           name: movie.name,
           img: movie.img,
@@ -78,7 +82,7 @@ class App {
       });
     } catch (err) {
 
-      setTimeout(() => location.reload(), 2000)
+      // setTimeout(() => location.reload(), 2000)
     }
   }
 
@@ -101,11 +105,11 @@ class App {
   }
 
   //Add movies in DOM
-  #displayMovies(name, img, imgPath, id, start, end) {
+  #displayMovies(name, img, id, start, end) {
     const html = `
       <div class="movie-card">
         <div class="movie-img">
-    		  <img src="${imgPath}${img}" alt="${name}" />
+    		  <img src="${img}" alt="${name}" />
     		</div>
     		<div class="movie-name-cont movie-link">
     		  <a class="movie-name" href="${imgPath}download/download.html?name=${this.#createSlug(name)}&id=${id}&start=${start}end=${end}">${name}</a>

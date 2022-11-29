@@ -3,25 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Door2Movies</title>
-  
-  <script type="module" src="src/js/controller.js" defer></script>
-  <link rel="stylesheet" href="css/style.css" />
-  
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.jpg">
+  <script type="module" src="../js/controller.js" defer></script>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 
-<body id="home">
+<body id="page">
   <header>
-    <h1><a href="index.html">Door2<span>Movies</span></a></h1>
+    <h1><a href="../index.html">Door2<span>Movies</span></a></h1>
   </header>
   <nav>
     <div class="nav-container" data-nav-container>
       <ul>
         <li>
-          <a href="index.html">Home</a>
+          <a href="../index.html">Home</a>
         </li>
       </ul>
 
@@ -36,7 +31,7 @@
           <a href="#">Fantasy</a>
         </div>
       </div>
-    </div>
+    </div> <!-- nav container -->
 
     <!-- Search -->
     <div class="search-container">
@@ -46,8 +41,8 @@
           <p>Search results...</p>
         </div>
         <!-- movies will be shown here -->
-      </div>
-    </div>
+      </div><!-- search result -->
+    </div><!-- search container -->
 
     <!-- Movies Card -->
     <template class="search-movie-template" data-search-movie-template>
@@ -60,8 +55,7 @@
 
   <main>
     <section class="pagination-container" data-pagination-Btncontainer>
-      <button type="button" data-btn="Next"><a href="pages/page.html">Next</a></button>
-      <!--- <button type="button" data-btn="Next">Next</button>--->
+      <button type="button" data-btn="Next">Next</button>
       <button type="button" data-btn="Prev">Prev</button>
     </section>
 
