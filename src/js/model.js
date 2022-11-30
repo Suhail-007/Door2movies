@@ -9,26 +9,6 @@ export const data = {
   page: 1,
 }
 
-// export const getData = async function() {
-//   try {
-//     data.movies = await getJSON(API_URL);
-
-//     //reverse the array so newly added movies will always be visible
-//     data.movies = data.movies.reverse();
-
-//     const id = document.body.id;
-//     switch (id) {
-//       case 'home':
-//         homeView.renderData(data.movies);
-//         break;
-//       default:
-//         return
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 export const getData = async function(callBackFn) {
   try {
     data.movies = await getJSON(API_URL);
@@ -39,7 +19,7 @@ export const getData = async function(callBackFn) {
     const id = document.body.id;
     switch (id) {
       case 'home':
-        callBackFn(data.movies);
+        callBackFn.renderData(data.movies);
         break;
       default:
         return

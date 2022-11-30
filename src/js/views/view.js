@@ -3,7 +3,6 @@ export default class View {
 
   async renderData(data) {
     try {
-console.log(this);
       this._data = await data;
       
       if(!this._data) throw new Error('could not able to load data');
