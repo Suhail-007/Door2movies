@@ -4,7 +4,7 @@ import movieView from './movieView.js'
 class HomeView extends View {
   _parentElem = document.querySelector('.movies-container')
 
-  _generateMovieMarkup() {
+  _generateMarkup() {
     return this._data.map(movie => movieView.generateMovie(movie)).join(',').replaceAll(',', '');
   }
   

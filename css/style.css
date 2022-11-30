@@ -79,9 +79,17 @@ header > h1 > a > span {
   color: #FDFDFD;
 }
 
+.movie-card {
+  text-align: center;
+}
+.movie-card .movie-name-cont > .movie-name {
+  font-size: 1.5rem;
+  color: #000;
+}
+
 .error-message {
   font-size: 1.6rem;
-  color: #E27474;
+  color: hsl(350deg, 80%, 52%);
   text-align: center;
 }
 
@@ -127,8 +135,6 @@ footer > p {
 }
 .movie-card .movie-name-cont > .movie-name {
   padding: 0;
-  font-size: 1.3rem;
-  color: #626262;
 }
 
 nav {
@@ -419,7 +425,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   align-items: center;
   justify-items: center;
-  gap: 1rem;
+  gap: 5rem 1rem;
   margin: 1rem;
   min-height: 100vh;
 }

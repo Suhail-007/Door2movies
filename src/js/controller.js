@@ -12,7 +12,7 @@ class App {
   async #controllerHome() {
     try {
       //loader 
-      await homeView.loader();
+      // await homeView.loader();
 
       //delay
       // await homeView.delay(1000);
@@ -28,7 +28,9 @@ class App {
 
 
   async #controllerPagination() {
-    paginationView.renderBtns();
+    paginationView.renderData(model.data);
+    
+    paginationView.addHandlerClick(model);
   }
 }
 

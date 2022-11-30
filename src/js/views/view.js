@@ -1,21 +1,16 @@
 export default class View {
   _data
 
-  async renderData(data) {
-    try {
-      this._data = await data;
-      
-      if(!this._data) throw new Error('could not able to load data');
+  renderData(data) {
+    this._data = data;
+    if (!this._data) throw new Error('could not able to load data');
 
-      const markup = this._generateMovieMarkup();
+    const markup = this._generateMarkup();
+    
+    //remove any pre-added markup
+    this._clear();
 
-      //remove any pre-added markup
-      this._clear();
-
-      this._parentElem.insertAdjacentHTML('beforeend', markup);
-    } catch (err) {
-      throw err
-    }
+    this._parentElem.insertAdjacentHTML('beforeend', markup);
   }
 
   _clear() {

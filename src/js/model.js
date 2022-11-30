@@ -5,8 +5,10 @@ import homeView from './views/homeView.js'
 
 export const data = {
   movies: [],
-  resPerPage: RES_PER_PAGE,
-  page: 1,
+  pagination: {
+    resPerPage: RES_PER_PAGE,
+    page: 1,
+  }
 }
 
 export const getData = async function(callBackFn) {
@@ -27,4 +29,11 @@ export const getData = async function(callBackFn) {
   } catch (err) {
     throw err
   }
+}
+
+export const getPerPageMovie = function(page = 1) {
+  data.pagination.page = page;
+  const start = (page - 1) * data.pagination.resPerPage;
+  const end = page * data.pagination.resPerPage;
+  return data.movies.slice(start, end);
 }

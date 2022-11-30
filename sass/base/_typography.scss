@@ -42,8 +42,17 @@ header {
   }
 }
 
+.movie-card {
+  text-align: center;
+
+  & .movie-name-cont>.movie-name {
+    font-size: 1.5rem;
+    color: $color-black;
+  }
+}
+
 .error-message {
   font-size: 1.6rem;
-  color: #E27474;
+  color: $color-primary;
   text-align: center;
 }
