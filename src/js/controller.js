@@ -6,7 +6,7 @@ import movieView from './views/movieView.js'
 class App {
   init() {
     this.#controllerHome()
-    model.getData();
+    // model.getData();
   }
 
   async #controllerHome() {
@@ -15,6 +15,11 @@ class App {
 
     //delay
     await homeView.delay(500);
+    
+    model.getData(homeView.renderData);
+    
+    //render Error message
+    homeView.errorMessage('Something went wrong :(');
   }
 }
 

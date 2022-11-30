@@ -3,8 +3,10 @@ export default class View {
 
   async renderData(data) {
     try {
-
+console.log(this);
       this._data = await data;
+      
+      if(!this._data) throw new Error('could not able to load data');
 
       const markup = this._generateMovieMarkup();
 
@@ -13,7 +15,7 @@ export default class View {
 
       this._parentElem.insertAdjacentHTML('beforeend', markup);
     } catch (err) {
-      this.errorMessage('Check your internet, ' + err);
+      throw err
     }
   }
 
