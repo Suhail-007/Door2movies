@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Door2Movies</title>
-  
+
   <script type="module" src="src/js/controller.js" defer></script>
   <link rel="stylesheet" href="css/style.css" />
-  
+
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.jpg">
 </head>
 
@@ -18,16 +18,13 @@
     <h1><a href="index.html">Door2<span>Movies</span></a></h1>
   </header>
   <nav>
-    <div class="nav-container" data-nav-container>
-      <ul>
-        <li>
-          <a href="index.html">Home</a>
-        </li>
-      </ul>
+    <div class="nav-container flex-row-AI-center" data-nav-container>
 
-      <div class="drop-down" data-dropdown>
+      <a href="index.html">Home</a>
+
+      <div class="drop-down flex-row-AI-center" data-dropdown>
         <button class="drop-btn" data-dropdownBtn>Categories</button>
-        <div class="dropdown-content" data-dropdown-content>
+        <div class="dropdown-content flex-col" data-dropdown-content>
           <a href="#">Action </a>
           <a href="#">Adventure</a>
           <a href="#">Anime</a>
@@ -39,7 +36,7 @@
     </div>
 
     <!-- Search -->
-    <div class="search-container">
+    <div class="search-container flex-row-Jend-AI-center">
       <input data-search-bar type="search" placeholder="Search here...">
       <div class="search-results" data-search-results>
         <div class="search-result-cont">

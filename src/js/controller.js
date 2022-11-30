@@ -1,11 +1,12 @@
 import * as model from './model.js';
 import homeView from './views/homeView.js'
-import movieView from './views/movieView.js'
+import paginationView from './views/paginationView.js'
 
 
 class App {
   init() {
-    this.#controllerHome()
+    this.#controllerHome();
+    this.#controllerPagination();
   }
 
   async #controllerHome() {
@@ -14,7 +15,7 @@ class App {
       await homeView.loader();
 
       //delay
-      await homeView.delay(500);
+      // await homeView.delay(1000);
 
       model.getData(homeView);
 
@@ -23,6 +24,11 @@ class App {
       //render Error message
       homeView.errorMessage('Something went wrong :(');
     }
+  }
+
+
+  async #controllerPagination() {
+    paginationView.renderBtns();
   }
 }
 

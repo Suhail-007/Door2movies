@@ -1,0 +1,49 @@
+header {
+  &>h1 {
+    text-align: center;
+
+    &>a {
+      text-decoration: none;
+      color: $color-black;
+      font-size: 4rem;
+
+      &>span {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+.nav-container>a,
+.drop-down>button,
+.search-container {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: $color-grey;
+}
+
+.drop-down>.dropdown-content>a {
+  text-decoration: none;
+  color: $color-grey;
+  font-size: 1.5rem;
+}
+
+.result {
+  &>a {
+    font-size: 1.3rem;
+    color: black;
+  }
+}
+
+.pagination {
+  &>button {
+    font-size: 1.5rem;
+    color: $color-grey-light-3;
+  }
+}
+
+.error-message {
+  font-size: 1.6rem;
+  color: #E27474;
+  text-align: center;
+}
