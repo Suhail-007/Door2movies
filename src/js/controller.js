@@ -1,23 +1,23 @@
 import * as model from './model.js';
-import homeView from './views/homeView.js'
 import paginationView from './views/paginationView.js'
 import movieView from './views/movieView.js'
-
+import navView from './views/navView.js';
 
 class App {
   init() {
     this.#controllerHome();
     paginationView.addHandlerClick(this.#controllerPagination());
+    navView.addDropDownHandler();
   }
 
   async #controllerHome() {
     try {
       //loader 
-      // await homeView.loader();
+      await movieView.loader();
 
       //delay
-      // await homeView.delay(1000);
-      
+      await movieView.delay(1000);
+
       //Render Movies
       model.getData(movieView);
 
@@ -32,7 +32,7 @@ class App {
    #controllerPagination() {
     //render Buttons
     paginationView.renderData(model.data);
-    
+
     return model
   }
 }

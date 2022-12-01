@@ -8,9 +8,9 @@ class Pagination extends View {
     this._parentElem.addEventListener('click', e => {
 
       const btn = e.target.closest('.btn__inline');
-      
-      if(!btn) return
-      
+
+      if (!btn) return
+
       const page = +btn.dataset.goto;
       const slicedArr = handler.getPerPageMovie(page);
       movieView.renderData(slicedArr);
@@ -57,9 +57,6 @@ class Pagination extends View {
         Page ${page - 1}
       </button>`
   }
-
-
-
 }
 
 export default new Pagination();

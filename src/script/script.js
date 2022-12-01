@@ -119,18 +119,7 @@ class App {
     this.#movieElemCont.insertAdjacentHTML('afterbegin', html);
   }
 
-  //DropDown
-  #dropDown(e) {
-    const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
-    //as long as user clicking inside of dropdown it won't close
-    if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) return;
-
-    const dropdownContent = document.querySelector('[data-dropdown-content]');
-
-    if (isDropdownBtn) dropdownContent.classList.toggle('active');
-    else dropdownContent.classList.remove('active');
-  }
 
   //Searchbar 
   findSearchMovie() {
