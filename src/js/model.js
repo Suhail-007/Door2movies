@@ -21,7 +21,7 @@ export const getData = async function(callBackFn) {
     const id = document.body.id;
     switch (id) {
       case 'home':
-        callBackFn.renderData(data.movies);
+        callBackFn.renderData(getPerPageMovie());
         break;
       default:
         return
@@ -35,5 +35,6 @@ export const getPerPageMovie = function(page = 1) {
   data.pagination.page = page;
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
+
   return data.movies.slice(start, end);
 }

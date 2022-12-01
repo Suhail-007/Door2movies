@@ -1,12 +1,8 @@
 import View from './view.js'
-import movieView from './movieView.js'
+// import movieView from './movieView.js'
 
 class HomeView extends View {
-  _parentElem = document.querySelector('.movies-container')
-
-  _generateMarkup() {
-    return this._data.map(movie => movieView.generateMovie(movie)).join(',').replaceAll(',', '');
-  }
+  _parentElem = document.querySelector('.movies-container');
   
 }
 

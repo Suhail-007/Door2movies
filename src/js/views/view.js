@@ -3,6 +3,7 @@ export default class View {
 
   renderData(data) {
     this._data = data;
+    
     if (!this._data) throw new Error('could not able to load data');
 
     const markup = this._generateMarkup();
@@ -15,6 +16,10 @@ export default class View {
 
   _clear() {
     this._parentElem.innerHTML = ''
+  }
+  
+  _createSlug(name) {
+    return name.toLowerCase();
   }
 
   loader() {
