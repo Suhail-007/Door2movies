@@ -5,11 +5,13 @@ import homeView from './views/homeView.js'
 
 export const data = {
   movies: [],
-  resPerPage = RES_PER_PAGE,
-  page = 1,
+  pagination: {
+    resPerPage: RES_PER_PAGE,
+    page: 1,
+  }
 }
 
-export const getData = async function() {
+export const getData = async function(callBackFn) {
   try {
     data.movies = await getJSON(API_URL);
 
@@ -19,12 +21,20 @@ export const getData = async function() {
     const id = document.body.id;
     switch (id) {
       case 'home':
-        homeView.renderData(data.movies);
+        callBackFn.renderData(getPerPageMovie());
         break;
       default:
         return
     }
   } catch (err) {
-    console.log(err);
+    throw err
   }
+}
+
+export const getPerPageMovie = function(page = 1) {
+  data.pagination.page = page;
+  const start = (page - 1) * data.pagination.resPerPage;
+  const end = page * data.pagination.resPerPage;
+
+  return data.movies.slice(start, end);
 }
