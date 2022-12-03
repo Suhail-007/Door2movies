@@ -38,3 +38,7 @@ export const getPerPageMovie = function(page = 1) {
 
   return data.movies.slice(start, end);
 }
+
+export const filterMovieCat = function(hash) {
+  return data.movies.filter(movie => movie.category.includes(hash))
+}
