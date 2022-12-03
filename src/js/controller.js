@@ -7,7 +7,7 @@ class App {
   init() {
     this.#controllerHome();
     paginationView.addHandlerClick(this.#controllerPagination());
-    navView.addDropDownHandler();
+    this.#controlNavigation()
   }
 
   async #controllerHome() {
@@ -34,6 +34,14 @@ class App {
     paginationView.renderData(model.data);
 
     return model
+  }
+  
+  
+  #controlNavigation() {
+    
+    navView.addDropDownHandler();
+    
+    navView.addHashHandler(model.filterMovieCat);
   }
 }
 
