@@ -3,7 +3,7 @@ class MovieView extends View {
   _parentElem = document.querySelector('.movies-container');
 
   _generateMarkup() {
-    return (this._data.map(movie => `
+    return this._data.map(movie => `
         <div class="movie-card">
           <div class="movie-img">
           	<img src="${movie.img}" alt="${movie.name}" />
@@ -13,7 +13,7 @@ class MovieView extends View {
           	  ${movie.name}
           	</a>
           </div>
-        </div>`))
+        </div>`)
       .join(',')
       .replaceAll(',', '');
   }

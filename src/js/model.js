@@ -32,6 +32,7 @@ export const getData = async function(callBackFn) {
 }
 
 export const getPerPageMovie = function(page = 1) {
+  
   data.pagination.page = page;
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
@@ -40,5 +41,6 @@ export const getPerPageMovie = function(page = 1) {
 }
 
 export const filterMovieCat = function(hash) {
-  return data.movies.filter(movie => movie.category.includes(hash))
+  const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));
+  return filteredMovies
 }

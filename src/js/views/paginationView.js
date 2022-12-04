@@ -10,11 +10,15 @@ class Pagination extends View {
       const btn = e.target.closest('.btn__inline');
 
       if (!btn) return
-
+      
+      //change to num
       const page = +btn.dataset.goto;
+      
+      //get returned value from model fn
       const slicedArr = handler.getPerPageMovie(page);
       movieView.renderData(slicedArr);
       this.renderData(this._data);
+      
     })
   }
 

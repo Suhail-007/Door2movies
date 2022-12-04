@@ -7,7 +7,8 @@ class App {
   init() {
     this.#controllerHome();
     paginationView.addHandlerClick(this.#controllerPagination());
-    this.#controlNavigation()
+    navView.addNavToggleHandler();
+    navView.addNavLinkHandler(this.#controlNavigation);
   }
 
   async #controllerHome() {
@@ -29,19 +30,25 @@ class App {
   }
 
 
-   #controllerPagination() {
+  #controllerPagination() {
     //render Buttons
     paginationView.renderData(model.data);
 
     return model
   }
-  
-  
-  #controlNavigation() {
-    
-    navView.addDropDownHandler();
-    
-    navView.addHashHandler(model.filterMovieCat);
+
+
+  async #controlNavigation() {
+
+    const filteredMovies = navView.addHashHandler(model.filterMovieCat);
+
+    //loader
+    await movieView.loader();
+
+    //delay
+    await movieView.delay(1000);
+
+    movieView.renderData(filteredMovies);
   }
 }
 
