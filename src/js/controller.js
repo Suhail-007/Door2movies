@@ -5,8 +5,14 @@ import navView from './views/navView.js';
 
 class App {
   init() {
+    //home
     this.#controllerHome();
-    paginationView.addHandlerClick(this.#controllerPagination());
+
+    //pagination
+    paginationView.addHandlerClick(this.#controllerPagination);
+    paginationView.renderData(model.data);
+
+    //navbar
     navView.addNavToggleHandler();
     navView.addNavLinkHandler(this.#controlNavigation);
   }
@@ -30,25 +36,42 @@ class App {
   }
 
 
-  #controllerPagination() {
-    //render Buttons
-    paginationView.renderData(model.data);
+  async #controllerPagination() {
+    try {
+      //render Buttons
+      paginationView.renderData(model.data);
 
-    return model
+      //get returned value from model fn
+      const slicedArr = model.getPerPageMovie(model.data.pagination.page);
+
+      //loader 
+      await movieView.loader();
+
+      //delay
+      await movieView.delay(300);
+
+      //render Movies
+      movieView.renderData(slicedArr);
+    } catch (e) {
+      movieView.errorMessage();
+    }
   }
 
 
   async #controlNavigation() {
+    try {
+      const filteredMovies = navView.addHashHandler(model.filterMovieCat);
 
-    const filteredMovies = navView.addHashHandler(model.filterMovieCat);
+      //loader
+      await movieView.loader();
 
-    //loader
-    await movieView.loader();
+      //delay
+      await movieView.delay(1000);
 
-    //delay
-    await movieView.delay(1000);
-
-    movieView.renderData(filteredMovies);
+      movieView.renderData(filteredMovies);
+    } catch (e) {
+      movieView.errorMessage();
+    }
   }
 }
 

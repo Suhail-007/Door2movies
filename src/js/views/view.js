@@ -47,7 +47,7 @@ export default class View {
     })
   }
 
-  errorMessage(message = 'check your internet') {
+  errorMessage(message = 'check your internet connection') {
     const html = `
       <div class="error-message">
         <p class="message">
