@@ -176,11 +176,7 @@ class App {
       this.#displayMovies(movie.name, movie.img, '../', movie.id, start, end);
     });
 
-    const url = new URL(window.location);
-    url.searchParams.set('start', start);
-    url.searchParams.set('end', end);
-
-    window.history.pushState({}, '', url);
+    
   }
 
   async #getSelectedMovie(e) {

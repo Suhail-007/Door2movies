@@ -6,14 +6,14 @@ class Pagination extends View {
 
   addHandlerClick(handler) {
     this._parentElem.addEventListener('click', e => {
-      
+
       const btn = e.target.closest('[data-goto]');
-      if(!btn) return
-      
+      if (!btn) return
+
       const btnDataset = btn.dataset.goto;
-      
+
       btnDataset === 'next' ? this._data.pagination.page++ : this._data.pagination.page--;
-      
+
       handler();
     })
   }

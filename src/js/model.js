@@ -32,10 +32,17 @@ export const getData = async function(callBackFn) {
 }
 
 export const getPerPageMovie = function(page = 1) {
-  
+
   data.pagination.page = page;
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
+
+  const url = new URL(window.location);
+  url.searchParams.set('home', 'home');
+  url.searchParams.set('start', start);
+  url.searchParams.set('end', end);
+
+  window.history.pushState({}, '', url);
 
   return data.movies.slice(start, end);
 }
