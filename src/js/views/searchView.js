@@ -25,13 +25,19 @@ class Search extends View {
     })
   }
 
-  async i(data) {
-    data.movies = await getJSON(API_URL);
+  async getSearchMovies(data) {
+    //explicit delay so browser don't have to make two fetch request
+    await this.delay(2000);
+    
+    data.search.movies = data.movies;
 
-    data.search.movies = data.movies.map(movie => {
+    data.search.movies = data.search.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
 
-      this.fillSearch(card, movie.name, movie.img, movie.id, 'src/pages/');
+      if (document.body.id === 'home') this.fillSearch(card, movie.name, movie.img, movie.id, 'src/pages/');
+
+      //change the download page path if user is already on download page
+      if (document.body.id === 'download-page') this.fillSearch(card, movie.name, movie.img, movie.id, './');
 
       return {
         name: movie.name,
@@ -50,10 +56,10 @@ class Search extends View {
     cardImg.loading = 'lazy';
     cardImg.src = `${img}`;
     movieName.textContent = name;
-    
+
     //create Slug
     movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
-    
+
     card.classList.add('hide');
     this._resultCont.appendChild(card);
   }

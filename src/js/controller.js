@@ -14,25 +14,33 @@ class App {
 
     switch (id) {
       case 'home':
+        //change page title
+        model.changeTitle(id);
+
         //home
         this.controllerHome();
+
+        //common 
+        this.#COMMON();
 
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
         paginationView.renderData(model.data);
-        
-        //common 
-        this.#COMMON();
+
 
         break;
       case 'download-page':
-        //
+        //change page title
+        model.changeTitle(id)
+
+        //common things
         this.#COMMON()
         break;
       default:
         return
     }
   }
+
 
 
   #COMMON() {
@@ -54,7 +62,6 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      // model.getData(movieView);
       movieView.renderData(model.getPerPageMovie());
 
     } catch (e) {
@@ -102,7 +109,7 @@ class App {
   }
 
   searchController() {
-    searchView.i(model.data)
+    searchView.getSearchMovies(model.data)
 
     searchView.findSearchMovie(model.data);
   }

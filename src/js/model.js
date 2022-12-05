@@ -16,15 +16,14 @@ export const data = {
 
 export async function getJsonData() {
   try {
-      data.movies = await getJSON(API_URL);
-      data.movies = data.movies.reverse();
+     data.movies = await getJSON(API_URL);
+     data.movies = data.movies.reverse();
   } catch (err) {
-    console.log(err);
+    throw err
   }
 }
 
 export const getPerPageMovie = function(page = 1) {
-
   data.pagination.page = page;
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
@@ -35,7 +34,7 @@ export const getPerPageMovie = function(page = 1) {
   url.searchParams.set('end', end);
 
   window.history.pushState({}, '', url);
-
+  
   return data.movies.slice(start, end);
 }
 
@@ -46,6 +45,17 @@ export const filterMovieCat = function(hash) {
 
   const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));
   return filteredMovies
+}
 
-  //i still have to add logic for filtered movies pagination
+export const changeTitle = function (id) {
+  if(id === 'home') document.title = 'DOOR2MOVIES';
+  
+  if(id === 'download-page') {
+    const url = location.href;
+    const searchParam = new URLSearchParams(url);
+    // console.log(url);
+    const title = searchParam.get('name');
+    console.log(title);
+    
+  }
 }
