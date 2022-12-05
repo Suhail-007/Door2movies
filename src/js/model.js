@@ -49,7 +49,7 @@ export const getPerPageMovie = function(page = 1) {
   const end = page * data.pagination.resPerPage;
 
   const url = new URL(window.location);
-  url.searchParams.set('on', 'home');
+  url.searchParams.set('page', 'home');
   url.searchParams.set('start', start);
   url.searchParams.set('end', end);
 
@@ -60,7 +60,7 @@ export const getPerPageMovie = function(page = 1) {
 
 export const filterMovieCat = function(hash) {
   const url = new URL(window.location);
-  url.searchParams.set('on', hash);
+  url.searchParams.set('page', hash);
   window.history.pushState({}, '', url);
 
   const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));

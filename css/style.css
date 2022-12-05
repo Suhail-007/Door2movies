@@ -191,65 +191,6 @@ nav {
   width: 100%;
 }
 
-.search-container {
-  padding: 1rem 0.5rem;
-  position: relative;
-}
-.search-container > input {
-  width: 50%;
-  font-size: 1.5rem;
-  transition: var(--transition-time-effect);
-  border-radius: 100px;
-  border: 1.5px solid #eee;
-  background: #FBFBFB;
-  outline: none;
-}
-.search-container > input[placeholder] {
-  padding: 1rem 0 1rem 0.5rem;
-}
-.search-container > input:focus, .search-container > input:hover {
-  width: 90%;
-  padding-left: 2rem;
-}
-
-.search-results {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  color: black;
-  background: white;
-  overflow: scroll;
-  height: 15rem;
-  display: none;
-  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  /*Your Search Results*/
-}
-.search-results.open {
-  display: block;
-}
-.search-results > div:first-child {
-  background: rgba(200, 200, 200, 0.3);
-  padding: 0.3rem;
-}
-.search-results > div:first-child > p {
-  font-size: 1.5rem;
-}
-
-.result {
-  display: flex;
-  flex-direction: row;
-  gap: 0 2em;
-  background: rgba(200, 200, 200, 0.5);
-  padding: 0.5rem 0;
-  width: 100%;
-}
-.result > img {
-  width: 25%;
-  height: 4em;
-}
-
 .pagination {
   margin: 2rem 0;
   padding-inline: 3rem;
@@ -283,6 +224,74 @@ nav {
 }
 .pagination__btn--prev:hover > svg, .pagination__btn--prev:focus > svg {
   margin-right: 0.5rem;
+}
+
+.search-container {
+  padding: 1rem 0.5rem;
+  position: relative;
+}
+.search-container > input {
+  width: 50%;
+  font-size: 1.5rem;
+  transition: var(--transition-time-effect);
+  border-radius: 100px;
+  border: 1.5px solid #eee;
+  background: #FBFBFB;
+  outline: none;
+}
+.search-container > input[placeholder] {
+  padding: 1rem 0 1rem 0.5rem;
+}
+.search-container > input:focus, .search-container > input:hover {
+  width: 90%;
+  padding-left: 2rem;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  right: 0;
+  color: black;
+  background: white;
+  overflow-y: scroll;
+  display: none;
+  box-shadow: 1px 0 0.5rem 0 rgba(0, 0, 0, 0.5);
+  /*Your Search Results*/
+}
+.search-results.open {
+  display: block;
+}
+.search-results > div:first-child {
+  background: #eee;
+  padding: 0.3rem;
+}
+.search-results > div:first-child > p {
+  font-size: 1.5rem;
+}
+
+form {
+  height: 100%;
+  overflow: hidden;
+}
+form a {
+  justify-self: center;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 10rem;
+  gap: 1rem 1.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  background: #FDFDFD;
+}
+.result > img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .flex {

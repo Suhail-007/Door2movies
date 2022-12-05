@@ -14,14 +14,18 @@ class Search extends View {
     searchInput.addEventListener('input', (e) => {
 
       const inputValue = e.target.value.toLowerCase();
-      
+
       if (inputValue !== '') this._resultCont.classList.add('open');
       else this._resultCont.classList.remove('open');
-      
+
       data.search.movies.forEach(movie => {
         const isIncludes = movie.name.toLowerCase().includes(inputValue);
         movie.element.classList.toggle('hide', !isIncludes);
       })
+    })
+
+    searchInput.addEventListener('blur', () => {
+      this._resultCont.classList.remove('open');
     })
   }
 
@@ -46,7 +50,7 @@ class Search extends View {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
-    
+
     cardImg.loading = 'lazy';
     cardImg.src = `${img}`;
     movieName.textContent = name;
@@ -55,43 +59,6 @@ class Search extends View {
     card.classList.add('hide');
     this._resultCont.appendChild(card);
   }
-
-
 }
 
 export default new Search();
-
-// addSearchHandler(handler) {
-//   const searchInput = document.querySelector('[data-search-bar]');
-
-//   searchInput.addEventListener('input', (e) => {
-
-// const inputValue = e.target.value.toLowerCase();
-// if (inputValue !== '') this._resultCont.classList.add('open');
-// else this._resultCont.classList.remove('open');
-
-// const data = this._data;
-
-// if (!data) return
-
-// // console.log(data);
-
-// data.forEach(movie => {
-//   const isIncludes = movie.name.toLowerCase().includes(inputValue);
-//   movie.card.classList.toggle('hide', !isIncludes);
-// })
-
-// handler();
-//   })
-// }
-// fillSearch(card, name, img, id, downPath) {
-//   const cardImg = card.querySelector('[data-search-img]');
-//   //anchor Elem
-//   const movieName = card.querySelector('[data-search-name]');
-//   cardImg.src = `${img}`;
-//   movieName.textContent = name;
-//   //create Slug
-//   movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
-//   card.classList.add('hide');
-//   this._resultCont.appendChild(card);
-// }
