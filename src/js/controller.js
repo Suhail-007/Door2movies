@@ -7,25 +7,45 @@ import searchView from './views/searchView.js';
 
 class App {
   init() {
-    //fetch data as soon as window load
+    const id = document.body.id;
+
+    //load movies as soon as window load
     window.addEventListener('load', model.getJsonData);
 
-    //home
-    this.#controllerHome();
+    switch (id) {
+      case 'home':
+        //home
+        this.controllerHome();
 
-    //pagination
-    paginationView.addHandlerClick(this.#controllerPagination);
-    paginationView.renderData(model.data);
+        //pagination
+        paginationView.addHandlerClick(this.controllerPagination);
+        paginationView.renderData(model.data);
+        
+        //common 
+        this.#COMMON();
+
+        break;
+      case 'download-page':
+        //
+        this.#COMMON()
+        break;
+      default:
+        return
+    }
+  }
+
+
+  #COMMON() {
+    //search
+    this.searchController();
 
     //navbar
     navView.addNavToggleHandler();
-    navView.addNavLinkHandler(this.#controlNavigation);
+    navView.addNavLinkHandler(this.controlNavigation);
 
-    //searchView
-    this.#searchController();
   }
 
-  async #controllerHome() {
+  async controllerHome() {
     try {
       //loader 
       await movieView.loader();
@@ -34,7 +54,8 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      model.getData(movieView);
+      // model.getData(movieView);
+      movieView.renderData(model.getPerPageMovie());
 
     } catch (e) {
       //render Error message
@@ -43,7 +64,7 @@ class App {
   }
 
 
-  async #controllerPagination() {
+  async controllerPagination() {
     try {
       //render Buttons
       paginationView.renderData(model.data);
@@ -65,25 +86,24 @@ class App {
   }
 
 
-  async #controlNavigation() {
+  async controlNavigation() {
     try {
-      const filteredMovies = navView.addHashHandler(model.filterMovieCat);
-
       //loader
       await movieView.loader();
 
       //delay
       await movieView.delay(1000);
 
-      movieView.renderData(filteredMovies);
+      movieView.renderData(navView.addHashHandler(model.filterMovieCat));
+
     } catch (e) {
       movieView.errorMessage();
     }
   }
 
-  #searchController() {
+  searchController() {
     searchView.i(model.data)
-    
+
     searchView.findSearchMovie(model.data);
   }
 }

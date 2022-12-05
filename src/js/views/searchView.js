@@ -35,7 +35,7 @@ class Search extends View {
     data.search.movies = data.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
 
-      this.fillSearch(card, movie.name, movie.img, movie.id, './');
+      this.fillSearch(card, movie.name, movie.img, movie.id, './src/pages/');
 
       return {
         name: movie.name,
@@ -54,8 +54,12 @@ class Search extends View {
     cardImg.loading = 'lazy';
     cardImg.src = `${img}`;
     movieName.textContent = name;
+    
     //create Slug
     movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
+    
+    console.log(movieName.href);
+    
     card.classList.add('hide');
     this._resultCont.appendChild(card);
   }

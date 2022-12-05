@@ -14,31 +14,12 @@ export const data = {
   }
 }
 
-
 export async function getJsonData() {
   try {
-    data.movies = await getJSON(API_URL);
+      data.movies = await getJSON(API_URL);
+      data.movies = data.movies.reverse();
   } catch (err) {
     console.log(err);
-  }
-}
-
-export const getData = async function(callBackFn) {
-  try {
-
-    //reverse the array so newly added movies will always be visible
-    data.movies = data.movies.reverse();
-
-    const id = document.body.id;
-    switch (id) {
-      case 'home':
-        callBackFn.renderData(getPerPageMovie());
-        break;
-      default:
-        return
-    }
-  } catch (err) {
-    callBackFn.errorMessage(err);
   }
 }
 
