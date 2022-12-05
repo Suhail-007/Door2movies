@@ -23,10 +23,6 @@ class Search extends View {
         movie.element.classList.toggle('hide', !isIncludes);
       })
     })
-
-    searchInput.addEventListener('blur', () => {
-      this._resultCont.classList.remove('open');
-    })
   }
 
   async i(data) {
@@ -35,7 +31,7 @@ class Search extends View {
     data.search.movies = data.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
 
-      this.fillSearch(card, movie.name, movie.img, movie.id, './src/pages/');
+      this.fillSearch(card, movie.name, movie.img, movie.id, 'src/pages/');
 
       return {
         name: movie.name,
@@ -57,8 +53,6 @@ class Search extends View {
     
     //create Slug
     movieName.href = `${downPath}download.html?name=${this._createSlug(name)}&id=${id}`;
-    
-    console.log(movieName.href);
     
     card.classList.add('hide');
     this._resultCont.appendChild(card);
