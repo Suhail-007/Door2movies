@@ -46,6 +46,8 @@ class Search extends View {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
+    
+    cardImg.loading = 'lazy';
     cardImg.src = `${img}`;
     movieName.textContent = name;
     //create Slug
