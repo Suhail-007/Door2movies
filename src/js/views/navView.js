@@ -1,14 +1,7 @@
 import View from './view.js';
 
 class Nav extends View {
-  
-  addNavLinkHandler(handler) {
-    window.addEventListener('hashchange', handler)
-  }
 
-  addNavToggleHandler() {
-    window.addEventListener('click', this.#toggleDropDown);
-  }
 
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
@@ -21,10 +14,18 @@ class Nav extends View {
     if (isDropdownBtn) dropdownContent.classList.toggle('active');
     else dropdownContent.classList.remove('active');
   }
+  
+  addNavLinkHandler(handler) {
+    window.addEventListener('hashchange', handler)
+  }
+
+  addNavToggleHandler() {
+    window.addEventListener('click', this.#toggleDropDown);
+  }
 
   addHashHandler(handler) {
-      const category = location.hash.slice(1).toLowerCase();
-      return handler(category);
+    const category = location.hash.slice(1).toLowerCase();
+    return handler(category);
   }
 }
 
