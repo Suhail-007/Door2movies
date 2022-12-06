@@ -1,13 +1,13 @@
 export default class View {
   _data
 
-  renderData(data) {
-    this._data = data;
-    
+  async renderData(data) {
+    this._data = await data;
+
     if (!this._data) throw new Error('could not able to load data');
 
     const markup = this._generateMarkup();
-    
+
     //remove any pre-added markup
     this._clear();
 
@@ -17,7 +17,7 @@ export default class View {
   _clear() {
     this._parentElem.innerHTML = ''
   }
-  
+
   _createSlug(name) {
     return name.toLowerCase();
   }
@@ -47,7 +47,7 @@ export default class View {
     })
   }
 
-  errorMessage(message = 'check your internet') {
+  errorMessage(message = 'check your internet connection') {
     const html = `
       <div class="error-message">
         <p class="message">

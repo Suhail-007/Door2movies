@@ -8,24 +8,16 @@ export const data = {
   pagination: {
     resPerPage: RES_PER_PAGE,
     page: 1,
+  },
+  search: {
+    movies: [],
   }
 }
 
-export const getData = async function(callBackFn) {
+export async function getJsonData() {
   try {
-    data.movies = await getJSON(API_URL);
-
-    //reverse the array so newly added movies will always be visible
-    data.movies = data.movies.reverse();
-
-    const id = document.body.id;
-    switch (id) {
-      case 'home':
-        callBackFn.renderData(getPerPageMovie());
-        break;
-      default:
-        return
-    }
+     data.movies = await getJSON(API_URL);
+     data.movies = data.movies.reverse();
   } catch (err) {
     throw err
   }
@@ -36,9 +28,34 @@ export const getPerPageMovie = function(page = 1) {
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
 
+  const url = new URL(window.location);
+  url.searchParams.set('page', 'home');
+  url.searchParams.set('start', start);
+  url.searchParams.set('end', end);
+
+  window.history.pushState({}, '', url);
+  
   return data.movies.slice(start, end);
 }
 
 export const filterMovieCat = function(hash) {
-  return data.movies.filter(movie => movie.category.includes(hash))
+  const url = new URL(window.location);
+  url.searchParams.set('page', hash);
+  window.history.pushState({}, '', url);
+
+  const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));
+  return filteredMovies
+}
+
+export const changeTitle = function (id) {
+  if(id === 'home') document.title = 'DOOR2MOVIES';
+  
+  if(id === 'download-page') {
+    const url = location.href;
+    const searchParam = new URLSearchParams(url);
+    // console.log(url);
+    const title = searchParam.get('name');
+    console.log(title);
+    
+  }
 }
