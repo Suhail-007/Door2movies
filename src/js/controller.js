@@ -11,6 +11,9 @@ class App {
 
     //load movies as soon as window load
     window.addEventListener('load', model.getJsonData);
+    
+    //get url of the page
+    model.getURL();
 
     switch (id) {
       case 'home':
@@ -41,8 +44,6 @@ class App {
     }
   }
 
-
-
   #COMMON() {
     //search
     this.searchController();
@@ -59,7 +60,7 @@ class App {
       await movieView.loader();
 
       //delay
-      await movieView.delay(1000);
+      await movieView.delay(1500);
 
       //Render Movies
       movieView.renderData(model.getPerPageMovie());

@@ -28,7 +28,7 @@ class Search extends View {
   async getSearchMovies(data) {
     //explicit delay so browser don't have to make two fetch request
     await this.delay(2000);
-    
+
     data.search.movies = data.movies;
 
     data.search.movies = data.search.movies.map(movie => {
