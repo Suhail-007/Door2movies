@@ -32,7 +32,6 @@ export const getPerPageMovie = function(page = 1) {
   data.pagination.end = page * data.pagination.resPerPage;
 
   updateURL()
-  console.log(location.href);
   return data.movies.slice(data.pagination.start, data.pagination.end);
 }
 
@@ -73,7 +72,7 @@ export const getURL = function() {
 
   if (urlStart === undefined || urlStart === null) return
   
-  if ((url !== null || url !== undefined) && urlStart > 0) {
+  if ((url !== null || url !== undefined) && +urlStart > 0) {
     
   console.log(urlStart);
   }
