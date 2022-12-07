@@ -64,7 +64,7 @@ export const changeTitle = function(id) {
 }
 
 export const getURL = function() {
-  const url = new URLSearchParams(location.href);
+  const url = new URL(location.href);
   const urlStart = url.searchParams?.get('start');
   
   console.log(urlStart);
