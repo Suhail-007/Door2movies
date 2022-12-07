@@ -71,6 +71,10 @@ export const getURL = function() {
   const url = new URLSearchParams();
   const urlStart = url.get('start');
 
+  if (urlStart === undefined || urlStart === null) return
+  
+  if ((url !== null || url !== undefined) && urlStart > 0) {
+    
   console.log(urlStart);
-  if (urlStart === undefined) return
+  }
 }
