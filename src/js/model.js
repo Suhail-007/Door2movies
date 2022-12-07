@@ -31,12 +31,16 @@ export const getPerPageMovie = function(page = 1) {
   data.pagination.start = (page - 1) * data.pagination.resPerPage;
   data.pagination.end = page * data.pagination.resPerPage;
 
-  const url = `${window.location.href}?page=home&start=${data.pagination.start}&end=${data.pagination.end}`;
-
-  const newUrl = new URL(url);
-  window.history.pushState({}, '', newUrl);
-  
+  updateURL()
+  console.log(location.href);
   return data.movies.slice(data.pagination.start, data.pagination.end);
+}
+
+const updateURL = function() {
+   const url = `?page=home&start=${data.pagination.start}&end=${data.pagination.end}`;
+  
+  const u = new URL(url, location.href);
+  window.history.pushState({}, '', u);
 }
 
 export const filterMovieCat = function(hash) {
@@ -64,8 +68,9 @@ export const changeTitle = function(id) {
 }
 
 export const getURL = function() {
-  const url = new URL(location.href);
-  const urlStart = url.searchParams?.get('start');
-  
+  const url = new URLSearchParams();
+  const urlStart = url.get('start');
+
   console.log(urlStart);
+  if (urlStart === undefined) return
 }
