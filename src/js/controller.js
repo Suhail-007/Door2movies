@@ -4,16 +4,16 @@ import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
 import searchView from './views/searchView.js';
+import downloadView from './views/downloadView.js';
 
 class App {
   init() {
     const id = document.body.id;
 
     //load movies as soon as window load
-    window.addEventListener('load', model.getJsonData);
-    
-    //get url of the page
-    model.getURL();
+    window.addEventListener('load', () => {
+      model.getJsonData()
+    });
 
     switch (id) {
       case 'home':
@@ -30,14 +30,20 @@ class App {
         paginationView.addHandlerClick(this.controllerPagination);
         paginationView.renderData(model.data);
 
+        //get url
+        // model.getURL();
 
+        //home
+        // this.controllerHome();
         break;
       case 'download-page':
         //change page title
         model.changeTitle(id)
 
         //common things
-        this.#COMMON()
+        this.#COMMON();
+        
+        this.#controllerDownload();
         break;
       default:
         return
@@ -57,7 +63,7 @@ class App {
   async controllerHome() {
     try {
       //loader 
-      await movieView.loader();
+      // await movieView.loader();
 
       //delay
       await movieView.delay(1500);
@@ -113,6 +119,18 @@ class App {
     searchView.getSearchMovies(model.data)
 
     searchView.findSearchMovie(model.data);
+  }
+
+  //download page
+  async #controllerDownload() {
+    //loader
+    await downloadView.loader();
+
+    //delay
+    await downloadView.delay(1000);
+
+    //render movie
+    downloadView.renderData(model.data);
   }
 }
 

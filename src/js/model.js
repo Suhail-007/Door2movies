@@ -1,13 +1,11 @@
 'use strict'
 import { API_URL, RES_PER_PAGE } from './config.js';
-import { getJSON } from './helper.js'
+import { getJSON, updateURL } from './helper.js'
 import homeView from './views/homeView.js'
 
 export const data = {
   movies: [],
   pagination: {
-    start: null,
-    end: null,
     resPerPage: RES_PER_PAGE,
     page: 1,
   },
@@ -28,24 +26,19 @@ export async function getJsonData() {
 export const getPerPageMovie = function(page = 1) {
   data.pagination.page = page;
 
-  data.pagination.start = (page - 1) * data.pagination.resPerPage;
-  data.pagination.end = page * data.pagination.resPerPage;
+  const start = (page - 1) * data.pagination.resPerPage;
+  // console.log(start);
+  const end = page * data.pagination.resPerPage;
 
-  updateURL()
-  return data.movies.slice(data.pagination.start, data.pagination.end);
-}
+  // updateURL('home', start, end);
 
-const updateURL = function() {
-   const url = `?page=home&start=${data.pagination.start}&end=${data.pagination.end}`;
-  
-  const u = new URL(url, location.href);
-  window.history.pushState({}, '', u);
+  // getURL()
+
+  return data.movies.slice(start, end);
 }
 
 export const filterMovieCat = function(hash) {
-  const url = new URL(window.location);
-  url.searchParams.set('page', hash);
-  window.history.pushState({}, '', url);
+  updateURL(hash, 0, RES_PER_PAGE);
 
   if (!hash) return data.movies;
 
@@ -67,13 +60,14 @@ export const changeTitle = function(id) {
 }
 
 export const getURL = function() {
-  const url = new URLSearchParams();
-  const urlStart = url.get('start');
+  const url = new URL(location.href);
+  const urlStart = url.searchParams.get('start');
+
 
   if (urlStart === undefined || urlStart === null) return
-  
-  if ((url !== null || url !== undefined) && +urlStart > 0) {
-    
-  console.log(urlStart);
+
+  if ((url !== null || url !== undefined) && Number(urlStart) > 0) {
+    data.pagination.page = urlStart;
+    console.log(data.pagination);
   }
 }

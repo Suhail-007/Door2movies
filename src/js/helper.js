@@ -13,7 +13,7 @@ export const getJSON = async function(url) {
   try {
 
     const res = await Promise.race([fetch(url), timeout(SECONDS)]);
-    
+
     if (!res.ok) throw new Error('could\'t fetch movies')
 
     const data = await res.json();
@@ -22,4 +22,12 @@ export const getJSON = async function(url) {
   } catch (err) {
     throw err
   }
+}
+
+export const updateURL = function(page = 'home', start, end) {
+  const url = `?page=${page}&start=${start}&end=${end}`;
+
+  const newURL = new URL(url, location.href);
+
+  window.history.pushState({}, '', newURL);
 }

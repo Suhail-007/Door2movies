@@ -1,5 +1,6 @@
 import View from './view.js';
 import movieView from './movieView.js';
+import { updateURL } from '../helper.js';
 
 class Pagination extends View {
   _parentElem = document.querySelector('[data-pagination-btns-container]');
@@ -13,6 +14,15 @@ class Pagination extends View {
       const btnDataset = btn.dataset.goto;
 
       btnDataset === 'next' ? this._data.pagination.page++ : this._data.pagination.page--;
+      
+      console.log('loaded');
+
+      const start = (this._data.pagination.page - 1) * this._data.pagination.resPerPage;
+
+      const end = this._data.pagination.page * this._data.pagination.resPerPage;
+
+
+      updateURL('home', start, end);
 
       handler();
     })

@@ -2,78 +2,79 @@
   min-height: 100vh;
 }
 
-main {
+.section__download {
   text-transform: capitalize;
+  height: 100%;
+  margin-block: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content repeat(auto-fit, 1fr);
+  row-gap: 1rem;
 
   &>p {
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    color: gray;
-    padding: 1rem 0.5rem;
+    font-size: 1.3rem;
+    color: $color-grey;
+    grid-row: 1 / 2;
+    padding-left: 1rem;
   }
-}
 
-.download-movie-page>h2 {
-  font-size: clamp(2rem, 3vw, 2.5rem);
-}
-
-.img {
-  text-align: center;
-  width: 100%;
-  border: 2px solid red;
-
-  &>img {
-    box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
-    object-fit: cover;
+  &>h2 {
+    font-size: 2rem;
+    padding-left: 1rem;
   }
-}
 
-.download-movie {
-  background: black;
-  padding: 1rem;
-}
-
-.download-movie,
-.rating,
-.actor,
-.director,
-.descp {
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  color: $color-white;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem 0;
-  padding: 5rem;
-
-  & a:link,
-  & a:visited {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    padding: 0.5rem;
+  &__img-cont {
     text-align: center;
-    border: 2px solid goldenrod;
-    border-radius: 10vw;
-    position: relative;
-    overflow: hidden;
-    color: goldenrod;
-    cursor: pointer;
+    width: 100%;
+
+    &>img {
+      box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+    }
+  }
+
+  &__movie-info {
+    background: black;
+    padding: 1rem;
+    color: $color-grey-light-2;
+    background: $color-black;
+    font-size: 1.4rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 0;
+    padding: 5rem;
+
+    & a:link,
+    & a:visited {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      text-align: center;
+      border: 2px solid goldenrod;
+      border-radius: 100px;
+      position: relative;
+      overflow: hidden;
+      color: $color-gold;
+      cursor: pointer;
 
 
-    &:hover::after,
-    &:focus::after {
-      content: "";
-      position: absolute;
-      top: -4em;
-      left: -8%;
-      right: 0;
-      bottom: 0;
-      width: 1.5em;
-      height: 10em;
-      background: goldenrod;
-      transform: rotate(20deg);
-      z-index: -1;
-      animation: slideToRight 1000ms forwards;
+      &:hover::after,
+      &:focus::after {
+        content: "";
+        position: absolute;
+        top: -4em;
+        left: -8%;
+        right: 0;
+        bottom: 0;
+        width: 1.5em;
+        height: 10em;
+        background: goldenrod;
+        transform: rotate(20deg);
+        z-index: -1;
+        animation: slideToRight 1000ms forwards;
+      }
     }
   }
 }
