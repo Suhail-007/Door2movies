@@ -29,8 +29,8 @@ class App {
 
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
-
-        //temporary solution to render pages while we get data from url
+        
+        //added delay for first time loading pagination
         await paginationView.delay(1000);
 
         paginationView.renderData(model.data);
@@ -75,10 +75,9 @@ class App {
   }
 
 
-  async controllerPagination() {
+  controllerPagination() {
     try {
 
-      await paginationView.delay(500)
       //render Buttons
       paginationView.renderData(model.data);
 
