@@ -12,7 +12,9 @@ class App {
 
     //load movies as soon as window load
     window.addEventListener('load', () => {
-      model.getJsonData()
+      model.getJsonData();
+
+      model.getURL();
     });
 
     switch (id) {
@@ -29,12 +31,6 @@ class App {
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
         paginationView.renderData(model.data);
-
-        //get url
-        // model.getURL();
-
-        //home
-        // this.controllerHome();
         break;
       case 'download-page':
         //change page title
@@ -42,7 +38,7 @@ class App {
 
         //common things
         this.#COMMON();
-        
+
         this.#controllerDownload();
         break;
       default:
@@ -57,7 +53,6 @@ class App {
     //navbar
     navView.addNavToggleHandler();
     navView.addNavLinkHandler(this.controlNavigation);
-
   }
 
   async controllerHome() {
@@ -69,7 +64,7 @@ class App {
       await movieView.delay(1500);
 
       //Render Movies
-      movieView.renderData(model.getPerPageMovie());
+      movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (e) {
       //render Error message

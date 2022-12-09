@@ -3,7 +3,6 @@ import View from './view.js'
 
 class HomeView extends View {
   _parentElem = document.querySelector('body');
-  
 }
 
 export default new HomeView();

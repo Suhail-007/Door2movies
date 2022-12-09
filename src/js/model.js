@@ -33,7 +33,6 @@ export const getPerPageMovie = function(page = 1) {
   // updateURL('home', start, end);
 
   // getURL()
-
   return data.movies.slice(start, end);
 }
 
@@ -59,7 +58,7 @@ export const changeTitle = function(id) {
   document.title = title
 }
 
-export const getURL = function() {
+export const getURL = async function() {
   const url = new URL(location.href);
   const urlStart = url.searchParams.get('start');
 
@@ -68,6 +67,5 @@ export const getURL = function() {
 
   if ((url !== null || url !== undefined) && Number(urlStart) > 0) {
     data.pagination.page = urlStart;
-    console.log(data.pagination);
   }
 }

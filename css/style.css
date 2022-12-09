@@ -382,13 +382,21 @@ header > h1 {
   font-size: 2rem;
   padding-left: 1rem;
 }
-.section__download__img-cont {
-  text-align: center;
-  width: 100%;
+.section__download__img-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* grid-template-rows: repeat(3, min-content); */
 }
-.section__download__img-cont > img {
+.section__download__img-grid figure {
+  grid-column: 3/11;
+  /* grid-row: 1/ 3;
+  align-self: center; */
+}
+.section__download__img-grid figure > img {
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .section__download__movie-info {
   background: black;
