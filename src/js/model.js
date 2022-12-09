@@ -11,7 +11,7 @@ export const data = {
   },
   search: {
     movies: [],
-  }
+  },
 }
 
 export async function getJsonData() {
@@ -66,6 +66,6 @@ export const getURL = async function() {
   if (urlStart === undefined || urlStart === null) return
 
   if ((url !== null || url !== undefined) && Number(urlStart) > 0) {
-    data.pagination.page = urlStart;
+    data.pagination.page = Math.ceil((urlStart / RES_PER_PAGE)+1);
   }
 }

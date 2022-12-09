@@ -213,8 +213,9 @@ nav {
   outline: none;
   user-select: none;
   cursor: pointer;
-  padding: 0.7rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   background: #000;
+  border-radius: 100px;
 }
 .pagination__btn--next > svg, .pagination__btn--prev > svg {
   transition: all 200ms ease-in-out;
@@ -223,14 +224,20 @@ nav {
 .pagination__btn--next {
   justify-self: end;
 }
-.pagination__btn--next:hover > svg, .pagination__btn--next:focus > svg {
+.pagination__btn--next > svg {
   margin-left: 0.5rem;
+}
+.pagination__btn--next:hover > svg, .pagination__btn--next:focus > svg {
+  margin-left: 1rem;
 }
 .pagination__btn--prev {
   justify-self: start;
 }
-.pagination__btn--prev:hover > svg, .pagination__btn--prev:focus > svg {
+.pagination__btn--prev > svg {
   margin-right: 0.5rem;
+}
+.pagination__btn--prev:hover > svg, .pagination__btn--prev:focus > svg {
+  margin-right: 1rem;
 }
 
 .search-container {
@@ -385,12 +392,9 @@ header > h1 {
 .section__download__img-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  /* grid-template-rows: repeat(3, min-content); */
 }
 .section__download__img-grid figure {
   grid-column: 3/11;
-  /* grid-row: 1/ 3;
-  align-self: center; */
 }
 .section__download__img-grid figure > img {
   box-shadow: 1px 0px 5px 1px rgba(0, 0, 0, 0.5);

@@ -14,13 +14,11 @@ class Pagination extends View {
       const btnDataset = btn.dataset.goto;
 
       btnDataset === 'next' ? this._data.pagination.page++ : this._data.pagination.page--;
-      
-      console.log('loaded');
 
+      //update URL on every click of pagination
       const start = (this._data.pagination.page - 1) * this._data.pagination.resPerPage;
 
       const end = this._data.pagination.page * this._data.pagination.resPerPage;
-
 
       updateURL('home', start, end);
 
@@ -31,15 +29,16 @@ class Pagination extends View {
   _generateMarkup() {
     const data = this._data;
 
-    const currPage = data.pagination.page;
+    const currPage = +data.pagination.page;
     const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
 
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
     if (currPage > 1 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;
 
-    //next btn is always going to be on webpage since there's always more than page
+    //next btn is always going to be on webpage since there's always more than one page
     if (currPage === 1) return this._generateNextBtnMarkup(currPage);
-    //if currpage and num of pagws is equal render only prev button
+
+    //if currpage and num of pages is equal render only prev button
     if (currPage === numPages) return this._generatePrevBtnMarkup(currPage)
   }
 

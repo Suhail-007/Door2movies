@@ -1,11 +1,11 @@
 export default class View {
   _data
 
-  async renderData(data) {
+  async renderData(data, value='home') {
     this._data = await data;
 
     if (!this._data) throw new Error('could not able to load data');
-
+    
     const markup = this._generateMarkup();
 
     //remove any pre-added markup

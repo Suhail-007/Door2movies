@@ -7,13 +7,12 @@ import searchView from './views/searchView.js';
 import downloadView from './views/downloadView.js';
 
 class App {
-  init() {
+ async init() {
     const id = document.body.id;
 
     //load movies as soon as window load
-    window.addEventListener('load', () => {
+    window.addEventListener('load', function() {
       model.getJsonData();
-
       model.getURL();
     });
 
@@ -30,6 +29,10 @@ class App {
 
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
+        
+        //temporary solution to render pages while we get data from url
+        await paginationView.delay(1000);
+        
         paginationView.renderData(model.data);
         break;
       case 'download-page':
@@ -65,7 +68,6 @@ class App {
 
       //Render Movies
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
-
     } catch (e) {
       //render Error message
       homeView.errorMessage('Something went wrong :(');
@@ -75,6 +77,8 @@ class App {
 
   async controllerPagination() {
     try {
+
+      await paginationView.delay(500)
       //render Buttons
       paginationView.renderData(model.data);
 
@@ -85,7 +89,7 @@ class App {
       await movieView.loader();
 
       //delay
-      await movieView.delay(300);
+      await movieView.delay(1000);
 
       //render Movies
       movieView.renderData(slicedArr);

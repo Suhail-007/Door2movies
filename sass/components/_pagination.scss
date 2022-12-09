@@ -14,8 +14,9 @@
     outline: none;
     user-select: none;
     cursor: pointer;
-    padding: 0.7rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     background: $color-black;
+    border-radius: 100px;
 
     &>svg {
       transition: all 200ms ease-in-out;
@@ -26,10 +27,14 @@
   &__btn--next {
     justify-self: end;
 
+    &>svg {
+      margin-left: .5rem;
+    }
+
     &:hover,
     &:focus {
       &>svg {
-        margin-left: 0.5rem;
+        margin-left: 1rem;
       }
     }
   }
@@ -37,10 +42,14 @@
   &__btn--prev {
     justify-self: start;
 
+    &>svg {
+      margin-right: .5rem;
+    }
+
     &:hover,
     &:focus {
       &>svg {
-        margin-right: 0.5rem;
+        margin-right: 1rem;
       }
     }
   }
