@@ -27,19 +27,12 @@ export const getPerPageMovie = function(page = 1) {
   data.pagination.page = page;
 
   const start = (page - 1) * data.pagination.resPerPage;
-  // console.log(start);
   const end = page * data.pagination.resPerPage;
-
-  // updateURL('home', start, end);
-
-  // getURL()
   return data.movies.slice(start, end);
 }
 
 export const filterMovieCat = function(hash) {
   updateURL(hash, 0, RES_PER_PAGE);
-
-  if (!hash) return data.movies;
 
   const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));
   return filteredMovies
@@ -61,7 +54,6 @@ export const changeTitle = function(id) {
 export const getURL = async function() {
   const url = new URL(location.href);
   const urlStart = url.searchParams.get('start');
-
 
   if (urlStart === undefined || urlStart === null) return
 

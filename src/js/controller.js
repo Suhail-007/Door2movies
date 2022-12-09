@@ -7,7 +7,7 @@ import searchView from './views/searchView.js';
 import downloadView from './views/downloadView.js';
 
 class App {
- async init() {
+  async init() {
     const id = document.body.id;
 
     //load movies as soon as window load
@@ -29,10 +29,10 @@ class App {
 
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
-        
+
         //temporary solution to render pages while we get data from url
         await paginationView.delay(1000);
-        
+
         paginationView.renderData(model.data);
         break;
       case 'download-page':
@@ -61,7 +61,7 @@ class App {
   async controllerHome() {
     try {
       //loader 
-      // await movieView.loader();
+      await movieView.loader();
 
       //delay
       await movieView.delay(1500);
