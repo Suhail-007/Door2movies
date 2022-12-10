@@ -1,4 +1,5 @@
 import View from './view.js';
+import { RESET_PAGE } from '../config.js';
 
 class Nav extends View {
   #toggleDropDown(e) {
@@ -12,7 +13,7 @@ class Nav extends View {
     if (isDropdownBtn) dropdownContent.classList.toggle('active');
     else dropdownContent.classList.remove('active');
   }
-  
+
   addNavLinkHandler(handler) {
     window.addEventListener('hashchange', handler)
   }
@@ -23,7 +24,8 @@ class Nav extends View {
 
   addHashHandler(handler) {
     const category = location.hash.slice(1).toLowerCase();
-    return  handler(category);
+    handler.data.pagination.page = RESET_PAGE;
+    return handler.filterMovies(category);
   }
 }
 

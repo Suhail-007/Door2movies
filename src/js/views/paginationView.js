@@ -12,20 +12,15 @@ class Pagination extends View {
       if (!btn) return
 
       const btnDataset = btn.dataset.goto;
-
       btnDataset === 'next' ? this._data.pagination.page++ : this._data.pagination.page--;
 
       //update URL on every click of pagination
       const start = (this._data.pagination.page - 1) * this._data.pagination.resPerPage;
-
       const end = this._data.pagination.page * this._data.pagination.resPerPage;
-      
+
       //change the page value
       const page = this._data.filter ? this._data.category : 'home';
-      // const page = 'home';
-//i have to make navigation work for both filtered movies and normal movies so when user reload filtered movies won't get back to home page, i'm almost there but when i set page category pagination stop working 
-
-      updateURL(`home`, start, end);
+      updateURL(`${page}`, start, end);
 
       handler();
     })
@@ -33,7 +28,6 @@ class Pagination extends View {
 
   _generateMarkup() {
     const data = this._data;
-
     const currPage = +data.pagination.page;
     const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
 

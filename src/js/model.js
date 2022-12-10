@@ -1,5 +1,5 @@
 'use strict'
-import { API_URL, RES_PER_PAGE, RESET_PAGE } from './config.js';
+import { API_URL, RES_PER_PAGE } from './config.js';
 import { getJSON, updateURL } from './helper.js'
 import homeView from './views/homeView.js'
 
@@ -29,7 +29,6 @@ export async function getJsonData() {
 export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
   const url = new URL(location.href);
   const hash = url.searchParams.get('page');
-  console.log(hash);
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
 
@@ -42,8 +41,6 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
 }
 
 export const filterMovies = async function(hash) {
-  //reset page to 1
-  data.pagination.page = RESET_PAGE;
   const start = (data.pagination.page - 1) * data.pagination.resPerPage;
   const end = data.pagination.page * data.pagination.resPerPage;
 

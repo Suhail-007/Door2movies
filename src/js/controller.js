@@ -68,12 +68,11 @@ class App {
 
       //Render Movies
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      
     } catch (e) {
-      //render Error message
       homeView.errorMessage('Something went wrong :(');
     }
   }
-
 
   async controllerPagination() {
     try {
@@ -101,7 +100,7 @@ class App {
   async controlNavigation() {
     try {
       const { page } = model.data.pagination;
-      const filteredMovies = await navView.addHashHandler(model.filterMovies);
+      const filteredMovies = await navView.addHashHandler(model);
 
       //loader
       await movieView.loader();
