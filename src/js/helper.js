@@ -4,7 +4,7 @@ import { SECONDS } from './config.js'
 const timeout = function(sec) {
   return new Promise(function(_, reject) {
     setTimeout(() => {
-      reject(new Error(`Request took too long, Timeout after ${sec} seconds`))
+      reject(new Error(`Request took too long, Timeout after ${sec} seconds. please retry`))
     }, sec * 1000);
   });
 }
@@ -13,8 +13,7 @@ export const getJSON = async function(url) {
   try {
 
     const res = await Promise.race([fetch(url), timeout(SECONDS)]);
-
-    if (!res.ok) throw new Error('could\'t fetch movies')
+    if (!res.ok) throw new Error('could\'t fetch movies');
 
     const data = await res.json();
 
@@ -26,8 +25,6 @@ export const getJSON = async function(url) {
 
 export const updateURL = function(page = 'home', start, end) {
   const url = `?page=${page}&start=${start}&end=${end}`;
-
   const newURL = new URL(url, location.href);
-
   window.history.pushState({}, '', newURL);
 }

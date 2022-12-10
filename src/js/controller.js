@@ -10,7 +10,7 @@ class App {
   async init() {
     const id = document.body.id;
 
-    //load movies as soon as window load
+    //load movies as soon as window load i.e home/download page.
     window.addEventListener('load', function() {
       model.getJsonData();
       model.getURL();
@@ -29,7 +29,7 @@ class App {
 
         //pagination
         paginationView.addHandlerClick(this.controllerPagination);
-        
+
         //added delay for first time loading pagination
         await paginationView.delay(1000);
 
@@ -54,7 +54,7 @@ class App {
     this.searchController();
 
     //navbar
-    navView.addNavToggleHandler();
+    navView.addDropdownToggle();
     navView.addNavLinkHandler(this.controlNavigation);
   }
 
@@ -75,14 +75,15 @@ class App {
   }
 
 
-  controllerPagination() {
+  async controllerPagination() {
     try {
+      const { page } = model.data.pagination;
 
       //render Buttons
       paginationView.renderData(model.data);
 
       //get returned value from model fn
-      const slicedArr = model.getPerPageMovie(model.data.pagination.page);
+      const slicedArr = model.getPerPageMovie(page);
 
       //loader 
       await movieView.loader();
@@ -92,30 +93,34 @@ class App {
 
       //render Movies
       movieView.renderData(slicedArr);
-    } catch (e) {
+    } catch (err) {
       movieView.errorMessage();
     }
   }
 
-
   async controlNavigation() {
     try {
+      const { page } = model.data.pagination;
+      const filteredMovies = await navView.addHashHandler(model.filterMovies);
+
       //loader
       await movieView.loader();
 
       //delay
       await movieView.delay(1000);
 
-      movieView.renderData(navView.addHashHandler(model.filterMovieCat));
+      movieView.renderData(model.getPerPageMovie(page, filteredMovies));
 
-    } catch (e) {
-      movieView.errorMessage();
+      //re-render the pagination button
+      paginationView.renderData(model.data);
+
+    } catch (err) {
+      movieView.errorMessage(err);
     }
   }
 
   searchController() {
     searchView.getSearchMovies(model.data)
-
     searchView.findSearchMovie(model.data);
   }
 

@@ -36,7 +36,7 @@ export default class View {
     this._clear();
     this._parentElem.insertAdjacentHTML('beforeend', html);
 
-    return Promise.resolve('')
+    return Promise.resolve()
   }
 
   delay(ms) {

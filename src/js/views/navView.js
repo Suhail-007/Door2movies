@@ -1,8 +1,6 @@
 import View from './view.js';
 
 class Nav extends View {
-
-
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
@@ -19,7 +17,7 @@ class Nav extends View {
     window.addEventListener('hashchange', handler)
   }
 
-  addNavToggleHandler() {
+  addDropdownToggle() {
     window.addEventListener('click', this.#toggleDropDown);
   }
 

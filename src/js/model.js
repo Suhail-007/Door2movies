@@ -5,6 +5,7 @@ import homeView from './views/homeView.js'
 
 export const data = {
   movies: [],
+  filteredMovies: [],
   pagination: {
     resPerPage: RES_PER_PAGE,
     page: 1,
@@ -23,19 +24,19 @@ export async function getJsonData() {
   }
 }
 
-export const getPerPageMovie = function(page = 1) {
-  data.pagination.page = page;
-
+export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
   const start = (page - 1) * data.pagination.resPerPage;
   const end = page * data.pagination.resPerPage;
-  return data.movies.slice(start, end);
+
+  return moviesArr.slice(start, end);
 }
 
-export const filterMovieCat = function(hash) {
-  updateURL(hash, 0, RES_PER_PAGE);
+export const filterMovies = async function(hash) {
+  const m = await getJSON(API_URL);
 
-  const filteredMovies = data.movies.filter(movie => movie.category.includes(hash));
-  return filteredMovies
+  data.movies = m.filter(movie => movie.category.includes(hash));
+
+  return data.movies;
 }
 
 export const changeTitle = function(id) {
@@ -58,6 +59,6 @@ export const getURL = async function() {
   if (urlStart === undefined || urlStart === null) return
 
   if ((url !== null || url !== undefined) && Number(urlStart) > 0) {
-    data.pagination.page = Math.ceil((urlStart / RES_PER_PAGE)+1);
+    data.pagination.page = Math.ceil((urlStart / data.pagination.resPerPage) + 1);
   }
 }
