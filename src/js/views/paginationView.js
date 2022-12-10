@@ -19,8 +19,13 @@ class Pagination extends View {
       const start = (this._data.pagination.page - 1) * this._data.pagination.resPerPage;
 
       const end = this._data.pagination.page * this._data.pagination.resPerPage;
+      
+      //change the page value
+      const page = this._data.filter ? this._data.category : 'home';
+      // const page = 'home';
+//i have to make navigation work for both filtered movies and normal movies so when user reload filtered movies won't get back to home page, i'm almost there but when i set page category pagination stop working 
 
-      updateURL('home', start, end);
+      updateURL(`home`, start, end);
 
       handler();
     })
@@ -31,7 +36,6 @@ class Pagination extends View {
 
     const currPage = +data.pagination.page;
     const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
-    console.log(numPages);
 
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
     if (currPage > 1 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;

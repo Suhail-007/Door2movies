@@ -23,7 +23,7 @@ class Nav extends View {
 
   addHashHandler(handler) {
     const category = location.hash.slice(1).toLowerCase();
-    return handler(category);
+    return  handler(category);
   }
 }
 
