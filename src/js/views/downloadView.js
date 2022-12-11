@@ -9,7 +9,6 @@ class Download extends View {
     const movieName = this._getMovieName();
 
     const data = this._data.movies.filter(movie => movie.name.toLowerCase() === movieName);
-    console.log(data);
 
     return `
       <p> Home > ${data[0].name}</p>

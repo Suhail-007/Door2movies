@@ -1,11 +1,9 @@
 'use strict'
 import { API_URL, RES_PER_PAGE } from './config.js';
 import { getJSON, updateURL } from './helper.js'
-import homeView from './views/homeView.js'
 
 export const data = {
   movies: [],
-  // filteredMovies: [],
   category: '',
   filter: false,
   pagination: {
@@ -19,25 +17,42 @@ export const data = {
 
 export async function getJsonData() {
   try {
-    data.movies = await getJSON(API_URL);
-    data.movies = data.movies.reverse();
+    const movies = await getJSON(API_URL);
+    data.movies = await movies.reverse();
   } catch (err) {
     throw err
   }
 }
 
-export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
+export const overwriteMovieArr = function() {
   const url = new URL(location.href);
   const hash = url.searchParams.get('page');
-  const start = (page - 1) * data.pagination.resPerPage;
-  const end = page * data.pagination.resPerPage;
-
   if (hash != null && hash !== 'home') {
-    const movies = await filterMovies(hash)
-    return movies.slice(start, end);
-  }
+    //overwrite the movies arr if page is not home
+    data.movies = data.movies.filter(movie => movie.category.includes(hash));
+    console.log(data.movies);
+  } else return
+}
 
-  if (hash == null || hash === 'home') return moviesArr.slice(start, end);
+export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
+  try {
+    const url = new URL(location.href);
+    const hash = url.searchParams.get('page');
+
+    const start = (page - 1) * data.pagination.resPerPage;
+    const end = page * data.pagination.resPerPage;
+
+    if (hash != null && hash !== 'home') {
+      const movies = await filterMovies(hash);
+      return movies.slice(start, end);
+    }
+
+    if (hash == null || hash === 'home') {
+      return moviesArr.slice(start, end);
+    }
+  } catch (err) {
+    throw err
+  }
 }
 
 export const filterMovies = async function(hash) {
@@ -51,9 +66,8 @@ export const filterMovies = async function(hash) {
   data.category = hash;
 
   const movies = await getJSON(API_URL);
-  data.movies = movies.filter(movie => movie.category.includes(hash));
-  data.movies = data.movies.reverse();
-
+  const filteredmovies = movies.filter(movie => movie.category.includes(hash));
+  data.movies = await filteredmovies;
   return data.movies;
 }
 

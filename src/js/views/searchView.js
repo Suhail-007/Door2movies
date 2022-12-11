@@ -29,9 +29,7 @@ class Search extends View {
     //explicit delay so browser don't have to make two fetch request
     await this.delay(2000);
 
-    data.search.movies = data.movies;
-
-    data.search.movies = data.search.movies.map(movie => {
+    data.search.movies = data.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
 
       if (document.body.id === 'home') this.fillSearch(card, movie.name, movie.img, movie.id, 'src/pages/');

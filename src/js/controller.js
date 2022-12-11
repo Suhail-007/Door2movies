@@ -11,13 +11,15 @@ class App {
     const id = document.body.id;
 
     //load movies as soon as window load i.e home/download page.
-    window.addEventListener('load', function() {
-      model.getJsonData();
-      model.getURL();
+    window.addEventListener('load', async function() {
+      await model.getJsonData();
+      await model.getURL();
+      await model.overwriteMovieArr();
     });
 
     switch (id) {
       case 'home':
+
         //change page title
         model.changeTitle(id);
 
@@ -27,13 +29,12 @@ class App {
         //common 
         this.#COMMON();
 
-        //pagination
         paginationView.addHandlerClick(this.controllerPagination);
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
-
         paginationView.renderData(model.data);
+
         break;
       case 'download-page':
         //change page title
@@ -41,7 +42,6 @@ class App {
 
         //common things
         this.#COMMON();
-
         this.#controllerDownload();
         break;
       default:
@@ -68,7 +68,7 @@ class App {
 
       //Render Movies
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
-      
+
     } catch (e) {
       homeView.errorMessage('Something went wrong :(');
     }
@@ -78,7 +78,7 @@ class App {
     try {
       const { page } = model.data.pagination;
 
-      //render Buttons
+      //render Burton
       paginationView.renderData(model.data);
 
       //get returned value from model fn
@@ -112,7 +112,6 @@ class App {
 
       //re-render the pagination button
       paginationView.renderData(model.data);
-
     } catch (err) {
       movieView.errorMessage(err);
     }
