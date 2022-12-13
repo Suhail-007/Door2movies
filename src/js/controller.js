@@ -135,6 +135,7 @@ class App {
   #loadData() {
     //load movies as soon as window load i.e home/download page.
     window.addEventListener('load', async function() {
+      console.log('dhd');
       await model.getJsonData();
       await model.getURL();
       await model.overwriteMovieArr();
@@ -144,7 +145,7 @@ class App {
   #popState() {
     window.addEventListener('popstate', async function(e) {
       if (!e.state) {
-        movieView.renderData(model.getPerPageMovie(model.data.movies));
+        model.data.pagination.page = 1;
         paginationView.renderData(model.data);
       }
 
