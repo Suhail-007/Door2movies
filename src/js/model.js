@@ -30,7 +30,6 @@ export const overwriteMovieArr = function() {
   if (hash != null && hash !== 'home') {
     //overwrite the movies arr if page is not home
     data.movies = data.movies.filter(movie => movie.category.includes(hash));
-    console.log(data.movies);
   } else return
 }
 
@@ -68,6 +67,7 @@ export const filterMovies = async function(hash) {
   const movies = await getJSON(API_URL);
   const filteredmovies = movies.filter(movie => movie.category.includes(hash));
   data.movies = await filteredmovies;
+
   return data.movies;
 }
 

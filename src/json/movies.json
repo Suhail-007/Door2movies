@@ -3,6 +3,7 @@
     "id": 1,
     "name": "Avengers EndGame",
     "img": "https://i.ibb.co/y5G0szp/avengers-End-Game.jpg",
+    "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg",
     "category": [
       "action"
     ],
@@ -29,6 +30,7 @@
     "id": 2,
     "name": "Multiverse Of Madness",
     "img": "https://i.ibb.co/wW4ZQ3d/multiverseofmadness.jpg",
+    "m_img": "https://i.ibb.co/HVzFv1K/multiverseofmadness.jpg",
     "category": [
       "adventure"
     ],
@@ -55,6 +57,7 @@
     "id": 3,
     "name": "Dragon ball super Broly",
     "img": "https://i.ibb.co/R41m7NK/dbs-broly.jpg",
+    "m_img": "https://i.ibb.co/GRGmQZv/dbs-broly.jpg",
     "category": [
       "action"
     ],
@@ -81,6 +84,7 @@
     "id": 4,
     "name": "Fast and Furious 9",
     "img": "https://i.ibb.co/XxfyK9r/f9.jpg",
+    "m_img": "https://i.ibb.co/hyshfTP/f9.jpg",
     "category": [
       "adventure"
     ],
@@ -107,6 +111,7 @@
     "id": 5,
     "name": "The Batman",
     "img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+    "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg",
     "category": [
       "adventure"
     ],
@@ -133,6 +138,7 @@
     "id": 6,
     "name": "Avengers Age Of Ultron",
     "img": "https://i.ibb.co/HXD99kv/age-of-ultron.jpg",
+    "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg",
     "category": [
       "comicbook"
     ],
@@ -159,6 +165,7 @@
     "id": 7,
     "name": "Avengers",
     "img": "https://i.ibb.co/2cYZhs6/the-avengers.jpg",
+    "m_img": "https://i.ibb.co/Bwxd2Hc/the-avengers.jpg",
     "category": [
       "thriller"
     ],
@@ -185,6 +192,7 @@
     "id": 8,
     "name": "Uncharted",
     "img": "https://i.ibb.co/zVRh8ZW/uncharted.jpg",
+    "m_img": "https://i.ibb.co/5RZXm8J/uncharted.jpg",
     "category": [
       "thriller"
     ],
@@ -211,6 +219,7 @@
     "id": 9,
     "name": "The Batman",
     "img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+    "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg",
     "category": [
       "adventure"
     ],

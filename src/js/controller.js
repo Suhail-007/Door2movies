@@ -1,21 +1,18 @@
 import * as model from './model.js';
-import homeView from './views/homeView.js'
 import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
 import searchView from './views/searchView.js';
 import downloadView from './views/downloadView.js';
+import { updateURL } from './helper.js';
+
 
 class App {
   async init() {
     const id = document.body.id;
 
-    //load movies as soon as window load i.e home/download page.
-    window.addEventListener('load', async function() {
-      await model.getJsonData();
-      await model.getURL();
-      await model.overwriteMovieArr();
-    });
+    this.#loadData();
+    this.#popState();
 
     switch (id) {
       case 'home':
@@ -24,12 +21,12 @@ class App {
         model.changeTitle(id);
 
         //home
-        this.controllerHome();
+        this.#controllerHome();
 
         //common 
         this.#COMMON();
 
-        paginationView.addHandlerClick(this.controllerPagination);
+        paginationView.addHandlerClick(this.#controllerPagination);
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
@@ -51,14 +48,14 @@ class App {
 
   #COMMON() {
     //search
-    this.searchController();
+    this.#searchController();
 
     //navbar
     navView.addDropdownToggle();
-    navView.addNavLinkHandler(this.controlNavigation);
+    navView.addNavLinkHandler(this.#controlNavigation);
   }
 
-  async controllerHome() {
+  async #controllerHome() {
     try {
       //loader 
       await movieView.loader();
@@ -74,7 +71,7 @@ class App {
     }
   }
 
-  async controllerPagination() {
+  async #controllerPagination() {
     try {
       const { page } = model.data.pagination;
 
@@ -92,12 +89,13 @@ class App {
 
       //render Movies
       movieView.renderData(slicedArr);
+
     } catch (err) {
       movieView.errorMessage();
     }
   }
 
-  async controlNavigation() {
+  async #controlNavigation() {
     try {
       const { page } = model.data.pagination;
       const filteredMovies = await navView.addHashHandler(model);
@@ -117,7 +115,7 @@ class App {
     }
   }
 
-  searchController() {
+  #searchController() {
     searchView.getSearchMovies(model.data)
     searchView.findSearchMovie(model.data);
   }
@@ -132,6 +130,39 @@ class App {
 
     //render movie
     downloadView.renderData(model.data);
+  }
+
+  #loadData() {
+    //load movies as soon as window load i.e home/download page.
+    window.addEventListener('load', async function() {
+      await model.getJsonData();
+      await model.getURL();
+      await model.overwriteMovieArr();
+    });
+  }
+
+  #popState() {
+    window.addEventListener('popstate', async function(e) {
+      if (!e.state) {
+        movieView.renderData(model.getPerPageMovie(model.data.movies));
+        paginationView.renderData(model.data);
+      }
+
+      if (e.state != null) {
+        model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
+
+        console.log(model.data.pagination.page);
+
+        await movieView.loader();
+
+        //delay
+        await movieView.delay(1000);
+
+        movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
+
+        paginationView.renderData(model.data);
+      }
+    });
   }
 }
 

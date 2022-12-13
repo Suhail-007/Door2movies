@@ -26,5 +26,6 @@ export const getJSON = async function(url) {
 export const updateURL = function(page = 'home', start, end) {
   const url = `?page=${page}&start=${start}&end=${end}`;
   const newURL = new URL(url, location.href);
-  window.history.pushState({}, '', newURL);
+  console.log(start);
+  window.history.pushState({ start }, '', newURL);
 }
