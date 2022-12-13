@@ -51,8 +51,8 @@ class App {
     this.#searchController();
 
     //navbar
-    navView.addDropdownToggle();
-    navView.addNavLinkHandler(this.#controlNavigation);
+    navView.addDropdownToggleHandler();
+    navView.addDropdownHandler(this.controlNavigation);
   }
 
   async #controllerHome() {
@@ -95,10 +95,10 @@ class App {
     }
   }
 
-  async #controlNavigation() {
+  async controlNavigation() {
     try {
       const { page } = model.data.pagination;
-      const filteredMovies = await navView.addHashHandler(model);
+      const filteredMovies = await navView.getFilterMoviesHandler(model);
 
       //loader
       await movieView.loader();
@@ -143,9 +143,23 @@ class App {
 
   #popState() {
     window.addEventListener('popstate', async function(e) {
-      if (!e.state) {
+      e.preventDefault();
+      // const page = new URL(location.href).get('page');
+      if (!e.state || location.href.includes('page')) {
         model.data.pagination.page = 1;
-        movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
+
+        //since we are assign filter movies to data.movies we need the orignal array again for trst page
+        await model.getJsonData();
+
+        //loader
+        await movieView.loader();
+
+        //delay
+        await movieView.delay(1000);
+
+        const movies = await model.getPerPageMovie(model.data.pagination.page, model.data.movies);
+
+        movieView.renderData(movies);
 
         paginationView.renderData(model.data);
       }
@@ -159,7 +173,7 @@ class App {
         await movieView.delay(1000);
 
         movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
-        
+
         paginationView.renderData(model.data);
       }
     });

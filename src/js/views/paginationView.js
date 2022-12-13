@@ -27,11 +27,11 @@ class Pagination extends View {
     })
   }
 
-   _generateMarkup() {
+  _generateMarkup() {
     const data = this._data;
     const currPage = +data.pagination.page;
     const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
-    
+
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
     if (currPage > 1 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;
 

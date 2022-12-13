@@ -5,6 +5,7 @@ import { getJSON, updateURL } from './helper.js'
 export const data = {
   movies: [],
   category: '',
+  movieCategories: ['action', 'adventure'],
   filter: false,
   pagination: {
     resPerPage: RES_PER_PAGE,
@@ -18,7 +19,7 @@ export const data = {
 export async function getJsonData() {
   try {
     const movies = await getJSON(API_URL);
-    data.movies = await movies.reverse();
+    data.movies = await movies;
   } catch (err) {
     throw err
   }
@@ -35,18 +36,20 @@ export const overwriteMovieArr = function() {
 
 export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
   try {
+
     const url = new URL(location.href);
-    const hash = url.searchParams.get('page');
+    const userPage = url.searchParams.get('page');
 
     const start = (page - 1) * data.pagination.resPerPage;
     const end = page * data.pagination.resPerPage;
 
-    if (hash != null && hash !== 'home') {
-      const movies = await filterMovies(hash);
+    if (userPage != null && data.movieCategories.includes(userPage)) {
+      const movies = await filterMovies(userPage);
       return movies.slice(start, end);
     }
 
-    if (hash == null || hash === 'home') {
+    if (!userPage || userPage === 'home') {
+      moviesArr = moviesArr.reverse();
       return moviesArr.slice(start, end);
     }
   } catch (err) {
@@ -54,20 +57,15 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
   }
 }
 
-export const filterMovies = async function(hash) {
-  const start = (data.pagination.page - 1) * data.pagination.resPerPage;
-  const end = data.pagination.page * data.pagination.resPerPage;
-
-  updateURL(hash, start, end);
+export const filterMovies = async function(category) {
   //set filter to true
   data.filter = true;
   //set category to hash value
-  data.category = hash;
+  data.category = category;
 
   const movies = await getJSON(API_URL);
-  const filteredmovies = movies.filter(movie => movie.category.includes(hash));
-  data.movies = await filteredmovies;
-
+  const filteredMovies = movies.filter(movie => movie.category.includes(category));
+  data.movies = await filteredMovies;
   return data.movies;
 }
 
