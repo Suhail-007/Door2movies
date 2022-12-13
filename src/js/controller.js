@@ -146,6 +146,9 @@ class App {
     window.addEventListener('popstate', async function(e) {
       if (!e.state) {
         model.data.pagination.page = 1;
+        
+        movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
+        
         paginationView.renderData(model.data);
       }
 
