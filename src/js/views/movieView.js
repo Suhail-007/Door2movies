@@ -24,13 +24,9 @@ class MovieView extends View {
   }
 
   _checkViewport(movie) {
-    if (window.matchMedia('(min-width: 64em)')) {
-      return `<img src="${movie.m_img}" alt="${movie.name}" />`
-    }
+    if (window.matchMedia('(min-width: 64em)')) return `<img src="${movie.imgs.d_img}" alt="${movie.name}" />`
 
-    if (window.matchMedia('(min-width: 37.2em)')) {
-      return `<img src="${movie.img}" alt="${movie.name}" />`
-    }
+    if (window.matchMedia('(min-width: 37.2em)')) return `<img src="${movie.imgs.m_img}" alt="${movie.name}" />`
   }
 }
 

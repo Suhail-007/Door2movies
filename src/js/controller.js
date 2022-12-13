@@ -135,7 +135,6 @@ class App {
   #loadData() {
     //load movies as soon as window load i.e home/download page.
     window.addEventListener('load', async function() {
-      console.log('dhd');
       await model.getJsonData();
       await model.getURL();
       await model.overwriteMovieArr();
@@ -154,15 +153,13 @@ class App {
       if (e.state != null) {
         model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
 
-        console.log(model.data.pagination.page);
-
         await movieView.loader();
 
         //delay
         await movieView.delay(1000);
 
         movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
-
+        
         paginationView.renderData(model.data);
       }
     });

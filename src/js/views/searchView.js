@@ -32,27 +32,25 @@ class Search extends View {
     data.search.movies = data.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
 
-      if (document.body.id === 'home') this.fillSearch(card, movie.name, movie.img, movie.id, 'src/pages/');
+      if (document.body.id === 'home') this.fillSearch(card, movie.name, movie.imgs, movie.id, 'src/pages/');
 
       //change the download page path if user is already on download page
-      if (document.body.id === 'download-page') this.fillSearch(card, movie.name, movie.img, movie.id, './');
+      if (document.body.id === 'download-page') this.fillSearch(card, movie.name, movie.imgs, movie.id, './');
 
       return {
         name: movie.name,
-        img: movie.img,
-        id: movie.id,
         element: card
       }
     })
   }
 
-  fillSearch(card, name, img, id, downPath) {
+  fillSearch(card, name, imgs, id, downPath) {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
 
     cardImg.loading = 'lazy';
-    cardImg.src = `${img}`;
+    this._checkViewport(cardImg, imgs);
     movieName.textContent = name;
 
     //create Slug
@@ -60,6 +58,12 @@ class Search extends View {
 
     card.classList.add('hide');
     this._resultCont.appendChild(card);
+  }
+  
+  _checkViewport(card, img) {
+    if (window.matchMedia('(min-width: 64em)')) card.src = img.d_img;
+  
+    if (window.matchMedia('(min-width: 37.2em)')) card.src = img.m_img;
   }
 }
 
