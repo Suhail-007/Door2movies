@@ -72,9 +72,15 @@ class Search extends View {
   }
 
   _checkViewport(card, img) {
-    if (window.matchMedia('(min-width: 64em)')) card.src = img.d_img;
+    if (window.matchMedia('(min-width: 37.2em)')) {
+      card.src = img.m_img;
+      return
+    };
 
-    if (window.matchMedia('(min-width: 37.2em)')) card.src = img.m_img;
+    if (window.matchMedia('(min-width: 64em)')) {
+      card.src = img.d_img;
+      return
+    };
   }
 }
 

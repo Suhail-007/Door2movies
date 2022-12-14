@@ -20,16 +20,16 @@ export async function getJsonData() {
   try {
     const movies = await getJSON(API_URL);
     data.movies = await movies;
+    data.movies = data.movies.reverse();
     data.search.movies = data.movies.map(m => m);
-    
   } catch (err) {
     throw err
   }
 }
 
 export const overwriteMovieArr = function() {
-  const url = new URL(location.href);
-  const page = url.searchParams.get('page');
+  const { url, page: userPage, urlStart } = getURLPage();
+  
   if (page != null && page !== 'home') {
     //overwrite the movies arr if page is not home
     data.movies = data.movies.filter(m => m.category.includes(page));
@@ -38,10 +38,7 @@ export const overwriteMovieArr = function() {
 
 export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
   try {
-
-    const url = new URL(location.href);
-    const userPage = url.searchParams.get('page');
-
+    const { url, page: userPage, urlStart } = getURLPage();
     const start = (page - 1) * data.pagination.resPerPage;
     const end = page * data.pagination.resPerPage;
 
@@ -51,7 +48,6 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
     }
 
     if (!userPage || userPage === 'home') {
-      moviesArr = moviesArr.reverse();
       return moviesArr.slice(start, end);
     }
   } catch (err) {
@@ -86,13 +82,19 @@ export const changeTitle = function(id) {
 }
 
 export const getURL = async function() {
-  const url = new URL(location.href);
-  const page = url.searchParams.get('page');
-  const urlStart = url.searchParams.get('start');
+  const { url, page, urlStart } = getURLPage();
 
   if (!url || !page) return
 
   if (url && Number(urlStart) > 0) {
     data.pagination.page = Math.ceil((urlStart / data.pagination.resPerPage) + 1);
   }
+}
+
+export const getURLPage = function() {
+  const url = new URL(location.href);
+  const page = url.searchParams.get('page');
+  const urlStart = url.searchParams.get('start');
+
+  return { url, page, urlStart }
 }

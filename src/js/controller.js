@@ -1,11 +1,11 @@
 import * as model from './model.js';
+import View from './views/movieView.js'
 import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
 import searchView from './views/searchView.js';
 import downloadView from './views/downloadView.js';
 import { updateURL } from './helper.js';
-
 
 class App {
   async init() {
@@ -61,13 +61,13 @@ class App {
       await movieView.loader();
 
       //delay
-      await movieView.delay(1500);
+      await movieView.delay(1000);
 
       //Render Movies
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (e) {
-      homeView.errorMessage('Something went wrong :(');
+      movieView.errorMessage('Something went wrong :(');
     }
   }
 
@@ -160,7 +160,7 @@ class App {
         movieView.renderData(movies);
 
         paginationView.renderData(model.data);
-        
+
         return
       }
 
