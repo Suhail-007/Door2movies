@@ -1,10 +1,10 @@
 import View from './view.js';
 import { RESET_PAGE } from '../config.js';
-import { updateURL } from '../helper.js';
+import { updateURL, PAGINATION } from '../helper.js';
 
 class Nav extends View {
   _category
-  
+
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
@@ -38,10 +38,9 @@ class Nav extends View {
   getFilterMoviesHandler(handler) {
     handler.data.pagination.page = RESET_PAGE;
 
-    const start = (handler.data.pagination.page - 1) * handler.data.pagination.resPerPage;
-    const end = handler.data.pagination.page * handler.data.pagination.resPerPage;
-    
-    updateURL(this._category,start, end);
+    const { start, end } = PAGINATION(handler.data.pagination.page, handler.data);
+
+    updateURL(this._category, start, end);
     return handler.filterMovies(this._category);
   }
 }

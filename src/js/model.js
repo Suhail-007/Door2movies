@@ -46,7 +46,11 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
       return movies.slice(start, end);
     }
 
-    if (!userPage || userPage === 'home') return moviesArr.slice(start, end);
+    if (!userPage || userPage === 'home') {
+      //set filter to true
+      data.filter = false;
+      return moviesArr.slice(start, end);
+    }
   } catch (err) {
     throw err
   }

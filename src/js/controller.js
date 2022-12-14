@@ -11,8 +11,7 @@ class App {
   async init() {
     const id = document.body.id;
 
-    this.#loadData();
-    // this.#popState();
+    window.addEventListener('load', this.#loadData.bind(this));
     window.addEventListener('popstate', this.#HistoryBackForward.bind(this));
 
     switch (id) {
@@ -77,7 +76,7 @@ class App {
       const { page } = model.data.pagination;
 
       //render Burton
-      paginationView.renderData(model.data);
+      await paginationView.renderData(model.data);
 
       //get returned value from model fn
       const slicedArr = model.getPerPageMovie(page);
@@ -89,7 +88,7 @@ class App {
       await movieView.delay(1000);
 
       //render Movies
-      movieView.renderData(slicedArr);
+      await movieView.renderData(slicedArr);
 
     } catch (err) {
       movieView.errorMessage();
@@ -97,6 +96,7 @@ class App {
   }
 
   async controlNavigation() {
+    debugger
     try {
       const { page } = model.data.pagination;
       const filteredMovies = await navView.getFilterMoviesHandler(model);
@@ -107,10 +107,10 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      movieView.renderData(model.getPerPageMovie(page, filteredMovies));
+      await movieView.renderData(model.getPerPageMovie(page, filteredMovies));
 
       //re-render the pagination button
-      paginationView.renderData(model.data);
+      await paginationView.renderData(model.data);
     } catch (err) {
       movieView.errorMessage(err);
     }
@@ -129,22 +129,21 @@ class App {
     await downloadView.delay(1000);
 
     //render movie
-    downloadView.renderData(model.data);
+    await downloadView.renderData(model.data);
   }
 
-  #loadData() {
+  async #loadData() {
     //load movies as soon as window load i.e home/download page.
-    window.addEventListener('load', async function() {
-      await model.getJsonData();
-      await model.getURL();
-      await model.overwriteMovieArr();
-    });
+    await model.getJsonData();
+    await model.getURL();
+    await model.overwriteMovieArr();
   }
 
   async #HistoryBackForward(e) {
     e.preventDefault();
     if (!e.state || !location.href.includes('page')) {
       model.data.pagination.page = 1;
+      model.data.filter = false;
 
       //since we are assign filter movies to data.movies we need the orignal array again for trst page
       await model.getJsonData();
