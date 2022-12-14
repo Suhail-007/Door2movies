@@ -1,5 +1,5 @@
 import View from './view.js';
-import { RESET_PAGE } from '../config.js';
+import { RESET_PAGE, isDownloadMovie } from '../config.js';
 import { updateURL, PAGINATION } from '../helper.js';
 
 class Nav extends View {
@@ -17,15 +17,16 @@ class Nav extends View {
     else dropdownContent.classList.remove('active');
   }
 
-  addDropdownHandler(handler) {
+  addDropdownHandler(handler, download = false) {
     const dropdown = document.querySelector('[data-dropdown-content]');
 
     dropdown.addEventListener('click', e => {
-
       if (!e.target.dataset.category) return
       if (e.target.dataset.category && e.target.closest('[data-dropdown-content]')) {
-        e.preventDefault();
         this._category = e.target.dataset.category;
+        e.preventDefault();
+        //change the href value of anchor tag if user is on download page
+        if (download) this._changeLocationHref();
         handler();
       }
     })
@@ -40,8 +41,15 @@ class Nav extends View {
 
     const { start, end } = PAGINATION(handler.data.pagination.page, handler.data);
 
-    updateURL(this._category, start, end);
+    //if user is on download page do not update the url
+    if (!isDownloadMovie.download) updateURL(this._category, start, end);
+    //set isDownloadMovie.download to false so when user leave page using navigation history won't update
+    isDownloadMovie.download = false;
     return handler.filterMovies(this._category);
+  }
+
+  _changeLocationHref() {
+    location.href = `../../index.html?page=${this._category}&start=${0}&end=${1}`;
   }
 }
 

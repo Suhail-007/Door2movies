@@ -27,7 +27,6 @@ export default class View {
   }
 
   _responsiveImg(movie) {
-    console.log(movie);
     if (window.matchMedia('(min-width: 37.2em)')) return movie.imgs.m_img
 
     if (window.matchMedia('(min-width: 64em)')) return movie.imgs.d_img

@@ -1,12 +1,13 @@
 import View from './view.js';
 import { getJSON } from '../helper.js';
-import { API_URL } from '../config.js';
+import { API_URL, isDownloadMovie } from '../config.js';
 
 class Download extends View {
   _parentElem = document.querySelector('[data-download]');
 
   _generateMarkup() {
     const movieName = this._getMovieName();
+    isDownloadMovie.download = true;
 
     const data = this._data.movies.filter(movie => movie.name.toLowerCase() === movieName);
 

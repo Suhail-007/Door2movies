@@ -26,6 +26,8 @@ class App {
         //common 
         this.#COMMON();
 
+        navView.addDropdownHandler(this.controlNavigation);
+
         paginationView.addHandlerClick(this.#controllerPagination);
 
         //added delay for first time loading pagination
@@ -35,10 +37,11 @@ class App {
         break;
       case 'download-page':
         //change page title
-        model.changeTitle(id)
+        model.changeTitle(id);
 
         //common things
         this.#COMMON();
+        navView.addDropdownHandler(this.controlNavigation, true);
         this.#controllerDownload();
         break;
       default:
@@ -49,10 +52,8 @@ class App {
   #COMMON() {
     //search
     this.#searchController();
-
     //navbar
     navView.addDropdownToggleHandler();
-    navView.addDropdownHandler(this.controlNavigation);
   }
 
   async #controllerHome() {
