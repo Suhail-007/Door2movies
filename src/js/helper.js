@@ -28,3 +28,9 @@ export const updateURL = function(page = 'home', start, end) {
   const newURL = new URL(url, location.href);
   window.history.pushState({ start }, '', newURL);
 }
+
+export const PAGINATION = function(page, data) {
+  const start = (page - 1) * data.pagination.resPerPage;
+  const end = page * data.pagination.resPerPage;
+  return { start, end }
+}

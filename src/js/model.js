@@ -1,6 +1,6 @@
 'use strict'
 import { API_URL, RES_PER_PAGE } from './config.js';
-import { getJSON, updateURL } from './helper.js'
+import { getJSON, updateURL, PAGINATION } from './helper.js'
 
 export const data = {
   movies: [],
@@ -28,8 +28,8 @@ export async function getJsonData() {
 }
 
 export const overwriteMovieArr = function() {
-  const { url, page: userPage, urlStart } = getURLPage();
-  
+  const { url, page, urlStart } = getURLPage();
+
   if (page != null && page !== 'home') {
     //overwrite the movies arr if page is not home
     data.movies = data.movies.filter(m => m.category.includes(page));
@@ -39,17 +39,14 @@ export const overwriteMovieArr = function() {
 export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
   try {
     const { url, page: userPage, urlStart } = getURLPage();
-    const start = (page - 1) * data.pagination.resPerPage;
-    const end = page * data.pagination.resPerPage;
+    const { start, end } = PAGINATION(page, data);
 
     if (userPage != null && data.movieCategories.includes(userPage)) {
       const movies = await filterMovies(userPage);
       return movies.slice(start, end);
     }
 
-    if (!userPage || userPage === 'home') {
-      return moviesArr.slice(start, end);
-    }
+    if (!userPage || userPage === 'home') return moviesArr.slice(start, end);
   } catch (err) {
     throw err
   }

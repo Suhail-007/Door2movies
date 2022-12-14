@@ -12,7 +12,8 @@ class App {
     const id = document.body.id;
 
     this.#loadData();
-    this.#popState();
+    // this.#popState();
+    window.addEventListener('popstate', this.#HistoryBackForward.bind(this));
 
     switch (id) {
       case 'home':
@@ -64,7 +65,7 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (e) {
       movieView.errorMessage('Something went wrong :(');
@@ -140,43 +141,25 @@ class App {
     });
   }
 
-  #popState() {
-    window.addEventListener('popstate', async function(e) {
-      e.preventDefault();
-      if (!e.state || !location.href.includes('page')) {
-        model.data.pagination.page = 1;
+  async #HistoryBackForward(e) {
+    e.preventDefault();
+    if (!e.state || !location.href.includes('page')) {
+      model.data.pagination.page = 1;
 
-        //since we are assign filter movies to data.movies we need the orignal array again for trst page
-        await model.getJsonData();
+      //since we are assign filter movies to data.movies we need the orignal array again for trst page
+      await model.getJsonData();
+      await this.#controllerHome();
+      paginationView.renderData(model.data);
+      return
+    }
 
-        //loader
-        await movieView.loader();
+    if (e.state != null) {
+      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
 
-        //delay
-        await movieView.delay(1000);
-
-        const movies = await model.getPerPageMovie(model.data.pagination.page, model.data.movies);
-
-        movieView.renderData(movies);
-
-        paginationView.renderData(model.data);
-
-        return
-      }
-
-      if (e.state != null) {
-        model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
-
-        await movieView.loader();
-
-        //delay
-        await movieView.delay(1000);
-
-        movieView.renderData(model.getPerPageMovie(model.data.pagination.page, model.data.movies));
-
-        paginationView.renderData(model.data);
-      }
-    });
+      this.#controllerHome();
+      paginationView.renderData(model.data);
+      return
+    }
   }
 }
 
