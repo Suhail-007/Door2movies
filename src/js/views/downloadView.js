@@ -15,7 +15,7 @@ class Download extends View {
       <h2 data-download-movie-name>${data[0].name}</h2>
       <div class="section__download__img-grid">
       <figure>
-        <img src="${data[0].img}" alt="${data[0].name}" />
+        <img src="${this._responsiveImg(data[0])}" alt="${data[0].name}" />
       </figure>
       </div>
       <div class="section__download__movie-info">

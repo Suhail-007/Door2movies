@@ -59,9 +59,10 @@ class Search extends View {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
+    const movie = { imgs };
 
     cardImg.loading = 'lazy';
-    this._checkViewport(cardImg, imgs);
+    cardImg.src = this._responsiveImg(movie);
     movieName.textContent = name;
 
     //create Slug
@@ -69,18 +70,6 @@ class Search extends View {
 
     card.classList.add('hide');
     this._resultCont.appendChild(card);
-  }
-
-  _checkViewport(card, img) {
-    if (window.matchMedia('(min-width: 37.2em)')) {
-      card.src = img.m_img;
-      return
-    };
-
-    if (window.matchMedia('(min-width: 64em)')) {
-      card.src = img.d_img;
-      return
-    };
   }
 }
 
