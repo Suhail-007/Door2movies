@@ -6,36 +6,47 @@ class Search extends View {
   _parentElem = document.querySelector('[data-search-cont]');
   _template = document.querySelector('[data-search-movie-template]');
   _resultCont = document.querySelector('[data-search-results]');
+  _isFocused = false;
 
 
-  findSearchMovie(data) {
+  findSearchMovie() {
     const searchInput = document.querySelector('[data-search-bar]');
 
     searchInput.addEventListener('input', (e) => {
-
       const inputValue = e.target.value.toLowerCase();
 
       if (inputValue !== '') this._resultCont.classList.add('open');
       else this._resultCont.classList.remove('open');
 
-      data.search.movies.forEach(movie => {
+      this._data.search.movies.forEach(movie => {
         const isIncludes = movie.name.toLowerCase().includes(inputValue);
         movie.element.classList.toggle('hide', !isIncludes);
       })
     })
   }
 
-  async getSearchMovies(data) {
-    //explicit delay so browser don't have to make two fetch request
-    await this.delay(2000);
+  addSearchHandler(data) {
+    const searchInput = document.querySelector('[data-search-bar]');
 
-    data.search.movies = data.movies.map(movie => {
+    searchInput.addEventListener('focus', (e) => {
+      if (e.target.value === '' && !this._isFocused) {
+        this._data = data
+        this.getSearchMovies();
+        this.findSearchMovie();
+        return
+      }
+    })
+  }
+
+  async getSearchMovies() {
+    this._data.search.movies = this._data.search.movies.map(movie => {
       const card = this._template.content.cloneNode(true).children[0];
+      const id = document.body.id;
 
-      if (document.body.id === 'home') this.fillSearch(card, movie.name, movie.imgs, movie.id, 'src/pages/');
+      if (id === 'home') this.#fillSearch(card, movie.name, movie.imgs, movie.id, 'src/pages/');
 
       //change the download page path if user is already on download page
-      if (document.body.id === 'download-page') this.fillSearch(card, movie.name, movie.imgs, movie.id, './');
+      if (id === 'download-page') this.#fillSearch(card, movie.name, movie.imgs, movie.id, './');
 
       return {
         name: movie.name,
@@ -44,7 +55,7 @@ class Search extends View {
     })
   }
 
-  fillSearch(card, name, imgs, id, downPath) {
+  #fillSearch(card, name, imgs, id, downPath) {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
@@ -59,10 +70,10 @@ class Search extends View {
     card.classList.add('hide');
     this._resultCont.appendChild(card);
   }
-  
+
   _checkViewport(card, img) {
     if (window.matchMedia('(min-width: 64em)')) card.src = img.d_img;
-  
+
     if (window.matchMedia('(min-width: 37.2em)')) card.src = img.m_img;
   }
 }

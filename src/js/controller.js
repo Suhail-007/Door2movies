@@ -116,8 +116,7 @@ class App {
   }
 
   #searchController() {
-    searchView.getSearchMovies(model.data)
-    searchView.findSearchMovie(model.data);
+    searchView.addSearchHandler(model.data)
   }
 
   //download page
@@ -144,8 +143,7 @@ class App {
   #popState() {
     window.addEventListener('popstate', async function(e) {
       e.preventDefault();
-      // const page = new URL(location.href).get('page');
-      if (!e.state || location.href.includes('page')) {
+      if (!e.state || !location.href.includes('page')) {
         model.data.pagination.page = 1;
 
         //since we are assign filter movies to data.movies we need the orignal array again for trst page
@@ -162,6 +160,8 @@ class App {
         movieView.renderData(movies);
 
         paginationView.renderData(model.data);
+        
+        return
       }
 
       if (e.state != null) {

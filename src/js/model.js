@@ -20,6 +20,8 @@ export async function getJsonData() {
   try {
     const movies = await getJSON(API_URL);
     data.movies = await movies;
+    data.search.movies = data.movies.map(m => m);
+    
   } catch (err) {
     throw err
   }
@@ -27,10 +29,10 @@ export async function getJsonData() {
 
 export const overwriteMovieArr = function() {
   const url = new URL(location.href);
-  const hash = url.searchParams.get('page');
-  if (hash != null && hash !== 'home') {
+  const page = url.searchParams.get('page');
+  if (page != null && page !== 'home') {
     //overwrite the movies arr if page is not home
-    data.movies = data.movies.filter(movie => movie.category.includes(hash));
+    data.movies = data.movies.filter(m => m.category.includes(page));
   } else return
 }
 
