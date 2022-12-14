@@ -2,13 +2,12 @@
   {
     "id": 1,
     "name": "Avengers EndGame",
-    "img": "https://i.ibb.co/y5G0szp/avengers-End-Game.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/y5G0szp/avengers-End-Game.jpg",
+      "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "action"
     ],
     "year": "2019",
     "link": [
@@ -32,13 +31,12 @@
   {
     "id": 2,
     "name": "Multiverse Of Madness",
-    "img": "https://i.ibb.co/wW4ZQ3d/multiverseofmadness.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/wW4ZQ3d/multiverseofmadness.jpg",
+      "m_img": "https://i.ibb.co/HVzFv1K/multiverseofmadness.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "adventure"
     ],
     "year": "2022",
     "link": [
@@ -62,13 +60,12 @@
   {
     "id": 3,
     "name": "Dragon ball super Broly",
-    "img": "https://i.ibb.co/R41m7NK/dbs-broly.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/R41m7NK/dbs-broly.jpg",
+      "m_img": "https://i.ibb.co/GRGmQZv/dbs-broly.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "action"
     ],
     "year": "2020",
     "link": [
@@ -92,13 +89,12 @@
   {
     "id": 4,
     "name": "Fast and Furious 9",
-    "img": "https://i.ibb.co/XxfyK9r/f9.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/XxfyK9r/f9.jpg",
+      "m_img": "https://i.ibb.co/hyshfTP/f9.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "adventure"
     ],
     "year": "2021",
     "link": [
@@ -122,13 +118,12 @@
   {
     "id": 5,
     "name": "The Batman",
-    "img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+      "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "adventure"
     ],
     "year": "2022",
     "link": [
@@ -152,12 +147,11 @@
   {
     "id": 6,
     "name": "Avengers Age Of Ultron",
-    "img": "https://i.ibb.co/HXD99kv/age-of-ultron.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/HXD99kv/age-of-ultron.jpg",
+      "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
       "comicbook"
     ],
     "year": "2022",
@@ -182,13 +176,12 @@
   {
     "id": 7,
     "name": "Avengers",
-    "img": "https://i.ibb.co/2cYZhs6/the-avengers.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/2cYZhs6/the-avengers.jpg",
+      "m_img": "https://i.ibb.co/Bwxd2Hc/the-avengers.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "thriller"
     ],
     "year": "2022",
     "link": [
@@ -212,13 +205,12 @@
   {
     "id": 8,
     "name": "Uncharted",
-    "img": "https://i.ibb.co/zVRh8ZW/uncharted.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/zVRh8ZW/uncharted.jpg",
+      "m_img": "https://i.ibb.co/5RZXm8J/uncharted.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "thriller"
     ],
     "year": "2022",
     "link": [
@@ -242,13 +234,12 @@
   {
     "id": 9,
     "name": "The Batman",
-    "img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+    "imgs": {
+      "d_img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
+      "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
+    },
     "category": [
-      "action",
-      "adventure",
-      "thriller",
-      "fantasy",
-      "comicbook"
+      "adventure"
     ],
     "year": "2022",
     "link": [

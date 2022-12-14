@@ -1,8 +1,10 @@
 import View from './view.js';
+import { RESET_PAGE } from '../config.js';
+import { updateURL } from '../helper.js';
 
 class Nav extends View {
-
-
+  _category
+  
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
 
@@ -14,18 +16,33 @@ class Nav extends View {
     if (isDropdownBtn) dropdownContent.classList.toggle('active');
     else dropdownContent.classList.remove('active');
   }
-  
-  addNavLinkHandler(handler) {
-    window.addEventListener('hashchange', handler)
+
+  addDropdownHandler(handler) {
+    const dropdown = document.querySelector('[data-dropdown-content]');
+
+    dropdown.addEventListener('click', e => {
+
+      if (!e.target.dataset.category) return
+      if (e.target.dataset.category && e.target.closest('[data-dropdown-content]')) {
+        e.preventDefault();
+        this._category = e.target.dataset.category;
+        handler();
+      }
+    })
   }
 
-  addNavToggleHandler() {
+  addDropdownToggleHandler() {
     window.addEventListener('click', this.#toggleDropDown);
   }
 
-  addHashHandler(handler) {
-    const category = location.hash.slice(1).toLowerCase();
-    return handler(category);
+  getFilterMoviesHandler(handler) {
+    handler.data.pagination.page = RESET_PAGE;
+
+    const start = (handler.data.pagination.page - 1) * handler.data.pagination.resPerPage;
+    const end = handler.data.pagination.page * handler.data.pagination.resPerPage;
+    
+    updateURL(this._category,start, end);
+    return handler.filterMovies(this._category);
   }
 }
 

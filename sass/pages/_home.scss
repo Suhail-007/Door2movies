@@ -10,6 +10,10 @@ main {
   gap: 5rem 1rem;
   margin: 1rem;
   min-height: 100vh;
+  
+  & .loader {
+    transform: translateY(-15rem);
+  }
 }
 
 .movie-name-cont {

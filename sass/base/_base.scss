@@ -14,14 +14,23 @@ html {
 body {
   min-height: 100vh;
   line-height: 1.7;
-  background: $color-grey-light-3;;
+  background: $color-grey-light-3;
+  ;
 }
 
 .loader {
   fill: $color-primary;
-  width: 4rem;
-  height: 4rem;
-  animation: rotationRight 1500ms infinite linear;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    animation: rotationRight 1500ms infinite linear;
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .error-message {

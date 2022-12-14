@@ -2,16 +2,20 @@ export default class View {
   _data
 
   async renderData(data) {
-    this._data = await data;
+    try {
+      this._data = await data;
 
-    if (!this._data) throw new Error('could not able to load data');
+      if (!this._data) throw new Error('could not able to load data');
 
-    const markup = this._generateMarkup();
+      const markup = this._generateMarkup();
 
-    //remove any pre-added markup
-    this._clear();
+      //remove any pre-added markup
+      this._clear();
 
-    this._parentElem.insertAdjacentHTML('beforeend', markup);
+      this._parentElem.insertAdjacentHTML('beforeend', markup);
+    } catch (err) {
+      throw err
+    }
   }
 
   _clear() {
@@ -36,7 +40,7 @@ export default class View {
     this._clear();
     this._parentElem.insertAdjacentHTML('beforeend', html);
 
-    return Promise.resolve('')
+    return Promise.resolve()
   }
 
   delay(ms) {
