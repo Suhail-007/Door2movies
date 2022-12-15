@@ -3,7 +3,6 @@ class MovieView extends View {
   _parentElem = document.querySelector('.movies-container');
 
   _generateMarkup() {
-
     return this._data.map(movie => `
       <div class="movie-card">
         <div class="movie-img">

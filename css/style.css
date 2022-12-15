@@ -264,12 +264,13 @@ nav {
 .search-results {
   position: absolute;
   top: 100%;
-  left: 30%;
+  left: 0;
   right: 0;
-  color: black;
-  background: white;
+  color: #000;
+  background: none;
   overflow-y: scroll;
   display: none;
+  /* height: 100vw; */
   box-shadow: 1px 0 0.5rem 0 rgba(0, 0, 0, 0.5);
   /*Your Search Results*/
 }
@@ -278,14 +279,11 @@ nav {
 }
 .search-results > div:first-child {
   background: #eee;
-  padding: 0.3rem;
-}
-.search-results > div:first-child > p {
   font-size: 1.5rem;
+  padding: 0.3rem;
 }
 
 form {
-  height: 100%;
   overflow: hidden;
 }
 form a {

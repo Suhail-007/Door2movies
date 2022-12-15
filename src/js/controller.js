@@ -26,8 +26,6 @@ class App {
         //common 
         this.#COMMON();
 
-        navView.addDropdownHandler(this.controlNavigation);
-
         paginationView.addHandlerClick(this.#controllerPagination);
 
         //added delay for first time loading pagination
@@ -40,8 +38,8 @@ class App {
         model.changeTitle(id);
 
         //common things
-        this.#COMMON();
-        navView.addDropdownHandler(this.controlNavigation, true);
+        this.#COMMON(true);
+
         this.#controllerDownload();
         break;
       default:
@@ -49,11 +47,13 @@ class App {
     }
   }
 
-  #COMMON() {
+  #COMMON(downloadPage = false) {
     //search
     this.#searchController();
+
     //navbar
     navView.addDropdownToggleHandler();
+    navView.addDropdownLinksHandler(this.controlNavigation,downloadPage);
   }
 
   async #controllerHome() {
@@ -75,7 +75,7 @@ class App {
   async #controllerPagination() {
     try {
       const { page } = model.data.pagination;
-
+      
       //render Burton
       await paginationView.renderData(model.data);
 
@@ -97,9 +97,7 @@ class App {
   }
 
   async controlNavigation() {
-    debugger
     try {
-      const { page } = model.data.pagination;
       const filteredMovies = await navView.getFilterMoviesHandler(model);
 
       //loader
@@ -108,7 +106,7 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      await movieView.renderData(model.getPerPageMovie(page, filteredMovies));
+      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
 
       //re-render the pagination button
       await paginationView.renderData(model.data);
@@ -118,7 +116,7 @@ class App {
   }
 
   #searchController() {
-    searchView.addSearchHandler(model.data)
+    searchView.addSearchHandler(model.data);
   }
 
   //download page

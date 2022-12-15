@@ -27,6 +27,7 @@ export async function getJsonData() {
   }
 }
 
+//when user refresh the page(category) getJsonData fn get triggered which overwrites the data.movie array that causes the pagination to render more pages than needed so we're overwriting in for categories
 export const overwriteMovieArr = function() {
   const { url, page, urlStart } = getURLPage();
 
@@ -72,7 +73,6 @@ export const changeTitle = function(id) {
   let title;
 
   if (id === 'home') title = 'Home || Door2Movies';
-
   if (id === 'download-page') {
     const url = new URL(location.href);
     const movieTitle = url.searchParams.get('name');

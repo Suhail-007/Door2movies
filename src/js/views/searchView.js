@@ -15,7 +15,7 @@ class Search extends View {
     searchInput.addEventListener('input', (e) => {
       const inputValue = e.target.value.toLowerCase();
 
-      if (inputValue !== '') this._resultCont.classList.add('open');
+      if (e.target.value !== '') this._resultCont.classList.add('open');
       else this._resultCont.classList.remove('open');
 
       this._data.search.movies.forEach(movie => {
@@ -28,9 +28,9 @@ class Search extends View {
   addSearchHandler(data) {
     const searchInput = document.querySelector('[data-search-bar]');
 
-    searchInput.addEventListener('focus', (e) => {
+    searchInput.addEventListener('focus', async (e) => {
       if (e.target.value === '' && !this._isFocused) {
-        this._data = data
+        this._data = await data
         this.getSearchMovies();
         this.findSearchMovie();
         return

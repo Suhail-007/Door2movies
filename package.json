@@ -1,7 +1,6 @@
 {
   "name": "door2movies",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -13,7 +12,6 @@
     "devserver": "live-server",
     "start": "npm-run-all --parallel devserver watch:sass",
     "compile:parcel": "parcel ./*.html",
-
     "compile:sass": "sass sass/main.scss css/style.comp.css",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.comp.css -o css/style.prefix.css",
     "compress:css": "sass css/style.prefix.css css/style.min.css --style compressed",
@@ -31,5 +29,6 @@
     "postcss-cli": "^10.0.0",
     "parcel-bundler": "1.12.5"
   },
-  "homepage": "https://github.com/Suhail-007/Door2movies#readme"
+  "homepage": "https://github.com/Suhail-007/Door2movies#readme",
+  "description": ""
 }

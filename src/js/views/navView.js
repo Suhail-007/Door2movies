@@ -17,7 +17,7 @@ class Nav extends View {
     else dropdownContent.classList.remove('active');
   }
 
-  addDropdownHandler(handler, download = false) {
+  addDropdownLinksHandler(handler, download = false) {
     const dropdown = document.querySelector('[data-dropdown-content]');
 
     dropdown.addEventListener('click', e => {

@@ -1,6 +1,6 @@
 import View from './view.js';
 import movieView from './movieView.js';
-import { updateURL } from '../helper.js';
+import { updateURL, PAGINATION } from '../helper.js';
 // import icons from '../../icons/icons.svg'
 
 class Pagination extends View {
@@ -15,9 +15,7 @@ class Pagination extends View {
       const btnDataset = btn.dataset.goto;
       btnDataset === 'next' ? this._data.pagination.page++ : this._data.pagination.page--;
 
-      //update URL on every click of pagination
-      const start = (this._data.pagination.page - 1) * this._data.pagination.resPerPage;
-      const end = this._data.pagination.page * this._data.pagination.resPerPage;
+      const { start, end } = PAGINATION(this._data.pagination.page, this._data);
 
       //change the page value
       const page = this._data.filter ? this._data.category : 'home';
@@ -33,10 +31,10 @@ class Pagination extends View {
     const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
 
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
-    if (currPage > 1 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;
+    if (currPage > 0 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;
 
     //next btn is always going to be on webpage since there's always more than one page
-    if (currPage === 1) return this._generateNextBtnMarkup(currPage);
+    if (currPage === 0) return this._generateNextBtnMarkup(currPage);
 
     //if currpage and num of pages is equal render only prev button
     if (currPage === numPages) return this._generatePrevBtnMarkup(currPage)
