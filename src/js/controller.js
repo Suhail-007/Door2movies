@@ -135,7 +135,7 @@ class App {
     //load movies as soon as window load i.e home/download page.
     await model.getJsonData();
     await model.getURL();
-    await model.overwriteMovieArr();
+    // await model.overwriteMovieArr();
   }
 
   async #HistoryBackForward(e) {
