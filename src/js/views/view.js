@@ -26,6 +26,12 @@ export default class View {
     return name.toLowerCase();
   }
 
+  _responsiveImg(movie) {
+    if (window.matchMedia('(min-width: 37.2em)')) return movie.imgs.m_img
+
+    if (window.matchMedia('(min-width: 64em)')) return movie.imgs.d_img
+  }
+
   loader() {
     const html = `
       <div class="loader">

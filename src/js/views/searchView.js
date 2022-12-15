@@ -15,7 +15,7 @@ class Search extends View {
     searchInput.addEventListener('input', (e) => {
       const inputValue = e.target.value.toLowerCase();
 
-      if (inputValue !== '') this._resultCont.classList.add('open');
+      if (e.target.value !== '') this._resultCont.classList.add('open');
       else this._resultCont.classList.remove('open');
 
       this._data.search.movies.forEach(movie => {
@@ -28,9 +28,9 @@ class Search extends View {
   addSearchHandler(data) {
     const searchInput = document.querySelector('[data-search-bar]');
 
-    searchInput.addEventListener('focus', (e) => {
+    searchInput.addEventListener('focus', async (e) => {
       if (e.target.value === '' && !this._isFocused) {
-        this._data = data
+        this._data = await data
         this.getSearchMovies();
         this.findSearchMovie();
         return
@@ -59,9 +59,10 @@ class Search extends View {
     const cardImg = card.querySelector('[data-search-img]');
     //anchor Elem
     const movieName = card.querySelector('[data-search-name]');
+    const movie = { imgs };
 
     cardImg.loading = 'lazy';
-    this._checkViewport(cardImg, imgs);
+    cardImg.src = this._responsiveImg(movie);
     movieName.textContent = name;
 
     //create Slug
@@ -69,18 +70,6 @@ class Search extends View {
 
     card.classList.add('hide');
     this._resultCont.appendChild(card);
-  }
-
-  _checkViewport(card, img) {
-    if (window.matchMedia('(min-width: 37.2em)')) {
-      card.src = img.m_img;
-      return
-    };
-
-    if (window.matchMedia('(min-width: 64em)')) {
-      card.src = img.d_img;
-      return
-    };
   }
 }
 

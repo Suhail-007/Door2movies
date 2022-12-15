@@ -1,6 +1,6 @@
 'use strict'
 import { API_URL, RES_PER_PAGE } from './config.js';
-import { getJSON, updateURL } from './helper.js'
+import { getJSON, updateURL, PAGINATION } from './helper.js'
 
 export const data = {
   movies: [],
@@ -27,9 +27,10 @@ export async function getJsonData() {
   }
 }
 
+//when user refresh the page(category) getJsonData fn get triggered which overwrites the data.movie array that causes the pagination to render more pages than needed so we're overwriting in for categories
 export const overwriteMovieArr = function() {
-  const { url, page: userPage, urlStart } = getURLPage();
-  
+  const { url, page, urlStart } = getURLPage();
+
   if (page != null && page !== 'home') {
     //overwrite the movies arr if page is not home
     data.movies = data.movies.filter(m => m.category.includes(page));
@@ -39,8 +40,7 @@ export const overwriteMovieArr = function() {
 export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
   try {
     const { url, page: userPage, urlStart } = getURLPage();
-    const start = (page - 1) * data.pagination.resPerPage;
-    const end = page * data.pagination.resPerPage;
+    const { start, end } = PAGINATION(page, data);
 
     if (userPage != null && data.movieCategories.includes(userPage)) {
       const movies = await filterMovies(userPage);
@@ -48,6 +48,8 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
     }
 
     if (!userPage || userPage === 'home') {
+      //set filter to true
+      data.filter = false;
       return moviesArr.slice(start, end);
     }
   } catch (err) {
@@ -71,7 +73,6 @@ export const changeTitle = function(id) {
   let title;
 
   if (id === 'home') title = 'Home || Door2Movies';
-
   if (id === 'download-page') {
     const url = new URL(location.href);
     const movieTitle = url.searchParams.get('name');

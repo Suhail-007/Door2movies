@@ -26,12 +26,13 @@
 .search-results {
   position: absolute;
   top: 100%;
-  left: 30%;
+  left: 0;
   right: 0;
-  color: black;
-  background: white;
+  color: $color-black;
+  background: none;
   overflow-y: scroll;
   display: none;
+  /* height: 100vw; */
   box-shadow: 1px 0 .5rem 0 alpha(.5);
 
   &.open {
@@ -41,16 +42,12 @@
   /*Your Search Results*/
   &>div:first-child {
     background: $color-grey-light;
-    padding: 0.3rem;
-  }
-
-  &>div:first-child>p {
     font-size: 1.5rem;
+    padding: 0.3rem;
   }
 }
 
 form {
-  height: 100%;
   overflow: hidden;
   
   & a {

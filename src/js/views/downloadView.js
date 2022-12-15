@@ -1,22 +1,22 @@
 import View from './view.js';
 import { getJSON } from '../helper.js';
-import { API_URL } from '../config.js';
+import { API_URL, isDownloadMovie } from '../config.js';
 
 class Download extends View {
   _parentElem = document.querySelector('[data-download]');
 
   _generateMarkup() {
     const movieName = this._getMovieName();
-
+    isDownloadMovie.download = true;
     const data = this._data.movies.filter(movie => movie.name.toLowerCase() === movieName);
 
     return `
       <p> Home > ${data[0].name}</p>
       <h2 data-download-movie-name>${data[0].name}</h2>
       <div class="section__download__img-grid">
-      <figure>
-        <img src="${data[0].img}" alt="${data[0].name}" />
-      </figure>
+        <figure>
+          <img src="${this._responsiveImg(data[0])}" alt="${data[0].name}" />
+        </figure>
       </div>
       <div class="section__download__movie-info">
         <p class="rating">Imbd Rating: ${data[0].imbd}</p>
