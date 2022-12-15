@@ -154,7 +154,8 @@ class App {
     if (e.state != null) {
       model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
 
-      this.#controllerHome();
+      await model.getJsonData();
+      await this.#controllerHome();
       paginationView.renderData(model.data);
       return
     }
