@@ -20,15 +20,15 @@ class Pagination extends View {
       //change the page value
       const page = this._data.filter ? this._data.category : 'home';
       updateURL(`${page}`, start, end);
-
       handler();
     })
   }
 
-  _generateMarkup() {
+   _generateMarkup() {
     const data = this._data;
     const currPage = +data.pagination.page;
-    const numPages = Math.ceil(data.movies.length / data.pagination.resPerPage);
+    const moviesLength = this._data.filter ? this._data.filteredMovies.length : this._data.movies.length;
+    const numPages = Math.ceil(moviesLength / data.pagination.resPerPage);
 
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
     if (currPage > 0 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;

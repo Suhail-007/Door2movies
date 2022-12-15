@@ -35,7 +35,7 @@ class Nav extends View {
     window.addEventListener('click', this.#toggleDropDown);
   }
 
-  getFilterMoviesHandler(handler) {
+  resetPageUpadeURL(handler) {
     handler.data.pagination.page = RESET_PAGE;
 
     const { start, end } = PAGINATION(handler.data.pagination.page, handler.data);
@@ -44,7 +44,6 @@ class Nav extends View {
     if (!isDownloadMovie.download) updateURL(this._category, start, end);
     //set isDownloadMovie.download to false so when user leave page using navigation history won't update
     isDownloadMovie.download = false;
-    return handler.filterMovies(this._category);
   }
 
   _changeLocationHref() {

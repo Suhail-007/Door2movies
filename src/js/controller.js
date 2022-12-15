@@ -53,7 +53,7 @@ class App {
 
     //navbar
     navView.addDropdownToggleHandler();
-    navView.addDropdownLinksHandler(this.controlNavigation,downloadPage);
+    navView.addDropdownLinksHandler(this.controlNavigation, downloadPage);
   }
 
   async #controllerHome() {
@@ -75,7 +75,7 @@ class App {
   async #controllerPagination() {
     try {
       const { page } = model.data.pagination;
-      
+
       //render Burton
       await paginationView.renderData(model.data);
 
@@ -98,7 +98,7 @@ class App {
 
   async controlNavigation() {
     try {
-      const filteredMovies = await navView.getFilterMoviesHandler(model);
+      await navView.resetPageUpadeURL(model);
 
       //loader
       await movieView.loader();
@@ -106,7 +106,7 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
+      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
       //re-render the pagination button
       await paginationView.renderData(model.data);
@@ -139,7 +139,10 @@ class App {
   }
 
   async #HistoryBackForward(e) {
+    const url = new URL(location.href);
+    const page = url.searchParams.get('page');
     e.preventDefault();
+
     if (!e.state || !location.href.includes('page')) {
       model.data.pagination.page = 1;
       model.data.filter = false;
@@ -151,10 +154,17 @@ class App {
       return
     }
 
+    if (e.state != null && page === 'home') {
+      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
+      model.data.filter = false;
+      await this.#controllerHome();
+      paginationView.renderData(model.data);
+      return
+    }
+
     if (e.state != null) {
       model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
 
-      await model.getJsonData();
       await this.#controllerHome();
       paginationView.renderData(model.data);
       return

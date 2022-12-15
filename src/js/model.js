@@ -4,15 +4,16 @@ import { getJSON, updateURL, PAGINATION } from './helper.js'
 
 export const data = {
   movies: [],
+  filteredMovies: [],
+  search: {
+    movies: [],
+  },
   category: '',
   movieCategories: ['action', 'adventure'],
   filter: false,
   pagination: {
     resPerPage: RES_PER_PAGE,
     page: 1,
-  },
-  search: {
-    movies: [],
   },
 }
 
@@ -64,9 +65,9 @@ export const filterMovies = async function(category) {
   data.category = category;
 
   const movies = await getJSON(API_URL);
-  const filteredMovies = movies.filter(movie => movie.category.includes(category));
-  data.movies = await filteredMovies;
-  return data.movies;
+  data.filteredMovies = await movies.filter(movie => movie.category.includes(category));
+  console.log(data.filteredMovies);
+  return await data.filteredMovies;
 }
 
 export const changeTitle = function(id) {
