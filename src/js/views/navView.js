@@ -7,11 +7,10 @@ class Nav extends View {
 
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
+    const dropdownContent = document.querySelector('[data-dropdown-content]');
 
     //as long as user clicking inside of dropdown it won't close
-    if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) return;
-
-    const dropdownContent = document.querySelector('[data-dropdown-content]');
+    if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) dropdownContent.classList.toggle('active');
 
     if (isDropdownBtn) dropdownContent.classList.toggle('active');
     else dropdownContent.classList.remove('active');
