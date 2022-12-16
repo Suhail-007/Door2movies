@@ -30,7 +30,7 @@ class App {
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
-        await paginationView.renderData(model.data);
+         paginationView.renderData(model.data);
 
         break;
       case 'download-page':
@@ -98,6 +98,8 @@ class App {
   async controlNavigation() {
     try {
       const filteredMovies = await navView.addNavLinksHandler(model);
+      navView.resetPage();
+      navView.updateURL();
 
       //loader
       await movieView.loader();

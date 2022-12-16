@@ -60,7 +60,6 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
 
     if (userPage != null && data.movieCategories.includes(userPage)) {
       moviesArr = data.filteredMovies;
-      console.log(moviesArr);
       return moviesArr.slice(start, end);
     }
 
@@ -135,8 +134,6 @@ export const HistoryBackForward = function(handler) {
       if (e.state != null && page === 'home') {
         data.pagination.page = Math.ceil((e.state.start / data.pagination.resPerPage) + 1);
         data.filter = false;
-        // await this.#controllerHome();
-        // paginationView.renderData(data);
         await handler()
         return
       }
