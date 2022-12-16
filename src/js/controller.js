@@ -11,8 +11,8 @@ class App {
   async init() {
     const id = document.body.id;
 
-    window.addEventListener('load', this.#loadData.bind(this));
-    window.addEventListener('popstate', this.#HistoryBackForward.bind(this));
+    model.loadData();
+    model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
 
     switch (id) {
       case 'home':
@@ -21,16 +21,16 @@ class App {
         model.changeTitle(id);
 
         //home
-        this.#controllerHome();
+        await this.#controllerHome();
 
         //common 
         this.#COMMON();
 
-        paginationView.addHandlerClick(this.#controllerPagination);
+        await paginationView.addHandlerClick(this.#controllerPagination);
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
-        paginationView.renderData(model.data);
+        await paginationView.renderData(model.data);
 
         break;
       case 'download-page':
@@ -50,7 +50,6 @@ class App {
   #COMMON(downloadPage = false) {
     //search
     this.#searchController();
-
     //navbar
     navView.addDropdownToggleHandler();
     navView.addDropdownLinksHandler(this.controlNavigation, downloadPage);
@@ -76,7 +75,7 @@ class App {
     try {
       const { page } = model.data.pagination;
 
-      //render Burton
+      //render Button
       await paginationView.renderData(model.data);
 
       //get returned value from model fn
@@ -98,7 +97,7 @@ class App {
 
   async controlNavigation() {
     try {
-      await navView.resetPageUpadeURL(model);
+      const filteredMovies = await navView.addNavLinksHandler(model);
 
       //loader
       await movieView.loader();
@@ -106,7 +105,7 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
 
       //re-render the pagination button
       await paginationView.renderData(model.data);
@@ -131,44 +130,9 @@ class App {
     await downloadView.renderData(model.data);
   }
 
-  async #loadData() {
-    //load movies as soon as window load i.e home/download page.
-    await model.getJsonData();
-    await model.getURL();
-    // await model.overwriteMovieArr();
-  }
-
-  async #HistoryBackForward(e) {
-    const url = new URL(location.href);
-    const page = url.searchParams.get('page');
-    e.preventDefault();
-
-    if (!e.state || !location.href.includes('page')) {
-      model.data.pagination.page = 1;
-      model.data.filter = false;
-
-      //since we are assign filter movies to data.movies we need the orignal array again for trst page
-      await model.getJsonData();
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
-
-    if (e.state != null && page === 'home') {
-      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
-      model.data.filter = false;
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
-
-    if (e.state != null) {
-      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
-
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
+  async #renderMoviesPagination() {
+    await this.#controllerHome();
+    await paginationView.renderData(model.data);
   }
 }
 

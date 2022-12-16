@@ -4,10 +4,10 @@ export default class View {
   async renderData(data) {
     try {
       this._data = await data;
-
+      
       if (!this._data) throw new Error('could not able to load data');
 
-      const markup = this._generateMarkup();
+      const markup = await this._generateMarkup();
 
       //remove any pre-added markup
       this._clear();
