@@ -11,8 +11,8 @@ class App {
   async init() {
     const id = document.body.id;
 
-    window.addEventListener('load', this.#loadData.bind(this));
-    window.addEventListener('popstate', this.#HistoryBackForward.bind(this));
+    model.loadData();
+    model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
 
     switch (id) {
       case 'home':
@@ -75,7 +75,7 @@ class App {
     try {
       const { page } = model.data.pagination;
 
-      //render Burton
+      //render Button
       await paginationView.renderData(model.data);
 
       //get returned value from model fn
@@ -91,7 +91,6 @@ class App {
       await movieView.renderData(slicedArr);
 
     } catch (err) {
-      console.log(err);
       movieView.errorMessage();
     }
   }
@@ -99,8 +98,6 @@ class App {
   async controlNavigation() {
     try {
       const filteredMovies = await navView.addNavLinksHandler(model);
-      navView.updateURL();
-      navView.resetPage();
 
       //loader
       await movieView.loader();
@@ -133,48 +130,9 @@ class App {
     await downloadView.renderData(model.data);
   }
 
-  async #loadData() {
-    //load movies as soon as window load i.e home/download page.
-    await model.getJsonData();
-    await model.getURL();
-    await model.loadFilterMovies();
-  }
-
-  async #HistoryBackForward(e) {
-    const { page } = model.getURLPage();
-
-    e.preventDefault();
-
-    if (!e.state || !location.href.includes('page')) {
-      model.data.pagination.page = 1;
-      model.data.filter = false;
-
-      //since we are assign filter movies to data.movies we need the orignal array again for trst page
-      await model.getJsonData();
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
-
-    if (e.state != null && page === 'home') {
-      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
-      model.data.filter = false;
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
-
-    if (e.state != null) {
-      model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
-
-      const isCategory = model.data.filteredMovies.every(m => m.category.includes(page));
-
-      if (!isCategory) model.getFilterMovies(page);
-
-      await this.#controllerHome();
-      paginationView.renderData(model.data);
-      return
-    }
+  async #renderMoviesPagination() {
+    await this.#controllerHome();
+    await paginationView.renderData(model.data);
   }
 }
 

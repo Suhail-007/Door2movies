@@ -37,6 +37,8 @@ class Nav extends View {
 
   addNavLinksHandler(handler) {
     this._data = handler.data;
+    this.resetPage();
+    this.updateURL();
     return handler.getFilterMovies(this._category);
   }
 
