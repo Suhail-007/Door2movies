@@ -17,14 +17,26 @@ export const data = {
   },
 }
 
-export async function getJsonData() {
+export const getJsonData = async function() {
   try {
     const movies = await getJSON(API_URL);
     data.movies = await movies;
     data.movies = data.movies.reverse();
-    data.search.movies = data.movies.map(m => m);
+    data.search.movies = await data.movies.map(m => m);
   } catch (err) {
     throw err
+  }
+}
+
+//load filter movies on window load
+export const loadFilterMovies = async function() {
+  const { page } = getURLPage();
+  if (data.movieCategories.includes(page)) {
+    data.filteredMovies = await data.movies.filter(m => m.category.includes(page));
+    //reverse the array to how it was
+    data.filteredMovies = data.filteredMovies.reverse();
+    data.filter = true;
+    data.category = page;
   }
 }
 
@@ -44,8 +56,9 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
     const { start, end } = PAGINATION(page, data);
 
     if (userPage != null && data.movieCategories.includes(userPage)) {
-      const movies = await filterMovies(userPage);
-      return movies.slice(start, end);
+      moviesArr = data.filteredMovies;
+      console.log(moviesArr);
+      return moviesArr.slice(start, end);
     }
 
     if (!userPage || userPage === 'home') {
@@ -58,7 +71,7 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
   }
 }
 
-export const filterMovies = async function(category) {
+export const getFilterMovies = async function(category) {
   //set filter to true
   data.filter = true;
   //set category to hash value

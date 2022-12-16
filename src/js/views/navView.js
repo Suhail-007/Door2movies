@@ -35,13 +35,21 @@ class Nav extends View {
     window.addEventListener('click', this.#toggleDropDown);
   }
 
-  resetPageUpadeURL(handler) {
-    handler.data.pagination.page = RESET_PAGE;
+  addNavLinksHandler(handler) {
+    this._data = handler.data;
+    return handler.getFilterMovies(this._category);
+  }
 
-    const { start, end } = PAGINATION(handler.data.pagination.page, handler.data);
+  resetPage() {
+    this._data.pagination.page = RESET_PAGE;
+  }
+
+  updateURL() {
+    const { start, end } = PAGINATION(this._data.pagination.page, this._data);
 
     //if user is on download page do not update the url
     if (!isDownloadMovie.download) updateURL(this._category, start, end);
+
     //set isDownloadMovie.download to false so when user leave page using navigation history won't update
     isDownloadMovie.download = false;
   }

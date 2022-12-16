@@ -21,16 +21,16 @@ class App {
         model.changeTitle(id);
 
         //home
-        this.#controllerHome();
+        await this.#controllerHome();
 
         //common 
         this.#COMMON();
 
-        paginationView.addHandlerClick(this.#controllerPagination);
+        await paginationView.addHandlerClick(this.#controllerPagination);
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
-        paginationView.renderData(model.data);
+        await paginationView.renderData(model.data);
 
         break;
       case 'download-page':
@@ -50,7 +50,6 @@ class App {
   #COMMON(downloadPage = false) {
     //search
     this.#searchController();
-
     //navbar
     navView.addDropdownToggleHandler();
     navView.addDropdownLinksHandler(this.controlNavigation, downloadPage);
@@ -92,13 +91,16 @@ class App {
       await movieView.renderData(slicedArr);
 
     } catch (err) {
+      console.log(err);
       movieView.errorMessage();
     }
   }
 
   async controlNavigation() {
     try {
-      await navView.resetPageUpadeURL(model);
+      const filteredMovies = await navView.addNavLinksHandler(model);
+      navView.updateURL();
+      navView.resetPage();
 
       //loader
       await movieView.loader();
@@ -106,7 +108,7 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
 
       //re-render the pagination button
       await paginationView.renderData(model.data);
@@ -135,12 +137,12 @@ class App {
     //load movies as soon as window load i.e home/download page.
     await model.getJsonData();
     await model.getURL();
-    // await model.overwriteMovieArr();
+    await model.loadFilterMovies();
   }
 
   async #HistoryBackForward(e) {
-    const url = new URL(location.href);
-    const page = url.searchParams.get('page');
+    const { page } = model.getURLPage();
+
     e.preventDefault();
 
     if (!e.state || !location.href.includes('page')) {
@@ -164,6 +166,10 @@ class App {
 
     if (e.state != null) {
       model.data.pagination.page = Math.ceil((e.state.start / model.data.pagination.resPerPage) + 1);
+
+      const isCategory = model.data.filteredMovies.every(m => m.category.includes(page));
+
+      if (!isCategory) model.getFilterMovies(page);
 
       await this.#controllerHome();
       paginationView.renderData(model.data);

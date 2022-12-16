@@ -26,6 +26,9 @@ class Pagination extends View {
 
    _generateMarkup() {
     const data = this._data;
+    
+    if(!this._data.movies) throw new Error('failed to load, please retry');
+    
     const currPage = +data.pagination.page;
     const moviesLength = this._data.filter ? this._data.filteredMovies.length : this._data.movies.length;
     const numPages = Math.ceil(moviesLength / data.pagination.resPerPage);

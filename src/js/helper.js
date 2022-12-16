@@ -16,7 +16,6 @@ export const getJSON = async function(url) {
     if (!res.ok) throw new Error('could\'t fetch movies');
 
     const data = await res.json();
-
     return data;
   } catch (err) {
     throw err
