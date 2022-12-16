@@ -66,7 +66,6 @@ export const filterMovies = async function(category) {
 
   const movies = await getJSON(API_URL);
   data.filteredMovies = await movies.filter(movie => movie.category.includes(category));
-  console.log(data.filteredMovies);
   return await data.filteredMovies;
 }
 
