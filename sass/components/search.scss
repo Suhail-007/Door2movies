@@ -32,7 +32,6 @@
   background: none;
   overflow-y: scroll;
   display: none;
-  /* height: 100vw; */
   box-shadow: 1px 0 .5rem 0 alpha(.5);
 
   &.open {
@@ -67,6 +66,5 @@ form {
   &>img {
     width: 100%;
     height: 100%;
-    
   }
 }

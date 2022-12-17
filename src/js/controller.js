@@ -8,9 +8,10 @@ import downloadView from './views/downloadView.js';
 import { updateURL } from './helper.js';
 
 class App {
-  async init() {
-    const id = document.body.id;
 
+  async init() {
+
+    const id = document.body.id;
     await model.loadData();
     model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
     switch (id) {
@@ -18,7 +19,7 @@ class App {
 
         //change page title
         model.changeTitle(id);
-
+        
         //home
         await this.#controllerHome();
 
@@ -29,7 +30,7 @@ class App {
 
         //added delay for first time loading pagination
         await paginationView.delay(1000);
-         paginationView.renderData(model.data);
+        paginationView.renderData(model.data);
         break;
       case 'download-page':
         //change page title
@@ -62,7 +63,7 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (err) {
       movieView.errorMessage('Something went wrong :(');
@@ -74,7 +75,7 @@ class App {
       const { page } = model.data.pagination;
 
       //render Button
-      await paginationView.renderData(model.data);
+      paginationView.renderData(model.data);
 
       //get returned value from model fn
       const slicedArr = model.getPerPageMovie(page);
@@ -86,7 +87,7 @@ class App {
       await movieView.delay(1000);
 
       //render Movies
-      await movieView.renderData(slicedArr);
+      movieView.renderData(slicedArr);
 
     } catch (err) {
       movieView.errorMessage();
@@ -95,7 +96,7 @@ class App {
 
   async controlNavigation() {
     try {
-      const filteredMovies = await navView.addNavLinksHandler(model);
+      const filteredMovies = navView.addNavLinksHandler(model);
       navView.resetPage();
       navView.updateURL();
 
@@ -105,10 +106,10 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      await movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
+      movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
 
       //re-render the pagination button
-      await paginationView.renderData(model.data);
+      paginationView.renderData(model.data);
     } catch (err) {
       movieView.errorMessage(err);
     }
@@ -127,12 +128,12 @@ class App {
     await downloadView.delay(1000);
 
     //render movie
-    await downloadView.renderData(model.data);
+    downloadView.renderData(model.data);
   }
 
   async #renderMoviesPagination() {
     await this.#controllerHome();
-    await paginationView.renderData(model.data);
+    paginationView.renderData(model.data);
   }
 }
 

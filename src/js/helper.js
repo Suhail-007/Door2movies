@@ -11,7 +11,6 @@ const timeout = function(sec) {
 
 export const getJSON = async function(url) {
   try {
-
     const res = await Promise.race([fetch(url), timeout(SECONDS)]);
     if (!res || !res.ok) throw new Error('could\'t fetch movies');
 
