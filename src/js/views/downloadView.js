@@ -9,7 +9,9 @@ class Download extends View {
     const movieName = this._getMovieName();
     isDownloadMovie.download = true;
     const data = this._data.movies.filter(movie => movie.name.toLowerCase() === movieName);
-
+    
+    if(!data[0]) location.reload();
+    
     return `
       <p> Home > ${data[0].name}</p>
       <h2 data-download-movie-name>${data[0].name}</h2>

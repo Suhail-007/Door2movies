@@ -11,9 +11,8 @@ class App {
   async init() {
     const id = document.body.id;
 
-    model.loadData();
+    await model.loadData();
     model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
-
     switch (id) {
       case 'home':
 
@@ -31,7 +30,6 @@ class App {
         //added delay for first time loading pagination
         await paginationView.delay(1000);
          paginationView.renderData(model.data);
-
         break;
       case 'download-page':
         //change page title
@@ -66,7 +64,7 @@ class App {
       //Render Movies
       await movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
-    } catch (e) {
+    } catch (err) {
       movieView.errorMessage('Something went wrong :(');
     }
   }

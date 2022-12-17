@@ -3,3 +3,5 @@ css/style.comp.css.map
 css/style.css
 css/style.css.map
 css/style.prefix.css
+dist
+.cache

@@ -6,6 +6,7 @@ nav {
   padding-inline: 1rem;
   background: $color-white;
   box-shadow: 0 .5rem 1rem alpha(.1);
+  z-index: 3;
 }
 
 .nav-container {

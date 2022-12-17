@@ -3,14 +3,14 @@ export default class View {
 
   async renderData(data) {
     try {
-      this._data = await data;
-      
+      this._data = await data
+
       if (!this._data) throw new Error('could not able to load data');
 
       const markup = await this._generateMarkup();
 
       //remove any pre-added markup
-      this._clear();
+      await this._clear();
 
       this._parentElem.insertAdjacentHTML('beforeend', markup);
     } catch (err) {

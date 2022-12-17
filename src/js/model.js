@@ -24,8 +24,8 @@ export const loadData = function() {
       await getJsonData();
       await getURL();
       await loadFilterMovies();
-    } catch (e) {
-      location.reload();
+    } catch (err) {
+      console.log(err);
     }
   });
 }
@@ -66,6 +66,9 @@ export const getPerPageMovie = async function(page = 1, moviesArr = data.movies)
     if (!userPage || userPage === 'home') {
       //set filter to true
       data.filter = false;
+      
+      if (moviesArr.length === 0) location.reload();
+      
       return moviesArr.slice(start, end);
     }
   } catch (err) {
@@ -93,7 +96,6 @@ export const changeTitle = function(id) {
     const movieTitle = url.searchParams.get('name');
     title = `Download ${movieTitle.toUpperCase()} || Door2Movies`;
   }
-
   document.title = title
 }
 
@@ -125,8 +127,6 @@ export const HistoryBackForward = function(handler) {
         data.pagination.page = 1;
         data.filter = false;
 
-        //since we are assign filter movies to data.movies we need the orignal array again for trst page
-        await getJsonData();
         await handler()
         return
       }
