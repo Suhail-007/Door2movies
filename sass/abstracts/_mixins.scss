@@ -16,7 +16,6 @@
   }
 
   @if $breakpoint==l-phone {
-
     // 600px
     @media only screen and (min-width: 37.5em) {
       @content

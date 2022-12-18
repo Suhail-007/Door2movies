@@ -46,6 +46,14 @@ body {
   line-height: 1.7;
   background: #FDFDFD;
 }
+@media only screen and (min-width: 68.75em) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(4, [col-start] 1fr [col-end]);
+    grid-template-rows: min-content max-content min-content;
+    gap: 1rem;
+  }
+}
 
 .loader {
   fill: hsl(350deg, 80%, 52%);
@@ -151,6 +159,12 @@ footer {
   place-items: center;
   padding: 5rem 0;
 }
+@media only screen and (min-width: 68.75em) {
+  footer {
+    grid-column: col-start 1/-1;
+    grid-row: row-start 3/row-end 4;
+  }
+}
 footer > p {
   color: #999;
   font-size: 1.2rem;
@@ -166,7 +180,7 @@ footer > p {
   height: 100%;
 }
 .movie-card:hover, .movie-card:focus {
-  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0.1rem 0 0.5rem 9 rgba(0, 0, 0, 0.5);
 }
 .movie-card .movie-img {
   height: 80%;
@@ -189,13 +203,43 @@ nav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 3;
 }
+@media only screen and (min-width: 68.75em) {
+  nav {
+    height: 100%;
+    z-index: 0;
+    box-shadow: none;
+    position: static;
+    align-self: start;
+    justify-items: center;
+    background: white;
+    padding-inline: 0;
+    grid-column: col-start 1/col-start 1;
+    grid-template-rows: repeat(2, min-content);
+  }
+}
 
 .nav-container {
   gap: 0 1rem;
 }
+@media only screen and (min-width: 68.75em) {
+  .nav-container {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    flex-direction: column !important;
+    align-items: start !important;
+    width: 100%;
+  }
+}
 .nav-container > a {
   text-decoration: none;
   display: inline-block;
+}
+@media only screen and (min-width: 68.75em) {
+  .nav-container > a:first-child {
+    display: inline-block;
+    padding: 0.5rem 5rem 0.5rem 2rem;
+    width: 100%;
+  }
 }
 
 .drop-down > button,
@@ -203,10 +247,20 @@ nav {
   padding: 0.5rem 0.5rem;
 }
 
+@media only screen and (min-width: 68.75em) {
+  .drop-down {
+    width: 100%;
+  }
+}
 .drop-down > .drop-btn {
   position: relative;
   border: none;
   background: none;
+}
+@media only screen and (min-width: 68.75em) {
+  .drop-down > .drop-btn {
+    display: none;
+  }
 }
 
 /*Nav Content*/
@@ -216,16 +270,30 @@ nav {
   background: #fff;
   opacity: 0;
   pointer-events: none;
-  z-index: 1;
+  visibility: hidden;
+  z-index: 0;
   padding-top: 1rem;
   border-radius: 3px;
   transition: 250ms all ease-in-out;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
 }
+@media only screen and (min-width: 68.75em) {
+  .dropdown-content {
+    opacity: 1;
+    position: static;
+    pointer-events: auto;
+    visibility: visible;
+    box-shadow: none;
+    border-radius: 0;
+    align-items: start !important;
+    width: 100%;
+  }
+}
 .dropdown-content.active {
   opacity: 1;
   top: 100%;
   pointer-events: auto;
+  visibility: visible;
 }
 
 .drop-down > .dropdown-content > a {
@@ -241,6 +309,14 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
   gap: 1.5rem;
+}
+@media only screen and (min-width: 68.75em) {
+  .pagination {
+    width: 30%;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+  }
 }
 .pagination__btn--next, .pagination__btn--prev {
   display: flex;
@@ -280,6 +356,13 @@ nav {
   padding: 1rem 0.5rem;
   position: relative;
 }
+@media only screen and (min-width: 68.75em) {
+  .search-container {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    justify-content: center !important;
+  }
+}
 .search-container > input {
   width: 50%;
   font-size: 1.5rem;
@@ -301,6 +384,11 @@ nav {
     width: 70%;
   }
 }
+@media only screen and (min-width: 68.75em) {
+  .search-container > input:focus, .search-container > input:hover {
+    width: 100%;
+  }
+}
 
 .search-results {
   position: absolute;
@@ -312,6 +400,7 @@ nav {
   overflow-y: scroll;
   display: none;
   box-shadow: 1px 0 0.5rem 0 rgba(0, 0, 0, 0.5);
+  z-index: 5;
   /*Your Search Results*/
 }
 @media only screen and (min-width: 47em) {
@@ -322,6 +411,11 @@ nav {
 @media only screen and (min-width: 64em) {
   .search-results {
     left: 60%;
+  }
+}
+@media only screen and (min-width: 68.75em) {
+  .search-results {
+    left: 0;
   }
 }
 .search-results.open {
@@ -352,6 +446,11 @@ form a {
 @media only screen and (min-width: 37.5em) {
   .result {
     grid-template-rows: 15rem;
+  }
+}
+@media only screen and (min-width: 68.75em) {
+  .result {
+    grid-template-rows: 1fr;
   }
 }
 .result > img {
@@ -412,6 +511,12 @@ form a {
 
 header {
   padding: 0.5rem 0;
+}
+@media only screen and (min-width: 68.75em) {
+  header {
+    grid-column: col-start 1/-1;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
 }
 header > h1 {
   margin: 0;
@@ -487,7 +592,13 @@ header > h1 {
 }
 
 main {
-  min-height: 100%;
+  min-height: 100vh;
+}
+@media only screen and (min-width: 68.75em) {
+  main {
+    grid-column: col-start 2/col-end 5;
+    grid-row: 2/4;
+  }
 }
 
 .movies-container {
@@ -497,7 +608,12 @@ main {
   justify-items: center;
   gap: 5rem 1rem;
   margin: 1rem;
-  min-height: 100vh;
+  min-height: 100%;
+}
+@media only screen and (min-width: 68.75em) {
+  .movies-container {
+    grid-row: row-start 2/row-end 11;
+  }
 }
 .movies-container .loader {
   transform: translateY(-15rem);

@@ -22,7 +22,7 @@ class Search extends View {
       })
     })
   }
-
+  
   addSearchHandler(data) {
     this._searchInput.addEventListener('focus', (e) => {
       if (e.target.value === '' && !this._isFocused) {

@@ -5,6 +5,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
   gap: 1.5rem;
+  
+  
+  @include respon(md-desktop) {
+    width: 30%;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+  }
 
   &__btn--next,
   &__btn--prev {

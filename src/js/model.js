@@ -17,15 +17,6 @@ export const data = {
   },
 }
 
-// export const loadData = function() {
-//   window.addEventListener('load', async () => {
-//     //load movies as soon as window load i.e home/download page.
-//     await getJsonData();
-//     getURL();
-//     loadFilterMovies();
-//   });
-// }
-
 export const getJsonData = async function() {
   try {
     data.movies = await getJSON(API_URL);

@@ -2,6 +2,12 @@
   padding: 1rem .5rem;
   position: relative;
 
+  @include respon(md-desktop) {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    justify-content: center !important;
+  }
+
   &>input {
     width: 50%;
     font-size: 1.5rem;
@@ -19,9 +25,13 @@
     &:hover {
       width: 90%;
       padding-left: 2rem;
-      
+
       @include respon(sm-desktop) {
         width: 70%;
+      }
+
+      @include respon(md-desktop) {
+        width: 100%;
       }
     }
   }
@@ -37,13 +47,18 @@
   overflow-y: scroll;
   display: none;
   box-shadow: 1px 0 .5rem 0 alpha(.5);
-  
+  z-index: 5;
+
   @include respon(tab-port) {
     left: 30%;
   }
-  
+
   @include respon(sm-desktop) {
     left: 60%;
+  }
+
+  @include respon(md-desktop) {
+    left: 0;
   }
 
   &.open {
@@ -60,7 +75,7 @@
 
 form {
   overflow: hidden;
-  
+
   & a {
     justify-self: center;
   }
@@ -74,10 +89,14 @@ form {
   padding: 0.5rem;
   width: 100%;
   background: $color-grey-light-3;
-  
- @include respon(l-phone) {
-   grid-template-rows: 15rem;
- }
+
+  @include respon(l-phone) {
+    grid-template-rows: 15rem;
+  }
+
+  @include respon(md-desktop) {
+    grid-template-rows: 1fr;
+  }
 
   &>img {
     width: 100%;

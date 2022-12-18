@@ -4,6 +4,11 @@ footer {
   display: grid;
   place-items: center;
   padding: 5rem 0;
+  
+  @include respon(md-desktop) {
+    grid-column: col-start 1 / -1;
+    grid-row: row-start 3 / row-end 4;
+  }
 
   &>p {
     color: #999;
