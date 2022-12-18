@@ -125,6 +125,7 @@ class App {
 
   #searchController() {
     searchView.addSearchHandler(model.data);
+    searchView.enableSearchField(model.data.movies);
   }
 
   //download page

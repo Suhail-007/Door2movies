@@ -7,12 +7,10 @@ class Search extends View {
   _template = document.querySelector('[data-search-movie-template]');
   _resultCont = document.querySelector('[data-search-results]');
   _isFocused = false;
-
+  _searchInput = document.querySelector('[data-search-bar]');
 
   findSearchMovie() {
-    const searchInput = document.querySelector('[data-search-bar]');
-
-    searchInput.addEventListener('input', (e) => {
+    this._searchInput.addEventListener('input', (e) => {
       const inputValue = e.target.value.toLowerCase();
 
       if (e.target.value !== '') this._resultCont.classList.add('open');
@@ -26,11 +24,9 @@ class Search extends View {
   }
 
   addSearchHandler(data) {
-    const searchInput = document.querySelector('[data-search-bar]');
-
-    searchInput.addEventListener('focus', async (e) => {
+    this._searchInput.addEventListener('focus', (e) => {
       if (e.target.value === '' && !this._isFocused) {
-        this._data = await data
+        this._data = data
         this.getSearchMovies();
         this.findSearchMovie();
         return
@@ -70,6 +66,12 @@ class Search extends View {
 
     card.classList.add('hide');
     this._resultCont.appendChild(card);
+  }
+
+  enableSearchField(data) {
+    if (data.length !== 0) {
+    this._searchInput.removeAttribute("disabled");
+    }
   }
 }
 

@@ -29,7 +29,6 @@ class Pagination extends View {
     const currPage = +this._data.pagination.page;
     const moviesLength = this._data.filter ? this._data.filteredMovies.length : this._data.movies.length;
     const numPages = Math.ceil(moviesLength / this._data.pagination.resPerPage);
-
     //if user are not on first page but currpage is less than total num of pages i.e currpage = 3 && numpages = 5
     if (currPage > 0 && currPage < numPages) return `${this._generatePrevBtnMarkup(currPage)} ${this._generateNextBtnMarkup(currPage)}`;
 
@@ -46,7 +45,7 @@ class Pagination extends View {
       <button class="pagination__btn--next btn__inline" data-goto="next">
         Page ${page + 1}
        <svg class='sm-icon'>
-          <use href="#icon-chevron-right"></use>
+          <use href="./src/icons/icons.svg#icon-chevron-right"></use>
         </svg>
       </button>`
   }
@@ -55,7 +54,7 @@ class Pagination extends View {
     return `
       <button class="${page > 1 ? 'pagination__btn--prev' : 'hide'} btn__prev" data-goto="prev">
         <svg class='sm-icon'>
-          <use href="#icon-chevron-left"></use>
+          <use href="./src/icons/icons.svg#icon-chevron-left"></use>
         </svg>
         Page ${page - 1}
       </button>`

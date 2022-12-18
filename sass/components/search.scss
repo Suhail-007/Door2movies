@@ -19,6 +19,10 @@
     &:hover {
       width: 90%;
       padding-left: 2rem;
+      
+      @include respon(sm-desktop) {
+        width: 70%;
+      }
     }
   }
 }
@@ -33,6 +37,14 @@
   overflow-y: scroll;
   display: none;
   box-shadow: 1px 0 .5rem 0 alpha(.5);
+  
+  @include respon(tab-port) {
+    left: 30%;
+  }
+  
+  @include respon(sm-desktop) {
+    left: 60%;
+  }
 
   &.open {
     display: block;
@@ -57,11 +69,15 @@ form {
 .result {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 10rem;
+  grid-template-rows: repeat(auto-fit, minmax(10rem, min-content));
   gap: 1rem 1.5rem;
   padding: 0.5rem;
   width: 100%;
   background: $color-grey-light-3;
+  
+ @include respon(l-phone) {
+   grid-template-rows: 15rem;
+ }
 
   &>img {
     width: 100%;

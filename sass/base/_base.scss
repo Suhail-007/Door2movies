@@ -9,6 +9,21 @@
 html {
   font-size: 62.5%; // 1rem == 10px
   box-sizing: border-box;
+  
+  @include respon(sm-phone) {
+    //1rem === 7px
+    font-size: 44%;
+  }
+  
+  @include respon(md-phone) {
+    //1rem === 11px;
+    font-size: 68%;
+  }
+  
+  @include respon(l-phone) {
+    //1rem === 12px
+    font-size: 75%; 
+  }
 }
 
 body {

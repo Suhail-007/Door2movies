@@ -25,6 +25,21 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
+@media only screen and (max-width: 20em) {
+  html {
+    font-size: 44%;
+  }
+}
+@media only screen and (min-width: 31.2em) {
+  html {
+    font-size: 68%;
+  }
+}
+@media only screen and (min-width: 37.5em) {
+  html {
+    font-size: 75%;
+  }
+}
 
 body {
   min-height: 100vh;
@@ -281,6 +296,11 @@ nav {
   width: 90%;
   padding-left: 2rem;
 }
+@media only screen and (min-width: 64em) {
+  .search-container > input:focus, .search-container > input:hover {
+    width: 70%;
+  }
+}
 
 .search-results {
   position: absolute;
@@ -293,6 +313,16 @@ nav {
   display: none;
   box-shadow: 1px 0 0.5rem 0 rgba(0, 0, 0, 0.5);
   /*Your Search Results*/
+}
+@media only screen and (min-width: 47em) {
+  .search-results {
+    left: 30%;
+  }
+}
+@media only screen and (min-width: 64em) {
+  .search-results {
+    left: 60%;
+  }
 }
 .search-results.open {
   display: block;
@@ -313,11 +343,16 @@ form a {
 .result {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 10rem;
+  grid-template-rows: repeat(auto-fit, minmax(10rem, min-content));
   gap: 1rem 1.5rem;
   padding: 0.5rem;
   width: 100%;
   background: #FDFDFD;
+}
+@media only screen and (min-width: 37.5em) {
+  .result {
+    grid-template-rows: 15rem;
+  }
 }
 .result > img {
   width: 100%;
