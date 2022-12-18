@@ -3,12 +3,11 @@ export default class View {
 
   renderData(data) {
     this._data = data;
-    console.log(this._data);
 
     if (!this._data) throw new Error('could not able to load data');
 
     const markup = this._generateMarkup();
-
+    
     //remove any pre-added markup
     this._clear();
 

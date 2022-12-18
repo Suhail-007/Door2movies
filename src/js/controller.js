@@ -1,5 +1,4 @@
 import * as model from './model.js';
-import View from './views/movieView.js'
 import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
@@ -12,15 +11,18 @@ class App {
   async init() {
 
     const id = document.body.id;
-    await model.loadData();
+    await model.getJsonData();
+    model.getURL();
+    model.loadFilterMovies();
+    
+    
     model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
     switch (id) {
       case 'home':
-
         //change page title
         model.changeTitle(id);
-        
         //home
+
         await this.#controllerHome();
 
         //common 
@@ -63,6 +65,12 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
+      // const m = model.getPerPageMovie(model.data.pagination.page, filteredMovies)
+      // console.log(m);
+      
+      // movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
+
+
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (err) {
@@ -111,7 +119,7 @@ class App {
       //re-render the pagination button
       paginationView.renderData(model.data);
     } catch (err) {
-      movieView.errorMessage(err);
+      movieView.errorMessage("Movie doesn\'t exist");
     }
   }
 

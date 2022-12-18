@@ -11,11 +11,16 @@ const timeout = function(sec) {
 
 export const getJSON = async function(url) {
   try {
-    const res = await Promise.race([fetch(url), timeout(SECONDS)]);
-    if (!res || !res.ok) throw new Error('could\'t fetch movies');
+    const res = await Promise.race([fetch(url, {
+      method: 'GET',
+      'Content-Type': 'application/json',
+      'X-Custom-Header': 'ProcessThisImmediately',
+    }), timeout(SECONDS)]);
 
+    if (!res || !res.ok) throw new Error('could\'t fetch movies');
     const data = await res.json();
-    return data;
+    
+    return data
   } catch (err) {
     throw err
   }

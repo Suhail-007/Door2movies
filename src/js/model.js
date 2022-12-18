@@ -17,21 +17,21 @@ export const data = {
   },
 }
 
-export const loadData = function() {
-  window.addEventListener('load', async () => {
-    //load movies as soon as window load i.e home/download page.
-    await getJsonData();
-    getURL();
-    loadFilterMovies();
-  });
-}
+// export const loadData = function() {
+//   window.addEventListener('load', async () => {
+//     //load movies as soon as window load i.e home/download page.
+//     await getJsonData();
+//     getURL();
+//     loadFilterMovies();
+//   });
+// }
 
 export const getJsonData = async function() {
   try {
-    const movies = await getJSON(API_URL);
-    data.movies = movies;
+    data.movies = await getJSON(API_URL);
     data.movies = data.movies.reverse();
     data.search.movies = data.movies.map(m => m);
+    return await getJSON(API_URL);
   } catch (err) {
     throw err
   }
@@ -50,24 +50,20 @@ export const loadFilterMovies = function() {
 }
 
 export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
-  try {
-    const { url, page: userPage, urlStart } = getURLPage();
-    const { start, end } = PAGINATION(page, data);
+  const { url, page: userPage, urlStart } = getURLPage();
+  const { start, end } = PAGINATION(page, data);
 
-    if (userPage != null && data.movieCategories.includes(userPage)) {
-      moviesArr = data.filteredMovies;
-      return moviesArr.slice(start, end);
-    }
+  if (userPage != null && data.movieCategories.includes(userPage)) {
+    moviesArr = data.filteredMovies;
+    return moviesArr.slice(start, end);
+  }
 
-    if (!userPage || userPage === 'home') {
-      //set filter to true
-      data.filter = false;
-
-      // if (moviesArr.length === 0) location.reload();
-      return moviesArr.slice(start, end);
-    }
-  } catch (err) {
-    throw err
+  if (!userPage || userPage === 'home') {
+    //set filter to true
+    data.filter = false;
+    console.log(moviesArr, 'moviesArr');
+    if (moviesArr.length !== 0) location.reload();
+    return moviesArr.slice(start, end);
   }
 }
 
