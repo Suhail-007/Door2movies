@@ -61,8 +61,7 @@ export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
   if (!userPage || userPage === 'home') {
     //set filter to true
     data.filter = false;
-    console.log(moviesArr, 'moviesArr');
-    if (moviesArr.length !== 0) location.reload();
+    if (moviesArr.length === 0) location.reload();
     return moviesArr.slice(start, end);
   }
 }
