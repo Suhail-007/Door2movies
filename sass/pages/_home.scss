@@ -22,6 +22,10 @@ main {
 
   & .loader {
     transform: translateY(-15rem);
+    
+    @include respon (md-desktop) {
+      transform: translateY(0);
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import { updateURL, PAGINATION } from '../helper.js';
 
 class Nav extends View {
   _category;
+  _navLinks = document.querySelectorAll('[data-category]');
 
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
@@ -24,6 +25,11 @@ class Nav extends View {
       if (e.target.dataset.category && e.target.closest('[data-dropdown-content]')) {
         this._category = e.target.dataset.category;
         e.preventDefault();
+        
+        this._navLinks.forEach(link => link.classList.remove('active'));
+        
+        e.target.classList.add('active');
+        
         //change the href value of anchor tag if user is on download page
         if (download) this._changeLocationHref();
         handler();

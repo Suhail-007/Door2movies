@@ -25,7 +25,11 @@
     padding: 0.8rem 1.5rem;
     background: $color-black;
     border-radius: 100px;
-
+    
+    @include respon(md-desktop) {
+      border: .5px solid $color-white;
+    }
+    
     &>svg {
       transition: all 200ms ease-in-out;
       fill: currentColor;

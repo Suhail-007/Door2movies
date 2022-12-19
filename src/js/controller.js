@@ -15,7 +15,6 @@ class App {
     model.getURL();
     model.loadFilterMovies();
     
-    
     model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
     switch (id) {
       case 'home':

@@ -12,13 +12,14 @@ nav {
   @include respon(md-desktop) {
     height: 100%;
     z-index: 0;
-    box-shadow: none;
     position: static;
     align-self: start;
     justify-items: center;
     background: white;
     padding-inline: 0;
     grid-column: col-start 1 / col-start 1;
+    grid-row: 2/7;
+    box-shadow: 1rem 0 1rem 0 alpha(.1);
     grid-template-rows: repeat(2, min-content);
   }
 }
@@ -30,21 +31,12 @@ nav {
     grid-column: 1/-1;
     grid-row: 2/3;
     flex-direction: column !important;
-    align-items: start !important;
     width: 100%;
   }
 
   &>a {
     text-decoration: none;
     display: inline-block;
-
-    @include respon(md-desktop) {
-      &:first-child {
-        display: inline-block;
-        padding: .5rem 5rem .5rem 2rem;
-        width: 100%;
-      }
-    }
   }
 }
 
@@ -82,7 +74,7 @@ nav {
   padding-top: 1rem;
   border-radius: 3px;
   transition: 250ms all ease-in-out;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 .1rem .5rem 0 alpha(.3);
 
   @include respon(md-desktop) {
     opacity: 1;
@@ -107,4 +99,17 @@ nav {
   display: inline-block;
   padding: .5rem 5rem .5rem 2rem;
   width: 100%;
+  transition: background 500ms ease-in-out;
+  
+  @include respon(md-desktop) {
+    padding-left: 4rem;
+  }
+  
+  &:hover {
+    background: $color-grey-dark-1;
+  }
+  
+  &.active {
+    background: $color-grey-dark-1;
+  }
 }
