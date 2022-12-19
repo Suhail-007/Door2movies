@@ -6,10 +6,33 @@ nav {
   padding-inline: 1rem;
   background: $color-white;
   box-shadow: 0 .5rem 1rem alpha(.1);
+  z-index: 3;
+
+
+  @include respon(md-desktop) {
+    height: 100%;
+    z-index: 0;
+    position: static;
+    align-self: start;
+    justify-items: center;
+    background: white;
+    padding-inline: 0;
+    grid-column: col-start 1 / col-start 1;
+    grid-row: 2/7;
+    box-shadow: 1rem 0 1rem 0 alpha(.1);
+    grid-template-rows: repeat(2, min-content);
+  }
 }
 
 .nav-container {
   gap: 0 1rem;
+
+  @include respon(md-desktop) {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    flex-direction: column !important;
+    width: 100%;
+  }
 
   &>a {
     text-decoration: none;
@@ -22,10 +45,21 @@ nav {
   padding: 0.5rem 0.5rem;
 }
 
-.drop-down>.drop-btn {
-  position: relative;
-  border: none;
-  background: none;
+.drop-down {
+
+  @include respon(md-desktop) {
+    width: 100%;
+  }
+
+  &>.drop-btn {
+    position: relative;
+    border: none;
+    background: none;
+
+    @include respon(md-desktop) {
+      display: none;
+    }
+  }
 }
 
 /*Nav Content*/
@@ -35,16 +69,29 @@ nav {
   background: $color-white;
   opacity: 0;
   pointer-events: none;
-  z-index: 1;
+  visibility: hidden;
+  z-index: 0;
   padding-top: 1rem;
   border-radius: 3px;
   transition: 250ms all ease-in-out;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 .1rem .5rem 0 alpha(.3);
+
+  @include respon(md-desktop) {
+    opacity: 1;
+    position: static;
+    pointer-events: auto;
+    visibility: visible;
+    box-shadow: none;
+    border-radius: 0;
+    align-items: start !important;
+    width: 100%;
+  }
 
   &.active {
     opacity: 1;
     top: 100%;
     pointer-events: auto;
+    visibility: visible;
   }
 }
 
@@ -52,4 +99,17 @@ nav {
   display: inline-block;
   padding: .5rem 5rem .5rem 2rem;
   width: 100%;
+  transition: background 500ms ease-in-out;
+  
+  @include respon(md-desktop) {
+    padding-left: 4rem;
+  }
+  
+  &:hover {
+    background: $color-grey-dark-1;
+  }
+  
+  &.active {
+    background: $color-grey-dark-1;
+  }
 }

@@ -5,6 +5,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
   gap: 1.5rem;
+  
+  
+  @include respon(md-desktop) {
+    width: 30%;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+  }
 
   &__btn--next,
   &__btn--prev {
@@ -17,7 +25,11 @@
     padding: 0.8rem 1.5rem;
     background: $color-black;
     border-radius: 100px;
-
+    
+    @include respon(md-desktop) {
+      border: .5px solid $color-white;
+    }
+    
     &>svg {
       transition: all 200ms ease-in-out;
       fill: currentColor;

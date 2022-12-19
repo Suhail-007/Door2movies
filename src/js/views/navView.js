@@ -3,14 +3,15 @@ import { RESET_PAGE, isDownloadMovie } from '../config.js';
 import { updateURL, PAGINATION } from '../helper.js';
 
 class Nav extends View {
-  _category
+  _category;
+  _navLinks = document.querySelectorAll('[data-category]');
 
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
     const dropdownContent = document.querySelector('[data-dropdown-content]');
 
     //as long as user clicking inside of dropdown it won't close
-    if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) dropdownContent.classList.toggle('active');
+    if (!isDropdownBtn && e.target.closest('[data-dropdown]') != null) dropdownContent.classList.remove('active');
 
     if (isDropdownBtn) dropdownContent.classList.toggle('active');
     else dropdownContent.classList.remove('active');
@@ -24,6 +25,11 @@ class Nav extends View {
       if (e.target.dataset.category && e.target.closest('[data-dropdown-content]')) {
         this._category = e.target.dataset.category;
         e.preventDefault();
+        
+        this._navLinks.forEach(link => link.classList.remove('active'));
+        
+        e.target.classList.add('active');
+        
         //change the href value of anchor tag if user is on download page
         if (download) this._changeLocationHref();
         handler();
@@ -37,8 +43,6 @@ class Nav extends View {
 
   addNavLinksHandler(handler) {
     this._data = handler.data;
-    this.resetPage();
-    this.updateURL();
     return handler.getFilterMovies(this._category);
   }
 

@@ -17,35 +17,22 @@ export const data = {
   },
 }
 
-export const loadData = function() {
-  window.addEventListener('load', async () => {
-    try {
-      //load movies as soon as window load i.e home/download page.
-      await getJsonData();
-      await getURL();
-      await loadFilterMovies();
-    } catch (e) {
-      location.reload();
-    }
-  });
-}
-
 export const getJsonData = async function() {
   try {
-    const movies = await getJSON(API_URL);
-    data.movies = await movies;
+    data.movies = await getJSON(API_URL);
     data.movies = data.movies.reverse();
-    data.search.movies = await data.movies.map(m => m);
+    data.search.movies = data.movies.map(m => m);
+    // return await getJSON(API_URL);
   } catch (err) {
     throw err
   }
 }
 
 //load filter movies on window load
-export const loadFilterMovies = async function() {
+export const loadFilterMovies = function() {
   const { page } = getURLPage();
   if (data.movieCategories.includes(page)) {
-    data.filteredMovies = await data.movies.filter(m => m.category.includes(page));
+    data.filteredMovies = data.movies.filter(m => m.category.includes(page));
     //reverse the array to how it was
     data.filteredMovies = data.filteredMovies.reverse();
     data.filter = true;
@@ -53,24 +40,19 @@ export const loadFilterMovies = async function() {
   }
 }
 
-export const getPerPageMovie = async function(page = 1, moviesArr = data.movies) {
-  try {
-    const { url, page: userPage, urlStart } = getURLPage();
-    const { start, end } = PAGINATION(page, data);
+export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
+  const { url, page: userPage, urlStart } = getURLPage();
+  const { start, end } = PAGINATION(page, data);
 
-    if (userPage != null && data.movieCategories.includes(userPage)) {
-      moviesArr = data.filteredMovies;
-      console.log(moviesArr);
-      return moviesArr.slice(start, end);
-    }
+  if (userPage != null && data.movieCategories.includes(userPage)) {
+    moviesArr = data.filteredMovies;
+    return moviesArr.slice(start, end);
+  }
 
-    if (!userPage || userPage === 'home') {
-      //set filter to true
-      data.filter = false;
-      return moviesArr.slice(start, end);
-    }
-  } catch (err) {
-    throw err
+  if (!userPage || userPage === 'home') {
+    //set filter to true
+    data.filter = false;
+    return moviesArr.slice(start, end);
   }
 }
 
@@ -81,8 +63,8 @@ export const getFilterMovies = async function(category) {
   data.category = category;
 
   const movies = await getJSON(API_URL);
-  data.filteredMovies = await movies.filter(movie => movie.category.includes(category));
-  return await data.filteredMovies;
+  data.filteredMovies = movies.filter(movie => movie.category.includes(category));
+  return data.filteredMovies;
 }
 
 export const changeTitle = function(id) {
@@ -94,7 +76,6 @@ export const changeTitle = function(id) {
     const movieTitle = url.searchParams.get('name');
     title = `Download ${movieTitle.toUpperCase()} || Door2Movies`;
   }
-
   document.title = title
 }
 
@@ -126,8 +107,6 @@ export const HistoryBackForward = function(handler) {
         data.pagination.page = 1;
         data.filter = false;
 
-        //since we are assign filter movies to data.movies we need the orignal array again for trst page
-        await getJsonData();
         await handler()
         return
       }
@@ -135,8 +114,6 @@ export const HistoryBackForward = function(handler) {
       if (e.state != null && page === 'home') {
         data.pagination.page = Math.ceil((e.state.start / data.pagination.resPerPage) + 1);
         data.filter = false;
-        // await this.#controllerHome();
-        // paginationView.renderData(data);
         await handler()
         return
       }

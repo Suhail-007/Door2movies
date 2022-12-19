@@ -15,7 +15,7 @@ class MovieView extends View {
         </div>
       </div>`)
       .join(',')
-      .replaceAll(',', '')
+      .replaceAll(',', '');
   }
 
   _createSlug(name) {

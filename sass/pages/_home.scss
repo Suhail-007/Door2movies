@@ -1,5 +1,10 @@
 main {
-  min-height: 100%;
+  min-height: 100vh;
+
+  @include respon(md-desktop) {
+    grid-column: col-start 2 / col-end 5;
+    grid-row: 2 / 4;
+  }
 }
 
 .movies-container {
@@ -9,10 +14,18 @@ main {
   justify-items: center;
   gap: 5rem 1rem;
   margin: 1rem;
-  min-height: 100vh;
-  
+  min-height: 100%;
+
+  @include respon(md-desktop) {
+    grid-row: row-start 2 / row-end 11;
+  }
+
   & .loader {
     transform: translateY(-15rem);
+    
+    @include respon (md-desktop) {
+      transform: translateY(0);
+    }
   }
 }
 

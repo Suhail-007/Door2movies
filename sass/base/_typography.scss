@@ -20,12 +20,20 @@ header {
   font-size: 1.5rem;
   font-weight: 400;
   color: $color-grey;
+
+  @include respon (md-desktop) {
+    font-size: 1.7rem;
+  }
 }
 
 .drop-down>.dropdown-content>a {
   text-decoration: none;
   color: $color-grey;
   font-size: 1.5rem;
+
+  @include respon(md-desktop) {
+    font-size: 1.7rem;
+  }
 }
 
 .result {
@@ -48,6 +56,10 @@ header {
   & .movie-name-cont>.movie-name {
     font-size: 1.5rem;
     color: $color-black;
+
+    @include respon(md-desktop) {
+      font-size: 1.7rem;
+    }
   }
 }
 
@@ -55,4 +67,41 @@ header {
   font-size: 1.6rem;
   color: $color-primary;
   text-align: center;
+}
+
+//download Page
+.section__download {
+  text-transform: capitalize;
+
+  &>p {
+    font-size: 1.3rem;
+    color: $color-grey;
+  }
+
+  &>h2 {
+    font-size: 2rem;
+  }
+
+  &__movie-info {
+    color: $color-grey-light-2;
+    font-size: 1.4rem;
+  }
+
+  & .links-heading {
+    font-size: 2rem;
+    font-weight: 400;
+    color: $color-gold;
+    text-shadow: .1rem .1rem .5rem $color-gold;
+    text-align: center;
+  }
+
+  &__links {
+
+    & a:link,
+    & a:visited {
+      font-size: 1.5rem;
+      text-align: center;
+      color: $color-gold;
+    }
+  }
 }

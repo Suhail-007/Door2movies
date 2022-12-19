@@ -9,13 +9,34 @@
 html {
   font-size: 62.5%; // 1rem == 10px
   box-sizing: border-box;
+
+  @include respon(sm-phone) {
+    //1rem === 7px
+    font-size: 44%;
+  }
+
+  @include respon(md-phone) {
+    //1rem === 11px;
+    font-size: 68%;
+  }
+
+  @include respon(l-phone) {
+    //1rem === 12px
+    font-size: 75%;
+  }
 }
 
 body {
   min-height: 100vh;
   line-height: 1.7;
   background: $color-grey-light-3;
-  ;
+
+  @include respon(md-desktop) {
+    display: grid;
+    grid-template-columns: repeat(4, [col-start] 1fr [col-end]);
+    grid-template-rows: min-content max-content min-content;
+    gap: 1rem;
+  }
 }
 
 .loader {
