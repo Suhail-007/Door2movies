@@ -19,10 +19,8 @@
     transform: translateY(-15rem);
 
     @include respon (tab-port) {
-      transform: translateY(0);
+      transform: translateY(30vh);
       grid-column: 1/-1;
-      /* grid-row: 1 / -1; */
-      border: 2px solid red;
     }
   }
 
