@@ -14,7 +14,7 @@ class App {
     await model.getJsonData();
     model.getURL();
     model.loadFilterMovies();
-    
+
     model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
     switch (id) {
       case 'home':
@@ -64,12 +64,6 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      // const m = model.getPerPageMovie(model.data.pagination.page, filteredMovies)
-      // console.log(m);
-      
-      // movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
-
-
       movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
 
     } catch (err) {

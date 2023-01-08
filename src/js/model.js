@@ -22,7 +22,6 @@ export const getJsonData = async function() {
     data.movies = await getJSON(API_URL);
     data.movies = data.movies.reverse();
     data.search.movies = data.movies.map(m => m);
-    // return await getJSON(API_URL);
   } catch (err) {
     throw err
   }
