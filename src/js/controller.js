@@ -10,40 +10,46 @@ class App {
 
   async init() {
 
-    const id = document.body.id;
-    await model.getJsonData();
-    model.getURL();
-    model.loadFilterMovies();
+    try {
+      const id = document.body.id;
+      await model.getJsonData();
+      model.getURL();
+      model.loadFilterMovies();
 
-    model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
-    switch (id) {
-      case 'home':
-        //change page title
-        model.changeTitle(id);
-        //home
+      model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
 
-        await this.#controllerHome();
+      switch (id) {
+        case 'home':
+          //change page title
+          model.changeTitle(id);
+          //home
 
-        //common 
-        this.#COMMON();
+          await this.#controllerHome();
 
-        await paginationView.addHandlerClick(this.#controllerPagination);
+          //common 
+          this.#COMMON();
 
-        //added delay for first time loading pagination
-        await paginationView.delay(1000);
-        paginationView.renderData(model.data);
-        break;
-      case 'download-page':
-        //change page title
-        model.changeTitle(id);
+          await paginationView.addHandlerClick(this.#controllerPagination);
 
-        //common things
-        this.#COMMON(true);
+          //added delay for first time loading pagination
+          await paginationView.delay(1000);
+          paginationView.renderData(model.data);
+          break;
+        case 'download-page':
+          //change page title
+          model.changeTitle(id);
 
-        this.#controllerDownload();
-        break;
-      default:
-        return
+          //common things
+          this.#COMMON(true);
+
+          this.#controllerDownload();
+          break;
+        default:
+          return
+      }
+    }
+    catch (err) {
+      movieView.errorMessage(err);
     }
   }
 

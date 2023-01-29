@@ -6,6 +6,9 @@ const timeout = function(sec) {
     setTimeout(() => {
       reject(new Error(`Request took too long, Timeout after ${sec} seconds. please retry`))
     }, sec * 1000);
+  })
+  .catch(err => {
+    throw Error(err);
   });
 }
 
@@ -16,8 +19,8 @@ export const getJSON = async function(url) {
       'Content-Type': 'application/json',
       'X-Custom-Header': 'ProcessThisImmediately',
     }), timeout(SECONDS)]);
-
     if (!res || !res.ok) throw new Error('could\'t fetch movies');
+    
     const data = await res.json();
     
     return data
