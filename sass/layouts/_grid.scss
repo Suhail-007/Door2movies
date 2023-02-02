@@ -1,0 +1,11 @@
+.grid {
+  &--absCenter {
+    display: grid;
+    place-items: center;
+  }
+  
+  &--two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

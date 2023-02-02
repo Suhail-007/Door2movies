@@ -29,6 +29,7 @@ html {
 body {
   min-height: 100vh;
   line-height: 1.7;
+  font-family: 'Sen', sans-serif;
   background: $color-grey-light-3;
 
   @include respon(md-desktop) {
@@ -36,6 +37,10 @@ body {
     grid-template-columns: repeat(4, [col-start] 1fr [col-end]);
     grid-template-rows: min-content max-content min-content;
     gap: 1rem;
+  }
+  
+  & input, button {
+    font-family: inherit;
   }
 }
 
@@ -46,6 +51,7 @@ body {
   display: grid;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 
   & svg {
     animation: rotationRight 1500ms infinite linear;

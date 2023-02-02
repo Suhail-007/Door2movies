@@ -46,7 +46,6 @@ nav {
 }
 
 .drop-down {
-
   @include respon(md-desktop) {
     width: 100%;
   }
@@ -74,7 +73,7 @@ nav {
   padding-top: 1rem;
   border-radius: 3px;
   transition: 250ms all ease-in-out;
-  box-shadow: 0 .1rem .5rem 0 alpha(.3);
+  box-shadow: .3rem .3rem .5rem 0 alpha(.2);
 
   @include respon(md-desktop) {
     opacity: 1;
