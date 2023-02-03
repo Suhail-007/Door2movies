@@ -15,8 +15,8 @@ class App {
       await model.getJsonData();
       model.getURL();
       model.loadFilterMovies();
-
       model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
+      model.copyRightYear();
 
       switch (id) {
         case 'home':
