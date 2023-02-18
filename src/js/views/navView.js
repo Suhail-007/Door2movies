@@ -1,6 +1,6 @@
 import View from './view.js';
 import { RESET_PAGE, isDownloadMovie } from '../config.js';
-import { updateURL, PAGINATION } from '../helper.js';
+import { updateURL as updateUrlHelper, PAGINATION } from '../helper.js';
 
 class Nav extends View {
   _category;
@@ -39,10 +39,10 @@ class Nav extends View {
   addDropdownToggleHandler() {
     window.addEventListener('click', this.#toggleDropDown);
   }
-
-  addNavLinksHandler(handler) {
-    this._data = handler.data;
-    return handler.getFilterMovies(this._category);
+  
+  filterMoviesHandler(data, handler) {
+    this._data = data;
+    return handler(this._category);
   }
 
   resetPage() {
@@ -53,7 +53,7 @@ class Nav extends View {
     const { start, end } = PAGINATION(this._data.pagination.page, this._data);
 
     //if user is on download page do not update the url
-    if (!isDownloadMovie.download) updateURL(this._category, start, end);
+    if (!isDownloadMovie.download) updateUrlHelper(this._category, start, end);
 
     //set isDownloadMovie.download to false so when user leave page using navigation history won't update
     isDownloadMovie.download = false;

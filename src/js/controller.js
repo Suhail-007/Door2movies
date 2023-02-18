@@ -1,4 +1,4 @@
-import * as model from './model.js';
+import { getJsonData, getURL, loadFilterMovies, HistoryBackForward, copyRightYear, changeTitle, data, getPerPageMovie } from './model.js';
 import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
@@ -12,16 +12,16 @@ class App {
 
     try {
       const id = document.body.id;
-      await model.getJsonData();
-      model.getURL();
-      model.loadFilterMovies();
-      model.HistoryBackForward(this.#renderMoviesPagination.bind(this));
-      model.copyRightYear();
+      await getJsonData();
+      getURL();
+      loadFilterMovies();
+      HistoryBackForward(this.#renderMoviesPagination.bind(this));
+      copyRightYear();
 
       switch (id) {
         case 'home':
           //change page title
-          model.changeTitle(id);
+          changeTitle(id);
           //home
 
           await this.#controllerHome();
@@ -33,11 +33,11 @@ class App {
 
           //added delay for first time loading pagination
           await paginationView.delay(1000);
-          paginationView.renderData(model.data);
+          paginationView.renderData(data);
           break;
         case 'download-page':
           //change page title
-          model.changeTitle(id);
+          changeTitle(id);
 
           //common things
           this.#COMMON(true);
@@ -70,22 +70,23 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      movieView.renderData(model.getPerPageMovie(model.data.pagination.page));
+      movieView.renderData(getPerPageMovie(data.pagination.page));
 
     } catch (err) {
+      console.log(err);
       movieView.errorMessage('Something went wrong :(');
     }
   }
 
   async #controllerPagination() {
     try {
-      const { page } = model.data.pagination;
+      const { page } = data.pagination;
 
       //render Button
-      paginationView.renderData(model.data);
+      paginationView.renderData(data);
 
       //get returned value from model fn
-      const slicedArr = model.getPerPageMovie(page);
+      const slicedArr = getPerPageMovie(page);
 
       //loader 
       await movieView.loader();
@@ -103,7 +104,8 @@ class App {
 
   async controlNavigation() {
     try {
-      const filteredMovies = navView.addNavLinksHandler(model);
+      //need to remove model
+      const filteredMovies = navView.filterMoviesHandler(data, getFilterMovies);
       navView.resetPage();
       navView.updateURL();
 
@@ -113,18 +115,18 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      movieView.renderData(model.getPerPageMovie(model.data.pagination.page, filteredMovies));
+      movieView.renderData(getPerPageMovie(data.pagination.page, filteredMovies));
 
       //re-render the pagination button
-      paginationView.renderData(model.data);
+      paginationView.renderData(data);
     } catch (err) {
       movieView.errorMessage("Movie doesn\'t exist");
     }
   }
 
   #searchController() {
-    searchView.addSearchHandler(model.data);
-    searchView.enableSearchField(model.data.movies);
+    searchView.addSearchHandler(data);
+    searchView.enableSearchField(data.movies);
   }
 
   //download page
@@ -136,12 +138,12 @@ class App {
     await downloadView.delay(1000);
 
     //render movie
-    downloadView.renderData(model.data);
+    downloadView.renderData(data);
   }
 
   async #renderMoviesPagination() {
     await this.#controllerHome();
-    paginationView.renderData(model.data);
+    paginationView.renderData(data);
   }
 }
 
