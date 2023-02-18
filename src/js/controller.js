@@ -1,4 +1,4 @@
-import { getJsonData, getURL, loadFilterMovies, HistoryBackForward, copyRightYear, changeTitle, data, getPerPageMovie } from './model.js';
+import { getJsonData, getURL, loadFilterMovies, HistoryBackForward, copyRightYear, changeTitle, data, getPerPageMovie, getFilterMovies } from './model.js';
 import movieView from './views/movieView.js'
 import paginationView from './views/paginationView.js'
 import navView from './views/navView.js';
@@ -73,7 +73,6 @@ class App {
       movieView.renderData(getPerPageMovie(data.pagination.page));
 
     } catch (err) {
-      console.log(err);
       movieView.errorMessage('Something went wrong :(');
     }
   }
@@ -120,6 +119,7 @@ class App {
       //re-render the pagination button
       paginationView.renderData(data);
     } catch (err) {
+      console.log(err);
       movieView.errorMessage("Movie doesn\'t exist");
     }
   }

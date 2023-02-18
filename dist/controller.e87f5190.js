@@ -753,6 +753,7 @@ var Nav = /*#__PURE__*/function (_View) {
     key: "filterMoviesHandler",
     value: function filterMoviesHandler(data, handler) {
       this._data = data;
+      console.log(handler);
       return handler(this._category);
     }
   }, {
@@ -1103,7 +1104,7 @@ var App = /*#__PURE__*/function () {
             case 0:
               _context2.prev = 0;
               //need to remove model
-              filteredMovies = _navView.default.filterMoviesHandler(_model.data, getFilterMovies);
+              filteredMovies = _navView.default.filterMoviesHandler(_model.data, _model.getFilterMovies);
               _navView.default.resetPage();
               _navView.default.updateURL();
 
@@ -1118,13 +1119,14 @@ var App = /*#__PURE__*/function () {
 
               //re-render the pagination button
               _paginationView.default.renderData(_model.data);
-              _context2.next = 15;
+              _context2.next = 16;
               break;
             case 12:
               _context2.prev = 12;
               _context2.t0 = _context2["catch"](0);
+              console.log(_context2.t0);
               _movieView.default.errorMessage("Movie doesn\'t exist");
-            case 15:
+            case 16:
             case "end":
               return _context2.stop();
           }
@@ -1163,14 +1165,13 @@ function _controllerHome3() {
         case 5:
           //Render Movies
           _movieView.default.renderData((0, _model.getPerPageMovie)(_model.data.pagination.page));
-          _context3.next = 12;
+          _context3.next = 11;
           break;
         case 8:
           _context3.prev = 8;
           _context3.t0 = _context3["catch"](0);
-          console.log(_context3.t0);
           _movieView.default.errorMessage('Something went wrong :(');
-        case 12:
+        case 11:
         case "end":
           return _context3.stop();
       }
@@ -1290,7 +1291,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39945" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40807" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
