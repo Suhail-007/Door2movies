@@ -578,7 +578,7 @@ var MovieView = /*#__PURE__*/function (_View) {
     value: function _generateMarkup() {
       var _this2 = this;
       return this._data.map(function (movie) {
-        return "\n      <div class=\"movie-card\">\n        <div class=\"movie-img\">\n         <img src=\"".concat(_this2._responsiveImg(movie), "\" alt=\"").concat(movie.name, "\" />\n        </div>\n        <div class=\"movie-name-cont movie-link\">\n        \t<a class=\"movie-name\" href=\"src/pages/download.html?name=").concat(_this2._createSlug(movie.name), "&id=").concat(movie.id, "\">\n        \t  ").concat(movie.name, "\n        \t</a>\n        </div>\n      </div>");
+        return "\n      <div class=\"movie-card\">\n        <div class=\"movie-img\">\n         <img loading='lazy' src=\"".concat(_this2._responsiveImg(movie), "\" alt=\"").concat(movie.name, "\" />\n        </div>\n        <div class=\"movie-name-cont movie-link\">\n        \t<a class=\"movie-name\" href=\"src/pages/download.html?name=").concat(_this2._createSlug(movie.name), "&id=").concat(movie.id, "\">\n        \t  ").concat(movie.name, "\n        \t</a>\n        </div>\n      </div>");
       }).join(',').replaceAll(',', '');
     }
   }, {
@@ -591,7 +591,9 @@ var MovieView = /*#__PURE__*/function (_View) {
 }(_view.default);
 var _default = new MovieView();
 exports.default = _default;
-},{"./view.js":"src/js/views/view.js"}],"src/js/views/paginationView.js":[function(require,module,exports) {
+},{"./view.js":"src/js/views/view.js"}],"src/icons/icons.svg":[function(require,module,exports) {
+module.exports = "/icons.31d8dd64.svg";
+},{}],"src/js/views/paginationView.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -601,6 +603,7 @@ exports.default = void 0;
 var _view = _interopRequireDefault(require("./view.js"));
 var _movieView = _interopRequireDefault(require("./movieView.js"));
 var _helper = require("../helper.js");
+var _icons = _interopRequireDefault(require("../../icons/icons.svg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -616,7 +619,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-// import icons from '../../icons/icons.svg'
 var Pagination = /*#__PURE__*/function (_View) {
   _inherits(Pagination, _View);
   var _super = _createSuper(Pagination);
@@ -664,19 +666,19 @@ var Pagination = /*#__PURE__*/function (_View) {
   }, {
     key: "_generateNextBtnMarkup",
     value: function _generateNextBtnMarkup(page) {
-      return "\n      <button class=\"pagination__btn--next btn__inline\" data-goto=\"next\">\n        Page ".concat(page + 1, "\n       <svg class='sm-icon'>\n          <use href=\"./src/icons/icons.svg#icon-chevron-right\"></use>\n        </svg>\n      </button>");
+      return "\n      <button class=\"pagination__btn--next btn__inline\" data-goto=\"next\">\n        Page ".concat(page + 1, "\n       <svg class='sm-icon'>\n          <use href=\"./").concat(_icons.default, "#icon-chevron-right\"></use>\n        </svg>\n      </button>");
     }
   }, {
     key: "_generatePrevBtnMarkup",
     value: function _generatePrevBtnMarkup(page) {
-      return "\n      <button class=\"".concat(page > 1 ? 'pagination__btn--prev' : 'hide', " btn__prev\" data-goto=\"prev\">\n        <svg class='sm-icon'>\n          <use href=\"./src/icons/icons.svg#icon-chevron-left\"></use>\n        </svg>\n        Page ").concat(page - 1, "\n      </button>");
+      return "\n      <button class=\"".concat(page > 1 ? 'pagination__btn--prev' : 'hide', " btn__prev\" data-goto=\"prev\">\n        <svg class='sm-icon'>\n          <use href=\"./").concat(_icons.default, "#icon-chevron-left\"></use>\n        </svg>\n        Page ").concat(page - 1, "\n      </button>");
     }
   }]);
   return Pagination;
 }(_view.default);
 var _default = new Pagination();
 exports.default = _default;
-},{"./view.js":"src/js/views/view.js","./movieView.js":"src/js/views/movieView.js","../helper.js":"src/js/helper.js"}],"src/js/views/navView.js":[function(require,module,exports) {
+},{"./view.js":"src/js/views/view.js","./movieView.js":"src/js/views/movieView.js","../helper.js":"src/js/helper.js","../../icons/icons.svg":"src/icons/icons.svg"}],"src/js/views/navView.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1288,7 +1290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42409" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39945" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

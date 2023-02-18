@@ -6,7 +6,7 @@ class MovieView extends View {
     return this._data.map(movie => `
       <div class="movie-card">
         <div class="movie-img">
-         <img src="${this._responsiveImg(movie)}" alt="${movie.name}" />
+         <img loading='lazy' src="${this._responsiveImg(movie)}" alt="${movie.name}" />
         </div>
         <div class="movie-name-cont movie-link">
         	<a class="movie-name" href="src/pages/download.html?name=${this._createSlug(movie.name)}&id=${movie.id}">
