@@ -136,5 +136,5 @@ export const HistoryBackForward = function(handler) {
 export const copyRightYear = function() {
   const yearElem = document.querySelector('[data-copyright-year]');
   const year = new Date().getFullYear();
-  yearElem.textContent += year;
+  yearElem.textContent = year;
 }
