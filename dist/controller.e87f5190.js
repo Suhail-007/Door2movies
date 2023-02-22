@@ -287,7 +287,7 @@ var loadFilterMovies = function loadFilterMovies() {
     data.filteredMovies = data.movies.filter(function (m) {
       return m.category.includes(page);
     });
-    //reverse the array to how it was
+    //reverse the array so new movies will be at starting 
     data.filteredMovies = data.filteredMovies.reverse();
     data.filter = true;
     data.category = page;
@@ -298,9 +298,7 @@ var getPerPageMovie = function getPerPageMovie() {
   var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var moviesArr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : data.movies;
   var _getURLPage2 = getURLPage(),
-    url = _getURLPage2.url,
-    userPage = _getURLPage2.page,
-    urlStart = _getURLPage2.urlStart;
+    userPage = _getURLPage2.page;
   var _PAGINATION = (0, _helper.PAGINATION)(page, data),
     start = _PAGINATION.start,
     end = _PAGINATION.end;
@@ -666,11 +664,14 @@ var Pagination = /*#__PURE__*/function (_View) {
   }, {
     key: "_generateNextBtnMarkup",
     value: function _generateNextBtnMarkup(page) {
+      //  const icons = ''
       return "\n      <button class=\"pagination__btn--next btn__inline\" data-goto=\"next\">\n        Page ".concat(page + 1, "\n       <svg class='sm-icon'>\n          <use href=\"./").concat(_icons.default, "#icon-chevron-right\"></use>\n        </svg>\n      </button>");
     }
   }, {
     key: "_generatePrevBtnMarkup",
     value: function _generatePrevBtnMarkup(page) {
+      //    const icons = ''
+
       return "\n      <button class=\"".concat(page > 1 ? 'pagination__btn--prev' : 'hide', " btn__prev\" data-goto=\"prev\">\n        <svg class='sm-icon'>\n          <use href=\"./").concat(_icons.default, "#icon-chevron-left\"></use>\n        </svg>\n        Page ").concat(page - 1, "\n      </button>");
     }
   }]);
@@ -753,7 +754,6 @@ var Nav = /*#__PURE__*/function (_View) {
     key: "filterMoviesHandler",
     value: function filterMoviesHandler(data, handler) {
       this._data = data;
-      console.log(handler);
       return handler(this._category);
     }
   }, {
@@ -971,7 +971,7 @@ var Download = /*#__PURE__*/function (_View) {
         return movie.name.toLowerCase() === movieName;
       });
       _config.isDownloadMovie.download = true;
-      return "\n    <p> Home > ".concat(data[0].name, "</p>\n    <h2 data-download-movie-name>").concat(data[0].name, "</h2>\n      <div class=\"section__download__img-grid\">\n        <figure>\n          <img src=\"").concat(this._responsiveImg(data[0]), "\" alt=\"").concat(data[0].name, "\" />\n        </figure>\n      </div>\n      <div class=\"section__download__movie-info\">\n        <p class=\"rating\">IMBD rating: ").concat(data[0].imbd, "</p>\n        <p class=\"year\">Year: ").concat(data[0].year, "</p>\n        <p class=\"director\">Director: <span>").concat(data[0].director, "</span></p>\n        <p class=\"cast\">Cast: <span>").concat(this._addWhiteSpace(data[0].cast), "</span></p>\n        <p> category : ").concat(this._addWhiteSpace(data[0].category), " </p>\n        <p class=\"desc\">Description: <span>").concat(data[0].description, "  luptatum praesent nascetur tempus scripta ferri idque sonet omittam vitae tellus diam persius conceptam hac sed etiam semper habitasse interpretaris</span></p>\n      </div>\n      <p class=\"links-heading\">Download Links </p>\n      <section class=\"section__download__links\">\n        <a href=\"").concat(data[0].link[1], "\">480p</a>\n        <a href=\"").concat(data[0].link[2], "\">720p</a>\n        <a href=\"").concat(data[0].link[3], "\">1080p</a>\n      </section>");
+      return "\n    <p> Home > ".concat(data[0].name, "</p>\n    <h2 data-download-movie-name>").concat(data[0].name, "</h2>\n      <div class=\"section__download__img-grid\">\n        <figure>\n          <img src=\"").concat(this._responsiveImg(data[0]), "\" alt=\"").concat(data[0].name, "\" />\n        </figure>\n      </div>\n      <div class=\"section__download__movie-info\">\n        <p class=\"rating\">IMBD rating: ").concat(data[0].imbd, "</p>\n        <p class=\"year\">Year: ").concat(data[0].year, "</p>\n        <p class=\"director\">Director: <span>").concat(data[0].director, "</span></p>\n        <p class=\"cast\">Cast: <span>").concat(this._addWhiteSpace(data[0].cast), "</span></p>\n        <p> category : ").concat(this._addWhiteSpace(data[0].category), " </p>\n        <p class=\"desc\">Description: <span>").concat(data[0].description, " </span></p>\n      </div>\n      <p class=\"links-heading\">Download Links </p>\n      <section class=\"section__download__links\">\n        <a href=\"").concat(data[0].link[1], "\">480p</a>\n        <a href=\"").concat(data[0].link[2], "\">720p</a>\n        <a href=\"").concat(data[0].link[3], "\">1080p</a>\n      </section>");
     }
   }, {
     key: "_getMovieName",
@@ -1077,13 +1077,12 @@ var App = /*#__PURE__*/function () {
             case 25:
               return _context.abrupt("return");
             case 26:
-              _context.next = 31;
+              _context.next = 30;
               break;
             case 28:
               _context.prev = 28;
               _context.t1 = _context["catch"](0);
-              _movieView.default.errorMessage(_context.t1);
-            case 31:
+            case 30:
             case "end":
               return _context.stop();
           }
@@ -1119,14 +1118,13 @@ var App = /*#__PURE__*/function () {
 
               //re-render the pagination button
               _paginationView.default.renderData(_model.data);
-              _context2.next = 16;
+              _context2.next = 15;
               break;
             case 12:
               _context2.prev = 12;
               _context2.t0 = _context2["catch"](0);
-              console.log(_context2.t0);
               _movieView.default.errorMessage("Movie doesn\'t exist");
-            case 16:
+            case 15:
             case "end":
               return _context2.stop();
           }
@@ -1228,10 +1226,26 @@ function _controllerDownload3() {
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
+          _context5.prev = 0;
+          _context5.next = 3;
+          return _downloadView.default.loader();
+        case 3:
+          _context5.next = 5;
+          return _downloadView.default.delay(1000);
+        case 5:
+          //render movie
+          _downloadView.default.renderData(_model.data);
+          _context5.next = 11;
+          break;
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](0);
+          _downloadView.default.errorMessage(_context5.t0);
+        case 11:
         case "end":
           return _context5.stop();
       }
-    }, _callee5);
+    }, _callee5, null, [[0, 8]]);
   }));
   return _controllerDownload3.apply(this, arguments);
 }
@@ -1243,15 +1257,22 @@ function _renderMoviesPagination3() {
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          _context6.next = 2;
+          _context6.prev = 0;
+          _context6.next = 3;
           return _classPrivateMethodGet(this, _controllerHome, _controllerHome2).call(this);
-        case 2:
-          _paginationView.default.renderData(_model.data);
         case 3:
+          _paginationView.default.renderData(_model.data);
+          _context6.next = 9;
+          break;
+        case 6:
+          _context6.prev = 6;
+          _context6.t0 = _context6["catch"](0);
+          _movieView.default.errorMessage(_context6.t0);
+        case 9:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, this);
+    }, _callee6, this, [[0, 6]]);
   }));
   return _renderMoviesPagination3.apply(this, arguments);
 }
@@ -1282,7 +1303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40646" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37331" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

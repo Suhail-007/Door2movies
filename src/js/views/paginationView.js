@@ -1,7 +1,7 @@
 import View from './view.js';
 import movieView from './movieView.js';
 import { updateURL, PAGINATION } from '../helper.js';
-// import icons from '../../icons/icons.svg'
+ import icons from '../../icons/icons.svg'
 
 class Pagination extends View {
   _parentElem = document.querySelector('[data-pagination-btns-container]');
@@ -36,7 +36,7 @@ class Pagination extends View {
   }
 
   _generateNextBtnMarkup(page) {
-    const icons = ''
+  //  const icons = ''
     return `
       <button class="pagination__btn--next btn__inline" data-goto="next">
         Page ${page + 1}
@@ -47,7 +47,7 @@ class Pagination extends View {
   }
 
   _generatePrevBtnMarkup(page) {
-    const icons = ''
+//    const icons = ''
     
     return `
       <button class="${page > 1 ? 'pagination__btn--prev' : 'hide'} btn__prev" data-goto="prev">
