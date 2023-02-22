@@ -32,7 +32,7 @@ export const loadFilterMovies = function() {
   const { page } = getURLPage();
   if (data.movieCategories.includes(page)) {
     data.filteredMovies = data.movies.filter(m => m.category.includes(page));
-    //reverse the array to how it was
+    //reverse the array so new movies will be at starting 
     data.filteredMovies = data.filteredMovies.reverse();
     data.filter = true;
     data.category = page;
@@ -40,7 +40,7 @@ export const loadFilterMovies = function() {
 }
 
 export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
-  const { url, page: userPage, urlStart } = getURLPage();
+  const { page: userPage } = getURLPage();
   const { start, end } = PAGINATION(page, data);
 
   if (userPage != null && data.movieCategories.includes(userPage)) {

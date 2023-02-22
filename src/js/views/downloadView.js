@@ -25,7 +25,7 @@ class Download extends View {
         <p class="director">Director: <span>${data[0].director}</span></p>
         <p class="cast">Cast: <span>${this._addWhiteSpace(data[0].cast)}</span></p>
         <p> category : ${this._addWhiteSpace(data[0].category)} </p>
-        <p class="desc">Description: <span>${data[0].description}  luptatum praesent nascetur tempus scripta ferri idque sonet omittam vitae tellus diam persius conceptam hac sed etiam semper habitasse interpretaris</span></p>
+        <p class="desc">Description: <span>${data[0].description} </span></p>
       </div>
       <p class="links-heading">Download Links </p>
       <section class="section__download__links">

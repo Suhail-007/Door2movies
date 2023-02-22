@@ -7,7 +7,7 @@
       "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
     },
     "category": [
-      "action, sci-fi, comic-book, adventure, fantasy, superhero "
+      "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
     "year": "2019",
     "link": [
@@ -22,7 +22,7 @@
       "3"
     ],
     "cast": [
-      "Robert Downey Jr.","Chris Evans","Mark Ruffalo","Chris Hemsworth","Scarlett Johansson","Jeremy Renner","Don Cheadle","Paul Rudd","Brie Larson","Karen Gillan","Danai Gurira","Benedict", "Wong"
+      "Robert Downey Jr.", "Chris Evans", "Mark Ruffalo", "Chris Hemsworth", "Scarlett Johansson", "Jeremy Renner", "Don Cheadle", "Paul Rudd", "Brie Larson", "Karen Gillan", "Danai Gurira", "Benedict", "Wong"
     ],
     "director": "Anthony Russo and Joe Russo",
     "imbd": "8.4/10"
@@ -35,7 +35,7 @@
       "m_img": "https://i.ibb.co/HVzFv1K/multiverseofmadness.jpg"
     },
     "category": [
-      "action, sci-fi, comic-book, adventure, fantasy, superhero "
+      "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
     "year": "2022",
     "link": [
@@ -64,7 +64,7 @@
       "m_img": "https://i.ibb.co/GRGmQZv/dbs-broly.jpg"
     },
     "category": [
-      "action, anime, fighting, martial arts"
+      "action", "anime", "fighting", "martial", "arts"
     ],
     "year": "2020",
     "link": [
@@ -93,7 +93,7 @@
       "m_img": "https://i.ibb.co/hyshfTP/f9.jpg"
     },
     "category": [
-      "adventure, raceing"
+      "adventure", "raceing"
     ],
     "year": "2021",
     "link": [
@@ -119,10 +119,10 @@
     "name": "The Batman",
     "imgs": {
       "d_img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
-      "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
+      "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
     },
     "category": [
-      "action, crime-flim, drama, adventure, mystery, superhero"
+      "action", "crime-flim", "drama", "adventure", "mystery", "superhero"
     ],
     "year": "2022",
     "link": [
@@ -148,10 +148,10 @@
     "name": "Avengers Age Of Ultron",
     "imgs": {
       "d_img": "https://i.ibb.co/HXD99kv/age-of-ultron.jpg",
-      "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
+      "m_img": "https://i.ibb.co/LgN6tCS/age-of-ultron-1.jpg"
     },
     "category": [
-      "action, sci-fi, comic-book, adventure, fantasy, superhero"
+      "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
     "year": "2022",
     "link": [
@@ -180,7 +180,7 @@
       "m_img": "https://i.ibb.co/Bwxd2Hc/the-avengers.jpg"
     },
     "category": [
-      "action, sci-fi, comic-book, adventure, fantasy, superhero"
+      "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
     "year": "2022",
     "link": [
@@ -238,7 +238,7 @@
       "m_img": "https://i.ibb.co/rHQnpFB/infinity-war.jpg"
     },
     "category": [
-        "action, sci-fi, comic-book, adventure, fantasy, superhero "
+      "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
       ],
     "year": "2018",
     "link": [

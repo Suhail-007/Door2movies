@@ -35,6 +35,7 @@ class App {
           await paginationView.delay(1000);
           paginationView.renderData(data);
           break;
+
         case 'download-page':
           //change page title
           changeTitle(id);
@@ -49,7 +50,6 @@ class App {
       }
     }
     catch (err) {
-      movieView.errorMessage(err);
     }
   }
 
@@ -119,7 +119,6 @@ class App {
       //re-render the pagination button
       paginationView.renderData(data);
     } catch (err) {
-      console.log(err);
       movieView.errorMessage("Movie doesn\'t exist");
     }
   }
@@ -131,19 +130,27 @@ class App {
 
   //download page
   async #controllerDownload() {
-    //loader
-    await downloadView.loader();
+    try {
+      //loader
+      await downloadView.loader();
 
-    //delay
-    await downloadView.delay(1000);
+      //delay
+      await downloadView.delay(1000);
 
-    //render movie
-    downloadView.renderData(data);
+      //render movie
+      downloadView.renderData(data);
+    } catch (err) {
+      downloadView.errorMessage(err);
+    }
   }
 
   async #renderMoviesPagination() {
-    await this.#controllerHome();
-    paginationView.renderData(data);
+    try {
+      await this.#controllerHome();
+      paginationView.renderData(data);
+    } catch (err) {
+      movieView.errorMessage(err)
+    }
   }
 }
 

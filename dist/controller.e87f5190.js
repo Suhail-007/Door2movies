@@ -460,7 +460,7 @@ exports.HistoryBackForward = HistoryBackForward;
 var copyRightYear = function copyRightYear() {
   var yearElem = document.querySelector('[data-copyright-year]');
   var year = new Date().getFullYear();
-  yearElem.textContent += year;
+  yearElem.textContent = year;
 };
 exports.copyRightYear = copyRightYear;
 },{"./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/js/views/view.js":[function(require,module,exports) {
@@ -1228,15 +1228,6 @@ function _controllerDownload3() {
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
-          return _downloadView.default.loader();
-        case 2:
-          _context5.next = 4;
-          return _downloadView.default.delay(1000);
-        case 4:
-          //render movie
-          _downloadView.default.renderData(_model.data);
-        case 5:
         case "end":
           return _context5.stop();
       }
@@ -1291,7 +1282,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40807" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40646" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

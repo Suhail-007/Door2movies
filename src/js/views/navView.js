@@ -42,7 +42,6 @@ class Nav extends View {
   
   filterMoviesHandler(data, handler) {
     this._data = data;
-    console.log(handler);
     return handler(this._category);
   }
 
