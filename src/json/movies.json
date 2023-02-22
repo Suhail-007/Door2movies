@@ -7,7 +7,7 @@
       "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
     },
     "category": [
-      "action"
+      "action, sci-fi, comic-book, adventure, fantasy, superhero "
     ],
     "year": "2019",
     "link": [
@@ -15,18 +15,17 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "After Thanos, an intergalactic warlord, disintegrates half of the universe, the Avengers must reunite and assemble again to reinvigorate their trounced allies and restore balance.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Robert Downey Jr.","Chris Evans","Mark Ruffalo","Chris Hemsworth","Scarlett Johansson","Jeremy Renner","Don Cheadle","Paul Rudd","Brie Larson","Karen Gillan","Danai Gurira","Benedict", "Wong"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Anthony Russo and Joe Russo",
+    "imbd": "8.4/10"
   },
   {
     "id": 2,
@@ -36,7 +35,7 @@
       "m_img": "https://i.ibb.co/HVzFv1K/multiverseofmadness.jpg"
     },
     "category": [
-      "adventure"
+      "action, sci-fi, comic-book, adventure, fantasy, superhero "
     ],
     "year": "2022",
     "link": [
@@ -44,7 +43,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -65,7 +64,7 @@
       "m_img": "https://i.ibb.co/GRGmQZv/dbs-broly.jpg"
     },
     "category": [
-      "action"
+      "action, anime, fighting, martial arts"
     ],
     "year": "2020",
     "link": [
@@ -73,7 +72,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -94,7 +93,7 @@
       "m_img": "https://i.ibb.co/hyshfTP/f9.jpg"
     },
     "category": [
-      "adventure"
+      "adventure, raceing"
     ],
     "year": "2021",
     "link": [
@@ -102,7 +101,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -123,7 +122,7 @@
       "m_img": "https://i.ibb.co/wdZ7JGb/avengers-End-Game.jpg"
     },
     "category": [
-      "adventure"
+      "action, crime-flim, drama, adventure, mystery, superhero"
     ],
     "year": "2022",
     "link": [
@@ -131,7 +130,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "On Halloween, Gotham City Mayor Don Mitchell Jr. is murdered by the Riddler, a masked serial killer. Reclusive billionaire Bruce Wayne, who has operated for two years as the vigilante Batman, investigates the murder alongside the Gotham City Police Department (GCPD). Lieutenant James Gordon discovers a message that the Riddler left for Batman.",
     "screenshot": [
       "1",
       "2",
@@ -141,7 +140,7 @@
       "etc",
       "etc"
     ],
-    "director": "etc",
+    "director": "Matt Reeves",
     "imbd": "7/10"
   },
   {
@@ -152,7 +151,7 @@
       "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
     },
     "category": [
-      "comicbook"
+      "action, sci-fi, comic-book, adventure, fantasy, superhero"
     ],
     "year": "2022",
     "link": [
@@ -160,7 +159,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -170,7 +169,7 @@
       "etc",
       "etc"
     ],
-    "director": "etc",
+    "director": "",
     "imbd": "7/10"
   },
   {
@@ -181,7 +180,7 @@
       "m_img": "https://i.ibb.co/Bwxd2Hc/the-avengers.jpg"
     },
     "category": [
-      "thriller"
+      "action, sci-fi, comic-book, adventure, fantasy, superhero"
     ],
     "year": "2022",
     "link": [
@@ -189,7 +188,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -210,7 +209,7 @@
       "m_img": "https://i.ibb.co/5RZXm8J/uncharted.jpg"
     },
     "category": [
-      "thriller"
+      "action, adventure, fantasy,"
     ],
     "year": "2022",
     "link": [
@@ -218,7 +217,7 @@
       "34",
       "56"
     ],
-    "description": "something something",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
     "screenshot": [
       "1",
       "2",
@@ -232,32 +231,29 @@
     "imbd": "7/10"
   },
   {
-    "id": 9,
-    "name": "The Batman",
+    "id": 1,
+    "name": "Avengers Infinity war",
     "imgs": {
-      "d_img": "https://i.ibb.co/JjZbJD8/the-batman.jpg",
-      "m_img": "https://i.ibb.co/Rjy7T24/the-batman.jpg"
+      "d_img": "https://i.ibb.co/2dtBtjD/infinity-war.jpg",
+      "m_img": "https://i.ibb.co/rHQnpFB/infinity-war.jpg"
     },
     "category": [
-      "adventure"
-    ],
-    "year": "2022",
+        "action, sci-fi, comic-book, adventure, fantasy, superhero "
+      ],
+    "year": "2018",
     "link": [
-      "12",
-      "34",
-      "56"
-    ],
-    "description": "something something",
+        "12",
+        "34",
+        "56"
+      ],
+    "description": "The Avengers must stop Thanos, an intergalactic warlord, from getting his hands on all the infinity stones. However, Thanos is prepared to go to any lengths to carry out his insane plan.",
     "screenshot": [
-      "1",
-      "2",
-      "3"
-    ],
-    "cast": [
-      "etc",
-      "etc"
-    ],
-    "director": "etc",
-    "imbd": "7/10"
+        "1",
+        "2",
+        "3"
+      ],
+    "cast": ["Robert Downey Jr.", "Chris Hemsworth", "Mark Ruffalo", "Chris Evans", "Scarlett Johansson", "Benedict Cumberbatch", "Don Cheadle", "Tom Holland", "Chadwick Boseman", "Paul Bettany", "Elizabeth Olsen"],
+    "director": "Anthony and Joe Russo",
+    "imbd": "8.4/10"
   }
 ]
