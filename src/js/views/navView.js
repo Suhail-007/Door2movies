@@ -4,7 +4,7 @@ import { updateURL as updateUrlHelper, PAGINATION } from '../helper.js';
 
 class Nav extends View {
   _category;
-  _navLinks = document.querySelectorAll('[data-category]');
+  _navLinks;
 
   generateCategoriesMarkup(data) {
     this._data = data;
@@ -12,7 +12,7 @@ class Nav extends View {
     const links = categories.map(category => {
       return `<a href="#" data-category="${category}">${category}</a>`
     });
-      
+
     const dropdownMenu = document.querySelector('[data-dropdown-content]');
     dropdownMenu.insertAdjacentHTML('beforeend', links.join(''));
   }
@@ -29,6 +29,7 @@ class Nav extends View {
 
   addDropdownLinksHandler(handler, download = false) {
     const dropdown = document.querySelector('[data-dropdown-content]');
+    const navLinks = document.querySelectorAll('[data-category]');
 
     dropdown.addEventListener('click', e => {
       if (!e.target.dataset.category) return
@@ -36,11 +37,15 @@ class Nav extends View {
         this._category = e.target.dataset.category.toLowerCase();
         e.preventDefault();
 
-        this._navLinks.forEach(link => link.classList.remove('active'));
+        navLinks.forEach(link => link.classList.remove('active'));
 
         e.target.classList.add('active');
 
-        //change the href value of anchor tag if user is on download page
+        //change the href value of anchor tag for categories/genre if user is on download page     
+        
+        
+        
+        
         if (download) this._changeLocationHref();
         handler();
       }
