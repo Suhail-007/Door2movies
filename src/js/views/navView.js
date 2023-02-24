@@ -41,11 +41,7 @@ class Nav extends View {
 
         e.target.classList.add('active');
 
-        //change the href value of anchor tag for categories/genre if user is on download page     
-        
-        
-        
-        
+        //change the href value of anchor tag for categories/genre if user is on download page
         if (download) this._changeLocationHref();
         handler();
       }
