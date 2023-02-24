@@ -9,48 +9,22 @@
   grid-template-columns: 1fr;
   row-gap: 1rem;
 
-  @include respon(tab-port) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, min-content) max-content min-content min-content;
-  }
-
-
   & .loader {
     transform: translateY(-15rem);
-
-    @include respon (tab-port) {
-      transform: translateY(30vh);
-      grid-column: 1/-1;
-    }
   }
 
   &>p {
     grid-column: 1/-1;
     padding-left: 1rem;
-
-    @include respon(tab-port) {
-      grid-column: 1/2;
-      grid-row: 1/2;
-    }
   }
 
   &>h2 {
     padding-left: 1rem;
-
-    @include respon(tab-port) {
-      grid-column: 1/2;
-      grid-row: 2/3;
-    }
   }
 
   &__img-grid {
     display: flex;
     justify-content: center;
-
-    @include respon(tab-port) {
-      grid-column: 1/2;
-      grid-row: 3/4;
-    }
 
     & figure {
       width: 60%;
@@ -66,43 +40,6 @@
   &__movie-info {
     padding: 2rem;
     background: black;
-
-    @include respon(tab-port) {
-      grid-column: 2/3;
-      grid-row: 3/4;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-content: space-evenly;
-
-      .rating,
-      .director {
-        grid-column: 1/2;
-      }
-
-      .year,
-      .cast {
-        grid-column: 2/3;
-      }
-
-      .category {
-        grid-column: 1/2;
-        grid-row: 3/4;
-      }
-
-      .desc {
-        grid-column: 1/3;
-        grid-row: 4/5;
-      }
-    }
-  }
-
-  & .links-heading {
-    @include respon(tab-port) {
-      grid-column: 1/ -1;
-      grid-row: 4 / 5;
-      margin-top: 1rem;
-    }
   }
 
   &__links {
@@ -110,13 +47,6 @@
     flex-direction: column;
     gap: 1rem 0;
     padding: 0 5rem 5rem;
-
-    @include respon(tab-port) {
-      grid-column: 1 / 3;
-      grid-row: 5 / 6;
-      flex-direction: row !important;
-      gap: 0 1rem;
-    }
 
     & a:link,
     & a:visited {
@@ -126,10 +56,6 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
-
-      @include respon(tab-port) {
-        width: 100%;
-      }
 
       &:hover::after,
       &:focus::after {

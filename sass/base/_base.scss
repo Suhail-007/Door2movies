@@ -24,6 +24,16 @@ html {
     //1rem === 12px
     font-size: 75%;
   }
+
+  @include respon(tab-port) {
+    //1rem === 16px
+    font-size: 100%;
+  }
+
+  @include respon(tab-land) {
+    //1rem === 13px
+    font-size: 81%;
+  }
 }
 
 body {
@@ -38,8 +48,9 @@ body {
     grid-template-rows: min-content max-content min-content;
     gap: 1rem;
   }
-  
-  & input, button {
+
+  & input,
+  button {
     font-family: inherit;
   }
 }

@@ -30,6 +30,7 @@ header {
   text-decoration: none;
   color: $color-grey;
   font-size: 1.5rem;
+  text-transform: capitalize;
 
   @include respon(md-desktop) {
     font-size: 1.7rem;
@@ -84,7 +85,11 @@ header {
 
   &__movie-info {
     color: $color-grey-light-2;
-    font-size: 1.4rem;
+    font-size: 1rem;
+
+    @include respon(tab-port) {
+      font-size: 1.6rem;
+    }
   }
 
   & .links-heading {
@@ -103,5 +108,18 @@ header {
       text-align: center;
       color: $color-gold;
     }
+  }
+}
+
+footer {
+  &>p {
+    color: #999;
+    font-size: 1.4rem;
+    padding: 0;
+  }
+
+  & a {
+    font-size: 1.4rem;
+    color: #fff
   }
 }

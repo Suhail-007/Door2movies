@@ -55,7 +55,9 @@ class App {
   #COMMON(downloadPage = false) {
     //search
     this.#searchController();
+
     //navbar
+    navView.generateCategoriesMarkup(data);
     navView.addDropdownToggleHandler();
     navView.addDropdownLinksHandler(this.controlNavigation, downloadPage);
   }
@@ -103,7 +105,7 @@ class App {
   async controlNavigation() {
     try {
       //need to remove model
-      const filteredMovies = await navView.filterMoviesHandler(data, getFilterMovies);
+      const filteredMovies = await navView.filterMoviesHandler(getFilterMovies);
 
       //reset pagination
       navView.resetPage();

@@ -6,6 +6,17 @@ class Nav extends View {
   _category;
   _navLinks = document.querySelectorAll('[data-category]');
 
+  generateCategoriesMarkup(data) {
+    this._data = data;
+    const { movieCategories: categories } = this._data;
+    const links = categories.map(category => {
+      return `<a href="#" data-category="${category}">${category}</a>`
+    });
+      
+    const dropdownMenu = document.querySelector('[data-dropdown-content]');
+    dropdownMenu.insertAdjacentHTML('beforeend', links.join(''));
+  }
+
   #toggleDropDown(e) {
     const isDropdownBtn = e.target.matches('[data-dropdownBtn]');
     const dropdownContent = document.querySelector('[data-dropdown-content]');
@@ -22,13 +33,13 @@ class Nav extends View {
     dropdown.addEventListener('click', e => {
       if (!e.target.dataset.category) return
       if (e.target.dataset.category && e.target.closest('[data-dropdown-content]')) {
-        this._category = e.target.dataset.category;
+        this._category = e.target.dataset.category.toLowerCase();
         e.preventDefault();
-        
+
         this._navLinks.forEach(link => link.classList.remove('active'));
-        
+
         e.target.classList.add('active');
-        
+
         //change the href value of anchor tag if user is on download page
         if (download) this._changeLocationHref();
         handler();
@@ -39,9 +50,8 @@ class Nav extends View {
   addDropdownToggleHandler() {
     window.addEventListener('click', this.#toggleDropDown);
   }
-  
-  filterMoviesHandler(data, handler) {
-    this._data = data;
+
+  filterMoviesHandler(handler) {
     return handler(this._category);
   }
 

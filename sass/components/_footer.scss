@@ -1,18 +1,16 @@
 footer {
   background: black;
-  height: 5em;
+  height: 13rem;
   display: grid;
   place-items: center;
-  padding: 5rem 0;
-  
+  align-content: center;
+
   @include respon(md-desktop) {
-    grid-column: col-start 1 / -1;
+    grid-column: col-start 1 / col-end 5;
     grid-row: row-start 3 / row-end 4;
   }
 
   &>p {
-    color: #999;
-    font-size: 1.2rem;
     padding: 0;
   }
 }
