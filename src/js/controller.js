@@ -49,8 +49,7 @@ class App {
           return
       }
     }
-    catch (err) {
-    }
+    catch (err) {}
   }
 
   #COMMON(downloadPage = false) {
@@ -104,7 +103,9 @@ class App {
   async controlNavigation() {
     try {
       //need to remove model
-      const filteredMovies = navView.filterMoviesHandler(data, getFilterMovies);
+      const filteredMovies = await navView.filterMoviesHandler(data, getFilterMovies);
+
+      //reset pagination
       navView.resetPage();
       navView.updateURL();
 
@@ -119,6 +120,7 @@ class App {
       //re-render the pagination button
       paginationView.renderData(data);
     } catch (err) {
+      console.log(err);
       movieView.errorMessage("Movie doesn\'t exist");
     }
   }

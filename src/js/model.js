@@ -9,7 +9,7 @@ export const data = {
     movies: [],
   },
   category: '',
-  movieCategories: ['action', 'adventure'],
+  movieCategories: ['action', 'adventure', 'anime', 'racing', 'fight', 'sci-fi', 'thriller', 'fantasy'],
   filter: false,
   pagination: {
     resPerPage: RES_PER_PAGE,
@@ -56,14 +56,18 @@ export const getPerPageMovie = function(page = 1, moviesArr = data.movies) {
 }
 
 export const getFilterMovies = async function(category) {
-  //set filter to true
-  data.filter = true;
-  //set category to hash value
-  data.category = category;
+  try {
+    //set filter to true
+    data.filter = true;
+    //set category to hash value
+    data.category = category;
 
-  const movies = await getJSON(API_URL);
-  data.filteredMovies = movies.filter(movie => movie.category.includes(category));
-  return data.filteredMovies;
+    const movies = await getJSON(API_URL);
+    data.filteredMovies = movies.filter(movie => movie.category.includes(category));
+    return data.filteredMovies;
+  } catch (err) {
+    throw err
+  }
 }
 
 export const changeTitle = function(id) {

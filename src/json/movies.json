@@ -43,18 +43,17 @@
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "Doctor Strange teams up with a mysterious teenage girl from his dreams who can travel across multiverses, to battle multiple threats, including other-universe versions of himself, which threaten to wipe out millions across the multiverse.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Benedict Cumberbatch", "Elizabeth Olsen", "Chiwetel Ejiofor"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Sam Raimi",
+    "imbd": "6.9/10"
   },
   {
     "id": 3,
@@ -64,26 +63,25 @@
       "m_img": "https://i.ibb.co/GRGmQZv/dbs-broly.jpg"
     },
     "category": [
-      "action", "anime", "fighting", "martial", "arts"
+      "action", "anime", "fight", "martial", "arts"
     ],
-    "year": "2020",
+    "year": "2018",
     "link": [
       "12",
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "A planet destroyed, a powerful race reduced to nothing. After the devastation of Planet Vegeta, three Saiyans were scattered among the stars, destined for different fates. While two found a home on Earth, the third was raised with a burning desire for vengeance and developed an unbelievable power. And the time for revenge has come.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Sean Schemmel", "Christopher Sabat", "Vic Mignogna"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Tatsuya Nagamine",
+    "imbd": "9.8/10"
   },
   {
     "id": 4,
@@ -93,7 +91,7 @@
       "m_img": "https://i.ibb.co/hyshfTP/f9.jpg"
     },
     "category": [
-      "adventure", "raceing"
+      "Action", "Adventure", "Crime", "Thriller", "Racing"
     ],
     "year": "2021",
     "link": [
@@ -101,18 +99,17 @@
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "Cypher enlists the help of Jakob, Dom’s younger brother to take revenge on Dom and his team.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+       "Vin Diesel", "Michelle Rodriguez", "Jordana Brewster", "John Cena"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Justin Lin",
+    "imbd": "5.6/10"
   },
   {
     "id": 5,
@@ -137,11 +134,10 @@
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Robert Pattinson", "Zoë Kravitz", "Colin Farrell"
     ],
     "director": "Matt Reeves",
-    "imbd": "7/10"
+    "imbd": "8.3/10"
   },
   {
     "id": 6,
@@ -153,28 +149,27 @@
     "category": [
       "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
-    "year": "2022",
+    "year": "2015",
     "link": [
       "12",
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "Tony Stark builds an artificial intelligence system named Ultron with the help of Bruce Banner. When the sentient Ultron makes plans to wipe out the human race, the Avengers set out to stop him.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Robert Downey Jr.", "Chris Hemsworth", "Mark Ruffalo", "Chris Evans", "Scarlett Johansson", "Jeremy Renner"
     ],
-    "director": "",
-    "imbd": "7/10"
+    "director": "Joss Whedon",
+    "imbd": "7.3/10"
   },
   {
     "id": 7,
-    "name": "Avengers",
+    "name": "The Avengers",
     "imgs": {
       "d_img": "https://i.ibb.co/2cYZhs6/the-avengers.jpg",
       "m_img": "https://i.ibb.co/Bwxd2Hc/the-avengers.jpg"
@@ -182,24 +177,23 @@
     "category": [
       "action", "sci-fi", "comic-book", "adventure", "fantasy", "superhero"
     ],
-    "year": "2022",
+    "year": "2012",
     "link": [
       "12",
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "S.H.I.E.L.D. leader Nick Fury is compelled to launch the ‘Avengers Initiative’ when Loki poses a threat to planet Earth. Will Nick Fury’s squad of superheroes prove themselves equal to the task?",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+        "Robert Downey Jr.","Chris Hemsworth", "Mark Ruffalo", "Chris Evans", "Scarlett Johansson", "Jeremy Renner"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Joss Whedon",
+    "imbd": "8.1/10"
   },
   {
     "id": 8,
@@ -209,7 +203,7 @@
       "m_img": "https://i.ibb.co/5RZXm8J/uncharted.jpg"
     },
     "category": [
-      "action, adventure, fantasy,"
+      "action", "adventure", "thriller"
     ],
     "year": "2022",
     "link": [
@@ -217,21 +211,20 @@
       "34",
       "56"
     ],
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora consequuntur animi voluptatibus, quaerat ipsa quia unde accusamus corrupti. Rerum, assumenda",
+    "description": "Nathan Drake and his partner Victor “Sully” Sullivan must go up against a wealthy, ruthless treasure hunter and his mercenaries in order to claim a lost fortune in gold from the voyages of Magellan, while also tracking clues that may lead to Drake’s long-lost brother, Sam.",
     "screenshot": [
       "1",
       "2",
       "3"
     ],
     "cast": [
-      "etc",
-      "etc"
+      "Tom Holland", "Mark Wahlberg", "Sophia Ali"
     ],
-    "director": "etc",
-    "imbd": "7/10"
+    "director": "Ruben Fleischer",
+    "imbd": "6.5/10"
   },
   {
-    "id": 1,
+    "id": 9,
     "name": "Avengers Infinity war",
     "imgs": {
       "d_img": "https://i.ibb.co/2dtBtjD/infinity-war.jpg",
@@ -255,5 +248,30 @@
     "cast": ["Robert Downey Jr.", "Chris Hemsworth", "Mark Ruffalo", "Chris Evans", "Scarlett Johansson", "Benedict Cumberbatch", "Don Cheadle", "Tom Holland", "Chadwick Boseman", "Paul Bettany", "Elizabeth Olsen"],
     "director": "Anthony and Joe Russo",
     "imbd": "8.4/10"
+  },
+  {
+    "id": 10,
+    "name": "Avatar 2: The way of water",
+    "imgs": {
+      "d_img": "https://i.ibb.co/SKW8s5Q/d-avatar2.jpg",
+      "m_img": "https://i.ibb.co/yVC9XmW/m-avatar2.jpg"
+    },
+    "category": [
+      "action", "sci-fi", "adventure", "fantasy"
+      ],
+    "link": [
+        "12",
+        "34",
+        "56"
+      ],
+    "description": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na’vi race to protect their home.",
+    "screenshot": [
+        "1",
+        "2",
+        "3"
+      ],
+    "cast": ["Sam Worthington", "Zoe Saldana", "Sigourney Weaver"],
+    "director": "Anthony and Joe Russo",
+    "imbd": "8/10"
   }
 ]

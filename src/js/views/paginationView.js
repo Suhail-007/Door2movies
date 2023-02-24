@@ -1,7 +1,7 @@
 import View from './view.js';
 import movieView from './movieView.js';
 import { updateURL, PAGINATION } from '../helper.js';
- import icons from '../../icons/icons.svg'
+// import icons from '../../icons/icons.svg'
 
 class Pagination extends View {
   _parentElem = document.querySelector('[data-pagination-btns-container]');
@@ -36,23 +36,22 @@ class Pagination extends View {
   }
 
   _generateNextBtnMarkup(page) {
-  //  const icons = ''
     return `
       <button class="pagination__btn--next btn__inline" data-goto="next">
         Page ${page + 1}
        <svg class='sm-icon'>
-          <use href="./${icons}#icon-chevron-right"></use>
+          <use href="./src/icons/icons.svg#icon-chevron-right"></use>
         </svg>
       </button>`
   }
 
   _generatePrevBtnMarkup(page) {
-//    const icons = ''
+    const icons = ''
     
     return `
       <button class="${page > 1 ? 'pagination__btn--prev' : 'hide'} btn__prev" data-goto="prev">
         <svg class='sm-icon'>
-          <use href="./${icons}#icon-chevron-left"></use>
+          <use href="./src/icons/icons.svg#icon-chevron-left"></use>
         </svg>
         Page ${page - 1}
       </button>`
