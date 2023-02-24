@@ -9,7 +9,7 @@ class Nav extends View {
   generateCategoriesMarkup(data) {
     this._data = data;
     const { movieCategories: categories } = this._data;
-    const links = categories.map(category => {
+    const links = categories.sort().map(category => {
       return `<a href="#" data-category="${category}">${category}</a>`
     });
 

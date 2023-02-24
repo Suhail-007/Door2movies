@@ -9,7 +9,7 @@ export const data = {
     movies: [],
   },
   category: '',
-  movieCategories: ['action', 'adventure', 'anime', 'racing', 'fight', 'sci-fi', 'thriller', 'fantasy'],
+  movieCategories: ['action', 'adventure', 'anime', 'racing', 'fight', 'sci-fi', 'thriller', 'fantasy', 'crime'],
   filter: false,
   pagination: {
     resPerPage: RES_PER_PAGE,
@@ -61,9 +61,11 @@ export const getFilterMovies = async function(category) {
     data.filter = true;
     //set category to hash value
     data.category = category;
-
+    
     const movies = await getJSON(API_URL);
+    
     data.filteredMovies = movies.filter(movie => movie.category.includes(category));
+
     return data.filteredMovies;
   } catch (err) {
     throw err

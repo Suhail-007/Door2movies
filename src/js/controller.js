@@ -33,7 +33,7 @@ class App {
 
           //added delay for first time loading pagination
           await paginationView.delay(1000);
-          paginationView.renderData(data);
+          paginationView.render(data);
           break;
 
         case 'download-page':
@@ -49,7 +49,9 @@ class App {
           return
       }
     }
-    catch (err) {}
+    catch (err) {
+      movieView.errorMessage(err);
+    }
   }
 
   #COMMON(downloadPage = false) {
@@ -71,7 +73,7 @@ class App {
       await movieView.delay(1000);
 
       //Render Movies
-      movieView.renderData(getPerPageMovie(data.pagination.page));
+      movieView.render(getPerPageMovie(data.pagination.page));
 
     } catch (err) {
       movieView.errorMessage('Something went wrong :(');
@@ -83,7 +85,7 @@ class App {
       const { page } = data.pagination;
 
       //render Button
-      paginationView.renderData(data);
+      paginationView.render(data);
 
       //get returned value from model fn
       const slicedArr = getPerPageMovie(page);
@@ -95,7 +97,7 @@ class App {
       await movieView.delay(1000);
 
       //render Movies
-      movieView.renderData(slicedArr);
+      movieView.render(slicedArr);
 
     } catch (err) {
       movieView.errorMessage();
@@ -117,12 +119,11 @@ class App {
       //delay
       await movieView.delay(1000);
 
-      movieView.renderData(getPerPageMovie(data.pagination.page, filteredMovies));
+      movieView.render(getPerPageMovie(data.pagination.page, filteredMovies));
 
       //re-render the pagination button
-      paginationView.renderData(data);
+      paginationView.render(data);
     } catch (err) {
-      console.log(err);
       movieView.errorMessage("Movie doesn\'t exist");
     }
   }
@@ -142,7 +143,7 @@ class App {
       await downloadView.delay(1000);
 
       //render movie
-      downloadView.renderData(data);
+      downloadView.render(data);
     } catch (err) {
       downloadView.errorMessage(err);
     }
@@ -151,7 +152,7 @@ class App {
   async #renderMoviesPagination() {
     try {
       await this.#controllerHome();
-      paginationView.renderData(data);
+      paginationView.render(data);
     } catch (err) {
       movieView.errorMessage(err)
     }
